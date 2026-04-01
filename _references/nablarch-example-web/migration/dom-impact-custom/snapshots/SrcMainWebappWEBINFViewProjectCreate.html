@@ -1,0 +1,317 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <n:script type="text/javascript" src="/javascripts/lib/jquery-3.7.1.min.js"></n:script>
+        <n:script type="text/javascript" src="/javascripts/projectInput.js"></n:script>
+        <n:script type="text/javascript" src="/javascripts/clientList.js"></n:script>
+        <title>プロジェクト登録画面</title>
+    </head>
+
+    <body>
+        <div class="mainContents">
+            
+            
+        </div>
+        <section>
+            <form useToken="true">
+                <div class="title-nav">
+
+                    <span class="page-title">プロジェクト登録画面</span>
+                    <div class="button-nav">
+                        
+                            <div class="button-block real-button-block">
+                                <n:button uri="/action/project/confirmOfCreate" cssClass="btn btn-lg btn-success">登録</n:button>
+                            </div>
+                            <div class="button-block link-button-block">
+                                <a id="topBackLink" href="#" cssClass="btn btn-lg btn-light">戻る</a>
+                            </div>
+                        
+                        
+                            <n:button uri="/action/project/backToNew" cssClass="btn btn-lg btn-light">入力へ戻る</n:button>
+                            <n:button uri="/action/project/create" cssClass="btn btn-lg btn-success" allowDoubleSubmission="false">確定</n:button>
+                        
+                    </div>
+                </div>
+                <div class="message-area margin-top">
+                    
+                </div>
+                <h2 class="font-group mb-3">
+                    プロジェクト情報
+                </h2>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th class="width-250 required">
+                                プロジェクト名
+                            </th>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" name="form.projectName" maxlength="64" cssClass="form-control form-control-lg width-300" errorCss="input-error" />
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="required">
+                                プロジェクト種別
+                            </th>
+                            <td>
+                                <div class="form-group">
+                                    <n:set var="projectTypeList" value=""/>
+                                    <select name="form.projectType"
+                                              listName="projectTypeList"
+                                              elementValueProperty="value"
+                                              elementLabelProperty="label"
+                                              elementLabelPattern="$LABEL$"
+                                              cssClass="form-control form-control-lg"/>
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="required">
+                                プロジェクト分類
+                            </th>
+                            <td>
+                                <div class="form-group">
+                                    <n:set var="projectClassList" value=""/>
+                                    <select name="form.projectClass"
+                                              listName="projectClassList"
+                                              elementValueProperty="value"
+                                              elementLabelProperty="label"
+                                              elementLabelPattern="$LABEL$"
+                                              cssClass="form-control form-control-lg"/>
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                プロジェクトマネージャー
+                            </th>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" name="form.projectManager" maxlength="64" cssClass="form-control form-control-lg width-300" errorCss="input-error"/>
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                プロジェクトリーダー
+                            </th>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" name="form.projectLeader" maxlength="64" cssClass="form-control form-control-lg width-300" errorCss="input-error"/>
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="required">
+                                顧客名
+                            </th>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" name="form.clientId" maxlength="10" readonly="true" cssClass="form-control form-control-lg mb-1" tabindex="-1" id="client-id" errorCss="input-error" />
+                                    <input type="text" name="form.clientName" maxlength="64" readonly="true" cssClass="form-control form-control-lg mb-1" tabindex="-1" id="client-name" errorCss="input-error" />
+                                </div>
+                                
+                                  <div class="btn-group-sm">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#client-search-dialog" class="badge rounded-pill text-dark bg-body-secondary"><i class="material-icons">search</i></a>
+                                    <a href="#" class="badge rounded-pill text-dark bg-body-secondary" id="client-remove"><i class="material-icons">remove</i></a>
+                                  </div>
+                                
+                                
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                プロジェクト開始日
+                            </th>
+                            <td>
+                                <div class="form-group">
+                                    <n:set var="projectStartDate" name="form.projectStartDate" scope="page" />
+                                    <input type="text" name="form.projectStartDate" nameAlias="form.date" value="__EL__" cssClass="form-control form-control-lg datepicker" errorCss="input-error"/>
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                プロジェクト終了日
+                            </th>
+                            <td>
+                                <div class="form-group">
+                                    <n:set var="projectEndDate" name="form.projectEndDate" scope="page" />
+                                    <input type="text" name="form.projectEndDate" nameAlias="form.date" value="__EL__" cssClass="form-control form-control-lg datepicker" errorCss="input-error" />
+                                    
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                備考
+                            </th>
+                            <td>
+                                <div class="form-group">
+                                    <textarea rows="5" cols="50" name="form.note" cssClass="form-control form-control-lg" errorCss="input-error"/>
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                売上高
+                            </th>
+                            <td>
+                                
+                                <div class="form-group">
+                                    <input type="text" name="form.sales" maxlength="9" cssClass="form-control form-control-lg width-200 me-3" errorCss="input-error" style="float:left;" />
+                                    <div style="display:table-cell;height:30px;vertical-align:bottom;">千円</div>
+                                    <div style="clear:left;"></div>
+                                </div>
+                                
+                                
+                                    <n:write value="__EL__"/>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                売上原価
+                            </th>
+                            <td>
+                                
+                                <div class="form-group">
+                                    <input type="text" name="form.costOfGoodsSold" maxlength="9" cssClass="form-control form-control-lg width-200 me-3" errorCss="input-error" style="float:left;" />
+                                    <div style="display:table-cell;height:30px;vertical-align:bottom;">千円</div>
+                                    <div style="clear:left;"></div>
+                                </div>
+                                
+                                
+                                    <n:write value="__EL__"/>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                販管費
+                            </th>
+                            <td>
+                                
+                                <div class="form-group">
+                                    <input type="text" name="form.sga" maxlength="9" cssClass="form-control form-control-lg width-200 me-3" errorCss="input-error" style="float:left;" />
+                                    <div style="display:table-cell;height:30px;vertical-align:bottom;">千円</div>
+                                    <div style="clear:left;"></div>
+                                </div>
+                                
+                                
+                                    <n:write value="__EL__"/>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                本社配賦
+                            </th>
+                            <td>
+                                
+                                <div class="form-group">
+                                    <input type="text" name="form.allocationOfCorpExpenses" maxlength="9" cssClass="form-control form-control-lg width-200 me-3" errorCss="input-error" style="float:left;" />
+                                    <div style="display:table-cell;height:30px;vertical-align:bottom;">千円</div>
+                                    <div style="clear:left;"></div>
+                                </div>
+                                
+                                
+                                    <n:write value="__EL__"/>
+                                
+                            </td>
+                        </tr>
+                        
+                            <tr>
+                                <td>
+                                    売上総利益
+                                </td>
+                                <td>
+                                    <n:write value="__EL__"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    配賦前利益
+                                </td>
+                                <td>
+                                    <n:write value="__EL__"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    配賦前利益率
+                                </td>
+                                <td>
+                                    <n:write value="__EL__"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    営業利益
+                                </td>
+                                <td>
+                                    <n:write value="__EL__"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    営業利益率
+                                </td>
+                                <td>
+                                    <n:write value="__EL__"/>
+                                </td>
+                            </tr>
+                        
+                    </tbody>
+                </table>
+
+                <div class="title-nav page-footer">
+                    <div class="button-nav">
+                        
+                            <div class="button-block real-button-block">
+                                <n:button uri="/action/project/confirmOfCreate" cssClass="btn btn-lg btn-success">登録</n:button>
+                            </div>
+                            <div class="button-block link-button-block">
+                                <a id="bottomBackLink" href="#" cssClass="btn btn-lg btn-light">戻る</a>
+                            </div>
+                        
+                        
+                            <n:button uri="/action/project/backToNew" cssClass="btn btn-lg btn-light">入力へ戻る</n:button>
+                            <n:button uri="/action/project/create" cssClass="btn btn-lg btn-success" allowDoubleSubmission="false">確定</n:button>
+                        
+                    </div>
+                </div>
+            </form>
+        </section>
+        
+        
+            <n:script type="text/javascript">
+                $(function(){
+                    setListUrlTo("topBackLink");
+                    setListUrlTo("bottomBackLink");
+                });
+            </n:script>
+        
+
+        
+        
+    </body>
+</html>

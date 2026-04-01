@@ -1,0 +1,43 @@
+{
+  "name": "@app/web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm:dev:mock\" \"npm:dev:next\"",
+    "dev:next": "next dev",
+    "dev:mock": "tsx src/mocks/http-server.ts",
+    "build": "next build",
+    "start": "next start",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "e2e": "playwright test",
+    "e2e:update": "playwright test -u"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@tanstack/react-query": "5.90.21",
+    "msw": "2.12.13",
+    "next": "16.1.7",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-hook-form": "7.71.2",
+    "zod": "^4.3.6",
+    "zustand": "5.0.12"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.4.0",
+    "@mswjs/http-middleware": "^0.10.3",
+    "@playwright/test": "^1.58.2",
+    "@types/node": "25.5.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "concurrently": "^9.2.1",
+    "eslint": "9.27.0",
+    "eslint-config-next": "16.2.0",
+    "jsdom": "^29.0.0",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3",
+    "vitest": "4.1.0"
+  }
+}

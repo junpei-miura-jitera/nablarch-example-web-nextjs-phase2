@@ -1,0 +1,553 @@
+{
+  "generatedAt": "2026-03-05T02:12:33.805Z",
+  "input": {
+    "jspDir": "src/main/webapp/WEB-INF/view",
+    "jsDir": "src/main/webapp/javascripts"
+  },
+  "summary": {
+    "jspFiles": 29,
+    "jsFiles": 5,
+    "bindings": 17,
+    "singleScope": 7,
+    "multipleScope": 5,
+    "noScope": 5
+  },
+  "impacts": [
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/projectInput.js",
+        "line": 5,
+        "selectorRaw": "#topUpdateButton",
+        "selectorType": "id",
+        "selectorValue": "topUpdateButton",
+        "event": "click",
+        "raw": "$(\"#topUpdateButton\").click("
+      },
+      "impactedPages": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedElements": [
+            {
+              "tag": "button",
+              "line": 30,
+              "id": "topUpdateButton",
+              "classes": [],
+              "raw": "<button value=\"更新\" uri=\"#\" id=\"topUpdateButton\" cssClass=\"btn btn-lg btn-success\" type=\"button\" suppressDefaultSubmit=\"true\" />"
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/projectBulk/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectBulkUpdate.html",
+          "matchedElements": [
+            {
+              "tag": "button",
+              "line": 47,
+              "id": "topUpdateButton",
+              "name": "isUpdatable",
+              "classes": [
+                "btn",
+                "btn-lg",
+                "btn-success"
+              ],
+              "raw": "<button id=\"topUpdateButton\" class=\"btn btn-lg btn-success\" suppressDefaultSubmit=\"true\" <n:write name=\"isUpdatable\" />"
+            }
+          ]
+        }
+      ],
+      "impactScope": "multiple",
+      "recommendation": "stateful-hook"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/projectInput.js",
+        "line": 6,
+        "selectorRaw": "#bottomUpdateButton",
+        "selectorType": "id",
+        "selectorValue": "bottomUpdateButton",
+        "event": "click",
+        "raw": "$(\"#bottomUpdateButton\").click("
+      },
+      "impactedPages": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedElements": [
+            {
+              "tag": "button",
+              "line": 294,
+              "id": "bottomUpdateButton",
+              "classes": [],
+              "raw": "<button value=\"更新\" uri=\"/action/project/confirmOfUpdate\" id=\"bottomUpdateButton\" cssClass=\"btn btn-lg btn-success\" type=\"button\" />"
+            }
+          ]
+        }
+      ],
+      "impactScope": "single",
+      "recommendation": "single-component"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/projectInput.js",
+        "line": 9,
+        "selectorRaw": "#topDeleteButton",
+        "selectorType": "id",
+        "selectorValue": "topDeleteButton",
+        "event": "click",
+        "raw": "$(\"#topDeleteButton\").click("
+      },
+      "impactedPages": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedElements": [
+            {
+              "tag": "button",
+              "line": 29,
+              "id": "topDeleteButton",
+              "classes": [],
+              "raw": "<button value=\"削除\" uri=\"#\" id=\"topDeleteButton\" cssClass=\"btn btn-lg btn-danger\" type=\"button\" allowDoubleSubmission=\"false\" suppressDefaultSubmit=\"true\" />"
+            }
+          ]
+        }
+      ],
+      "impactScope": "single",
+      "recommendation": "single-component"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/projectInput.js",
+        "line": 10,
+        "selectorRaw": "#bottomDeleteButton",
+        "selectorType": "id",
+        "selectorValue": "bottomDeleteButton",
+        "event": "click",
+        "raw": "$(\"#bottomDeleteButton\").click("
+      },
+      "impactedPages": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedElements": [
+            {
+              "tag": "button",
+              "line": 293,
+              "id": "bottomDeleteButton",
+              "classes": [],
+              "raw": "<button value=\"削除\" uri=\"/action/project/delete\" id=\"bottomDeleteButton\" cssClass=\"btn btn-lg btn-danger\" allowDoubleSubmission=\"false\" type=\"button\" />"
+            }
+          ]
+        }
+      ],
+      "impactScope": "single",
+      "recommendation": "single-component"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/projectInput.js",
+        "line": 13,
+        "selectorRaw": "#topBackButton",
+        "selectorType": "id",
+        "selectorValue": "topBackButton",
+        "event": "click",
+        "raw": "$(\"#topBackButton\").click("
+      },
+      "impactedPages": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedElements": [
+            {
+              "tag": "button",
+              "line": 33,
+              "id": "topBackButton",
+              "classes": [],
+              "raw": "<button value=\"入力へ戻る\" uri=\"#\" id=\"topBackButton\" cssClass=\"btn btn-lg btn-light\" type=\"button\" suppressDefaultSubmit=\"true\" />"
+            }
+          ]
+        }
+      ],
+      "impactScope": "single",
+      "recommendation": "single-component"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/projectInput.js",
+        "line": 14,
+        "selectorRaw": "#bottomBackButton",
+        "selectorType": "id",
+        "selectorValue": "bottomBackButton",
+        "event": "click",
+        "raw": "$(\"#bottomBackButton\").click("
+      },
+      "impactedPages": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedElements": [
+            {
+              "tag": "button",
+              "line": 297,
+              "id": "bottomBackButton",
+              "classes": [],
+              "raw": "<button value=\"入力へ戻る\" uri=\"/action/project/backToEdit\" id=\"bottomBackButton\" cssClass=\"btn btn-lg btn-light\" type=\"button\" />"
+            }
+          ]
+        }
+      ],
+      "impactScope": "single",
+      "recommendation": "single-component"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/projectInput.js",
+        "line": 17,
+        "selectorRaw": "#topSubmitButton",
+        "selectorType": "id",
+        "selectorValue": "topSubmitButton",
+        "event": "click",
+        "raw": "$(\"#topSubmitButton\").click("
+      },
+      "impactedPages": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedElements": [
+            {
+              "tag": "button",
+              "line": 34,
+              "id": "topSubmitButton",
+              "classes": [],
+              "raw": "<button value=\"確定\" uri=\"#\" id=\"topSubmitButton\" cssClass=\"btn btn-lg btn-success\" type=\"button\" allowDoubleSubmission=\"false\" suppressDefaultSubmit=\"true\" />"
+            }
+          ]
+        }
+      ],
+      "impactScope": "single",
+      "recommendation": "single-component"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/projectInput.js",
+        "line": 18,
+        "selectorRaw": "#bottomSubmitButton",
+        "selectorType": "id",
+        "selectorValue": "bottomSubmitButton",
+        "event": "click",
+        "raw": "$(\"#bottomSubmitButton\").click("
+      },
+      "impactedPages": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedElements": [
+            {
+              "tag": "button",
+              "line": 298,
+              "id": "bottomSubmitButton",
+              "classes": [],
+              "raw": "<button value=\"確定\" uri=\"/action/project/update\" id=\"bottomSubmitButton\" cssClass=\"btn btn-lg btn-success\" allowDoubleSubmission=\"false\" type=\"button\" />"
+            }
+          ]
+        }
+      ],
+      "impactScope": "single",
+      "recommendation": "single-component"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/projectInput.js",
+        "line": 24,
+        "selectorRaw": "#client-remove",
+        "selectorType": "id",
+        "selectorValue": "client-remove",
+        "event": "click",
+        "raw": "$('#client-remove').click("
+      },
+      "impactedPages": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/common/sidemenu.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewCommonSidemenu.html",
+          "matchedElements": [
+            {
+              "tag": "a",
+              "line": 84,
+              "id": "client-remove",
+              "classes": [
+                "badge",
+                "rounded-pill",
+                "text-dark",
+                "bg-body-secondary"
+              ],
+              "raw": "<a href=\"#\" class=\"badge rounded-pill text-dark bg-body-secondary\" id=\"client-remove\">"
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/create.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectCreate.html",
+          "matchedElements": [
+            {
+              "tag": "a",
+              "line": 130,
+              "id": "client-remove",
+              "classes": [
+                "badge",
+                "rounded-pill",
+                "text-dark",
+                "bg-body-secondary"
+              ],
+              "raw": "<a href=\"#\" class=\"badge rounded-pill text-dark bg-body-secondary\" id=\"client-remove\">"
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedElements": [
+            {
+              "tag": "a",
+              "line": 127,
+              "id": "client-remove",
+              "classes": [
+                "badge",
+                "rounded-pill",
+                "text-dark",
+                "bg-body-secondary"
+              ],
+              "raw": "<a href=\"#\" class=\"badge rounded-pill text-dark bg-body-secondary\" id=\"client-remove\">"
+            }
+          ]
+        }
+      ],
+      "impactScope": "multiple",
+      "recommendation": "stateful-hook"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/projectList.js",
+        "line": 8,
+        "selectorRaw": "#sortKey",
+        "selectorType": "id",
+        "selectorValue": "sortKey",
+        "event": "change",
+        "raw": "$(\"#sortKey,#sortDir\").change("
+      },
+      "impactedPages": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/index.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectIndex.html",
+          "matchedElements": [
+            {
+              "tag": "select",
+              "line": 111,
+              "id": "sortKey",
+              "name": "searchForm.sortKey",
+              "classes": [],
+              "raw": "<select id=\"sortKey\" name=\"searchForm.sortKey\" listName=\"sortKeyList\" elementValueProperty=\"value\" elementLabelProperty=\"label\" elementLabelPattern=\"$LABEL$\" cssClass=\"form-select form-select-lg\"/>"
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/projectBulk/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectBulkUpdate.html",
+          "matchedElements": [
+            {
+              "tag": "select",
+              "line": 85,
+              "id": "sortKey",
+              "name": "searchForm.sortKey",
+              "classes": [],
+              "raw": "<select id=\"sortKey\" name=\"searchForm.sortKey\" listName=\"sortKeyList\" elementValueProperty=\"value\" elementLabelProperty=\"label\" elementLabelPattern=\"$LABEL$\" cssClass=\"form-select form-select-lg\"/>"
+            }
+          ]
+        }
+      ],
+      "impactScope": "multiple",
+      "recommendation": "stateful-hook"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/projectList.js",
+        "line": 8,
+        "selectorRaw": "#sortDir",
+        "selectorType": "id",
+        "selectorValue": "sortDir",
+        "event": "change",
+        "raw": "$(\"#sortKey,#sortDir\").change("
+      },
+      "impactedPages": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/index.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectIndex.html",
+          "matchedElements": [
+            {
+              "tag": "select",
+              "line": 122,
+              "id": "sortDir",
+              "name": "searchForm.sortDir",
+              "classes": [],
+              "raw": "<select id=\"sortDir\" name=\"searchForm.sortDir\" listName=\"sortOrderList\" elementValueProperty=\"value\" elementLabelProperty=\"label\" elementLabelPattern=\"$LABEL$\" cssClass=\"form-select form-select-lg\"/>"
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/projectBulk/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectBulkUpdate.html",
+          "matchedElements": [
+            {
+              "tag": "select",
+              "line": 96,
+              "id": "sortDir",
+              "name": "searchForm.sortDir",
+              "classes": [],
+              "raw": "<select id=\"sortDir\" name=\"searchForm.sortDir\" listName=\"sortOrderList\" elementValueProperty=\"value\" elementLabelProperty=\"label\" elementLabelPattern=\"$LABEL$\" cssClass=\"form-select form-select-lg\"/>"
+            }
+          ]
+        }
+      ],
+      "impactScope": "multiple",
+      "recommendation": "stateful-hook"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/projectList.js",
+        "line": 16,
+        "selectorRaw": "#client-remove",
+        "selectorType": "id",
+        "selectorValue": "client-remove",
+        "event": "click",
+        "raw": "$('#client-remove').click("
+      },
+      "impactedPages": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/common/sidemenu.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewCommonSidemenu.html",
+          "matchedElements": [
+            {
+              "tag": "a",
+              "line": 84,
+              "id": "client-remove",
+              "classes": [
+                "badge",
+                "rounded-pill",
+                "text-dark",
+                "bg-body-secondary"
+              ],
+              "raw": "<a href=\"#\" class=\"badge rounded-pill text-dark bg-body-secondary\" id=\"client-remove\">"
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/create.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectCreate.html",
+          "matchedElements": [
+            {
+              "tag": "a",
+              "line": 130,
+              "id": "client-remove",
+              "classes": [
+                "badge",
+                "rounded-pill",
+                "text-dark",
+                "bg-body-secondary"
+              ],
+              "raw": "<a href=\"#\" class=\"badge rounded-pill text-dark bg-body-secondary\" id=\"client-remove\">"
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedElements": [
+            {
+              "tag": "a",
+              "line": 127,
+              "id": "client-remove",
+              "classes": [
+                "badge",
+                "rounded-pill",
+                "text-dark",
+                "bg-body-secondary"
+              ],
+              "raw": "<a href=\"#\" class=\"badge rounded-pill text-dark bg-body-secondary\" id=\"client-remove\">"
+            }
+          ]
+        }
+      ],
+      "impactScope": "multiple",
+      "recommendation": "stateful-hook"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/sideMenu.js",
+        "line": 50,
+        "selectorRaw": "#client_pop",
+        "selectorType": "id",
+        "selectorValue": "client_pop",
+        "event": "click",
+        "raw": "$(\"#client_pop\").click("
+      },
+      "impactedPages": [],
+      "impactScope": "none",
+      "recommendation": "manual-review"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/sideMenu.js",
+        "line": 55,
+        "selectorRaw": "#clientId",
+        "selectorType": "id",
+        "selectorValue": "clientId",
+        "event": "click",
+        "raw": "$(\"#clientId, #clientName\").click("
+      },
+      "impactedPages": [],
+      "impactScope": "none",
+      "recommendation": "manual-review"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/sideMenu.js",
+        "line": 55,
+        "selectorRaw": "#clientName",
+        "selectorType": "id",
+        "selectorValue": "clientName",
+        "event": "click",
+        "raw": "$(\"#clientId, #clientName\").click("
+      },
+      "impactedPages": [],
+      "impactScope": "none",
+      "recommendation": "manual-review"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/sideMenu.js",
+        "line": 56,
+        "selectorRaw": "#client_pop",
+        "selectorType": "id",
+        "selectorValue": "client_pop",
+        "event": "click",
+        "raw": "$(\"#client_pop\").click("
+      },
+      "impactedPages": [],
+      "impactScope": "none",
+      "recommendation": "manual-review"
+    },
+    {
+      "binding": {
+        "jsFile": "src/main/webapp/javascripts/sideMenu.js",
+        "line": 62,
+        "selectorRaw": ".checkbox",
+        "selectorType": "class",
+        "selectorValue": "checkbox",
+        "event": "change",
+        "raw": "$('.checkbox').change("
+      },
+      "impactedPages": [],
+      "impactScope": "none",
+      "recommendation": "manual-review"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>プロジェクト一覧更新完了画面</title>
+    </head>
+    <body>
+        
+        <div class="mainContents">
+            
+            
+            <section>
+                <form>
+                    <div class="title-nav">
+                        <span class="page-title">プロジェクト一覧更新完了画面</span>
+                        <div class="button-nav">
+                            <div class="button-block link-button-block">
+                                <a id="topReturnList" href="#" cssClass="btn btn-lg btn-success">次へ</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message-area">
+                        プロジェクトの更新が完了しました。
+                    </div>
+                    <div class="title-nav">
+                        <div class="button-nav">
+                            <div class="button-block link-button-block">
+                                <a id="bottomReturnList" href="#" cssClass="btn btn-lg btn-success">次へ</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            
+        </div>
+        <n:script type="text/javascript">
+            $(function(){
+                setListUrlTo("topReturnList");
+                setListUrlTo("bottomReturnList");
+            });
+        </n:script>
+    </body>
+</html>

@@ -1,0 +1,109 @@
+
+
+
+
+
+<n:script type="text/javascript" src="/javascripts/sideMenu.js"></n:script>
+<nav class="col-md-2 menu">
+    <div class="card">
+        <div class="card-body">
+            <ul>
+                <li>
+                    <div class="sideMenu">
+                        <h4 class="text-muted fs-4 mb-3"><strong>プロジェクトをさがす</strong></h4>
+                        <form method="GET" action="list">
+                            <!-- 入力フォームで送信しない条件を保持するため、hiddenパラメータとして持つ -->
+                            <input type="hidden" name="searchForm.projectStartDateBeginStr"/>
+                            <input type="hidden" name="searchForm.projectStartDateEndStr"/>
+                            <input type="hidden" name="searchForm.projectEndDateBeginStr"/>
+                            <input type="hidden" name="searchForm.projectEndDateEndStr"/>
+                            <input type="hidden" name="searchForm.sortKey"/>
+                            <input type="hidden" name="searchForm.sortDir"/>
+
+                            <!-- 検索結果の表示ページ番号を指定する -->
+                            <input id="firstPageNumber" type="hidden" name="searchForm.pageNumber" value="1" />
+                            <ul>
+                                <li>
+                                    <span class="text-primary">ランクからさがす</span>
+                                    <ul>
+                                        
+                                            <li>
+                                                <div class="checkbox form-check">
+                                                    <label class="form-check-label form-control-lg">
+                                                        <n:checkbox name="searchForm.projectClass" cssClass="form-check-input" value="__EL__"/>
+                                                        <n:write name="projectClass.label"/>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        
+                                    </ul>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="text-primary">期間からさがす</span>
+                                    <c:url value="list" var="uri">
+                                        <c:param name="searchForm.clientId" value="__EL__"/>
+                                        <c:param name="searchForm.clientName" value="__EL__"/>
+                                        <c:param name="searchForm.projectName" value="__EL__"/>
+                                        <c:param name="searchForm.projectType" value="__EL__"/>
+                                        
+                                            <c:param name="searchForm.projectClass" value="__EL__" />
+                                        
+                                        <c:param name="searchForm.sortKey" value="__EL__"/>
+                                        <c:param name="searchForm.sortDir" value="__EL__"/>
+                                        <c:param name="searchForm.pageNumber" value="1"/>
+                                    </c:url>
+                                    <ul>
+                                        <li class="py-2">
+                                            <a id="startThisYear" href="__EL__">
+                                                <span class="text-muted fs-5 ps-3">今年開始</span>
+                                            </a>
+                                        </li>
+                                        <li class="py-2">
+                                            <a id="endThisYear" href="__EL__">
+                                                <span class="text-muted fs-5 ps-3">今年終了</span>
+                                            </a>
+                                        </li>
+                                        <li class="py-2">
+                                            <a id="endLastYear" href="__EL__">
+                                                <span class="text-muted fs-5 ps-3">昨年までに終了</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <fieldset>
+                                <div>
+                                    <div class="form-group label-static mb-3">
+                                        <div class="mb-2">
+                                            <label for="client-name" class="control-label mb-3">顧客名</label>
+                                            <input type="text" id="client-id" name="searchForm.clientId" readonly="true" cssClass="form-control form-control-lg mb-2" placeholder="顧客ID"/>
+                                            <input type="text" id="client-name" name="searchForm.clientName" readonly="true" cssClass="form-control form-control-lg" placeholder="顧客名"/>
+                                        </div>
+                                        <div class="text-end">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#client-search-dialog" class="badge rounded-pill text-dark bg-body-secondary"><i class="material-icons">search</i></a>
+                                            <a href="#" class="badge rounded-pill text-dark bg-body-secondary" id="client-remove"><i class="material-icons">remove</i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group mb-3">
+                                        <label for="projectName" class="control-label mb-3">プロジェクト名</label>
+                                        <div>
+                                            <input type="text" id="projectName" name="searchForm.projectName" size="25" maxlength="64" cssClass="form-control form-control-lg" errorCss="input-error" placeholder="プロジェクト名"/>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <input type="submit" id="search" class="btn btn-lg btn-primary" value="検索" />
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+  
+  
+</nav>

@@ -1,0 +1,43 @@
+# Environment variables
+*.env
+!*.env.example
+
+# Local files
+*.local.*
+
+# Log files
+*.log
+logs/
+
+# Node dependencies
+node_modules/
+
+# Build artifacts
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Next.js
+.next/
+
+# Storybook
+storybook-static/
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+
+# Vitest
+coverage/
+
+# Cache
+.cache/
+.turbo/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

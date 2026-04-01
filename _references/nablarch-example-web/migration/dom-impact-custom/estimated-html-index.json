@@ -1,0 +1,405 @@
+{
+  "generatedAt": "2026-03-05T02:14:36.935Z",
+  "pages": [
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/client/index.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewClientIndex.html",
+      "elementCount": 5,
+      "ids": [
+        "client-search",
+        "context-path",
+        "search-client-name",
+        "search-industry-code"
+      ],
+      "names": [
+        "form.clientName",
+        "form.industryCode"
+      ],
+      "classes": [
+        "btn",
+        "btn-close",
+        "btn-lg",
+        "btn-primary",
+        "form-control",
+        "form-control-lg"
+      ]
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/errorPages/doubleSubmissionError.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonErrorPagesDoubleSubmissionError.html",
+      "elementCount": 1,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/errorPages/error.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonErrorPagesError.html",
+      "elementCount": 1,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/errorPages/optimisticLockError.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonErrorPagesOptimisticLockError.html",
+      "elementCount": 1,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/errorPages/pageNotFoundError.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonErrorPagesPageNotFoundError.html",
+      "elementCount": 1,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/errorPages/permissionError.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonErrorPagesPermissionError.html",
+      "elementCount": 1,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/errorPages/requestEntityTooLarge.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonErrorPagesRequestEntityTooLarge.html",
+      "elementCount": 1,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/errorPages/serviceUnavailableError.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonErrorPagesServiceUnavailableError.html",
+      "elementCount": 1,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/errorPages/tamperingDetected.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonErrorPagesTamperingDetected.html",
+      "elementCount": 1,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/errorPages/userError.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonErrorPagesUserError.html",
+      "elementCount": 1,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/footer.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonFooter.html",
+      "elementCount": 0,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/header.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonHeader.html",
+      "elementCount": 2,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/menu.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonMenu.html",
+      "elementCount": 5,
+      "ids": [],
+      "names": [],
+      "classes": [
+        "fs-4",
+        "navbar-brand",
+        "navbar-toggler",
+        "px-2"
+      ]
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/noscript.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonNoscript.html",
+      "elementCount": 0,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/common/sidemenu.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewCommonSidemenu.html",
+      "elementCount": 17,
+      "ids": [
+        "client-id",
+        "client-name",
+        "client-remove",
+        "endLastYear",
+        "endThisYear",
+        "firstPageNumber",
+        "projectName",
+        "search",
+        "startThisYear"
+      ],
+      "names": [
+        "searchForm.clientId",
+        "searchForm.clientName",
+        "searchForm.pageNumber",
+        "searchForm.projectEndDateBeginStr",
+        "searchForm.projectEndDateEndStr",
+        "searchForm.projectName",
+        "searchForm.projectStartDateBeginStr",
+        "searchForm.projectStartDateEndStr",
+        "searchForm.sortDir",
+        "searchForm.sortKey"
+      ],
+      "classes": [
+        "badge",
+        "bg-body-secondary",
+        "btn",
+        "btn-lg",
+        "btn-primary",
+        "rounded-pill",
+        "text-dark"
+      ]
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/login/index.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewLoginIndex.html",
+      "elementCount": 2,
+      "ids": [
+        "loginId"
+      ],
+      "names": [
+        "loginId"
+      ],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/project/completeOfCreate.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewProjectCompleteOfCreate.html",
+      "elementCount": 3,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/project/completeOfDelete.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewProjectCompleteOfDelete.html",
+      "elementCount": 3,
+      "ids": [
+        "bottomReturnList",
+        "topReturnList"
+      ],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/project/completeOfUpdate.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewProjectCompleteOfUpdate.html",
+      "elementCount": 3,
+      "ids": [
+        "bottomReturnList",
+        "topReturnList"
+      ],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/project/confirmOfCreate.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewProjectConfirmOfCreate.html",
+      "elementCount": 0,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/project/confirmOfUpdate.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewProjectConfirmOfUpdate.html",
+      "elementCount": 0,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/project/create.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewProjectCreate.html",
+      "elementCount": 19,
+      "ids": [
+        "bottomBackLink",
+        "client-id",
+        "client-name",
+        "client-remove",
+        "topBackLink"
+      ],
+      "names": [
+        "form.allocationOfCorpExpenses",
+        "form.clientId",
+        "form.clientName",
+        "form.costOfGoodsSold",
+        "form.note",
+        "form.projectClass",
+        "form.projectEndDate",
+        "form.projectLeader",
+        "form.projectManager",
+        "form.projectName",
+        "form.projectStartDate",
+        "form.projectType",
+        "form.sales",
+        "form.sga"
+      ],
+      "classes": [
+        "badge",
+        "bg-body-secondary",
+        "rounded-pill",
+        "text-dark"
+      ]
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/project/detail.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewProjectDetail.html",
+      "elementCount": 4,
+      "ids": [
+        "bottomReturnList",
+        "topReturnList"
+      ],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/project/index.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewProjectIndex.html",
+      "elementCount": 17,
+      "ids": [
+        "firstPageNumber",
+        "sortDir",
+        "sortKey"
+      ],
+      "names": [
+        "searchForm.clientId",
+        "searchForm.clientName",
+        "searchForm.pageNumber",
+        "searchForm.projectClass",
+        "searchForm.projectEndDateBegin",
+        "searchForm.projectEndDateEnd",
+        "searchForm.projectName",
+        "searchForm.projectStartDateBegin",
+        "searchForm.projectStartDateEnd",
+        "searchForm.projectType",
+        "searchForm.sortDir",
+        "searchForm.sortKey"
+      ],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+      "elementCount": 28,
+      "ids": [
+        "bottomBackButton",
+        "bottomDeleteButton",
+        "bottomSubmitButton",
+        "bottomUpdateButton",
+        "client-id",
+        "client-name",
+        "client-remove",
+        "topBackButton",
+        "topDeleteButton",
+        "topSubmitButton",
+        "topUpdateButton"
+      ],
+      "names": [
+        "form.allocationOfCorpExpenses",
+        "form.clientId",
+        "form.clientName",
+        "form.costOfGoodsSold",
+        "form.note",
+        "form.projectClass",
+        "form.projectEndDate",
+        "form.projectLeader",
+        "form.projectManager",
+        "form.projectName",
+        "form.projectStartDate",
+        "form.projectType",
+        "form.sales",
+        "form.sga"
+      ],
+      "classes": [
+        "badge",
+        "bg-body-secondary",
+        "rounded-pill",
+        "text-dark"
+      ]
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/projectBulk/completeOfUpdate.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewProjectBulkCompleteOfUpdate.html",
+      "elementCount": 3,
+      "ids": [
+        "bottomReturnList",
+        "topReturnList"
+      ],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/projectBulk/confirmOfUpdate.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewProjectBulkConfirmOfUpdate.html",
+      "elementCount": 6,
+      "ids": [],
+      "names": [],
+      "classes": []
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/projectBulk/update.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewProjectBulkUpdate.html",
+      "elementCount": 24,
+      "ids": [
+        "bottomCreateButton",
+        "sortDir",
+        "sortKey",
+        "topUpdateButton"
+      ],
+      "names": [
+        "bulkForm.projectList[__EL__].projectEndDate",
+        "bulkForm.projectList[__EL__].projectId",
+        "bulkForm.projectList[__EL__].projectName",
+        "bulkForm.projectList[__EL__].projectStartDate",
+        "bulkForm.projectList[__EL__].projectType",
+        "isUpdatable",
+        "searchForm.clientId",
+        "searchForm.clientName",
+        "searchForm.pageNumber",
+        "searchForm.projectClass",
+        "searchForm.projectEndDateBegin",
+        "searchForm.projectEndDateEnd",
+        "searchForm.projectName",
+        "searchForm.projectStartDateBegin",
+        "searchForm.projectStartDateEnd",
+        "searchForm.projectType",
+        "searchForm.sortDir",
+        "searchForm.sortKey"
+      ],
+      "classes": [
+        "btn",
+        "btn-lg",
+        "btn-success"
+      ]
+    },
+    {
+      "jspFile": "src/main/webapp/WEB-INF/view/projectUpload/create.jsp",
+      "snapshotFile": "migration/dom-impact-custom/snapshots/SrcMainWebappWEBINFViewProjectUploadCreate.html",
+      "elementCount": 1,
+      "ids": [],
+      "names": [],
+      "classes": []
+    }
+  ]
+}

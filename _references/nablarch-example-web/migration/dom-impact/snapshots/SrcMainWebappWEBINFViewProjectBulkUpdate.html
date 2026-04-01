@@ -1,0 +1,226 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <n:script type="text/javascript" src="/javascripts/lib/jquery-3.7.1.min.js"></n:script>
+        <n:script type="text/javascript" src="/javascripts/projectList.js"></n:script>
+        <n:script type="text/javascript" src="/javascripts/projectInput.js"></n:script>
+        <n:script type="text/javascript" src="/javascripts/clientList.js"></n:script>
+        
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+        <title>
+            プロジェクト検索一覧更新画面
+        </title>
+    </head>
+    <body>
+        
+
+        <div class="mainContents">
+            
+            
+        </div>
+        <div class="container-fluid mainContents">
+            <div class="row">
+                
+                <div class="pages col-md-10">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="title-nav">
+                                        <span>
+                                            プロジェクト検索一覧更新画面
+                                        </span>
+                                        <n:set var="isUpdatable" value="__EL__" />
+                                        <div class="button-nav">
+                                            <button id="topUpdateButton" class="btn btn-lg btn-success" suppressDefaultSubmit="true" <n:write name="isUpdatable" />>更新</button>
+                                            <a href="/action/project" cssClass="btn btn-lg btn-light">新規登録</a>
+                                        </div>
+                                    </div>
+                                    <div class="message-area margin-top">
+                                          
+                                    </div>
+                                    <form method="GET" action="/action/projectBulk/list">
+                                        <div class="sort-nav  mb-3">
+                                            <div style="float:left;">
+                                                <span class="font-group">
+                                                検索結果
+                                                </span>
+                                                <span class="search-result-count">
+                                                
+                                                    <n:write name="projectListDto.projectList.pagination.resultCount" />
+                                                
+                                                
+                                                    0
+                                                
+                                                </span>
+                                            </div>
+
+                                            <!-- ソート順を変更した際に現在の検索条件及びソート順を再送するためのパラメータ -->
+                                            <input type="hidden" name="searchForm.clientId"/>
+                                            <input type="hidden" name="searchForm.clientName"/>
+                                            <input type="hidden" name="searchForm.projectName"/>
+                                            <input type="hidden" name="searchForm.projectType"/>
+                                            <input type="hidden" name="searchForm.projectClass"/>
+                                            <input type="hidden" name="searchForm.projectStartDateBegin"/>
+                                            <input type="hidden" name="searchForm.projectStartDateEnd"/>
+                                            <input type="hidden" name="searchForm.projectEndDateBegin"/>
+                                            <input type="hidden" name="searchForm.projectEndDateEnd"/>
+                                            <input type="hidden" name="searchForm.projectEndDateEnd" />
+                                            <input type="hidden" name="searchForm.pageNumber" value="1" />
+                                            <n:set var="sortKeyList" value=""/>
+                                            <div class="row justify-content-end">
+                                                <div class="col-md-2">
+                                                    <select
+                                                            id="sortKey"
+                                                            name="searchForm.sortKey"
+                                                            listName="sortKeyList"
+                                                            elementValueProperty="value"
+                                                            elementLabelProperty="label"
+                                                            elementLabelPattern="$LABEL$"
+                                                            cssClass="form-select form-select-lg"/>
+                                                    <n:set var="sortOrderList" value=""/>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <select
+                                                            id="sortDir"
+                                                            name="searchForm.sortDir"
+                                                            listName="sortOrderList"
+                                                            elementValueProperty="value"
+                                                            elementLabelProperty="label"
+                                                            elementLabelPattern="$LABEL$"
+                                                            cssClass="form-select form-select-lg"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form>
+                                        
+                                        <c:url value="/action/projectBulk/list" var="uri">
+                                            <c:param name="searchForm.clientId" value="__EL__"/>
+                                            <c:param name="searchForm.clientName" value="__EL__"/>
+                                            <c:param name="searchForm.projectName" value="__EL__"/>
+                                            <c:param name="searchForm.projectType" value="__EL__"/>
+                                            
+                                                <c:param name="searchForm.projectClass" value="__EL__" />
+                                            
+                                            <c:param name="searchForm.projectStartDateBegin" value="__EL__"/>
+                                            <c:param name="searchForm.projectStartDateEnd" value="__EL__"/>
+                                            <c:param name="searchForm.projectEndDateBegin" value="__EL__"/>
+                                            <c:param name="searchForm.projectEndDateEnd" value="__EL__"/>
+                                            <c:param name="searchForm.sortId" value="__EL__"/>
+                                        </c:url>
+                                        <app:listSearchResult
+                                            useFirstSubmit="true"
+                                            currentPageNumberCss="fs-5 mb-3 border-0"
+                                            pagingCss="paging mb-3"
+                                            usePageNumberSubmit="true"
+                                            firstSubmitCss="page-link"
+                                            prevSubmitCss="page-link"
+                                            pageNumberSubmitCss="page-link"
+                                            nextSubmitCss="page-link"
+                                            useLastSubmit="true"
+                                            lastSubmitCss="page-link"
+                                            resultSetCss="table table-striped table-hover"
+                                            searchFormName="searchForm"
+                                            searchUri="__EL__"
+                                            resultSetName="projectListDto.projectList"
+                                            useResultCount="false">
+                                            <jsp:attribute name="headerRowFragment">
+                                                <tr>
+                                                    <th>プロジェクトID</th>
+                                                    <th>プロジェクト名</th>
+                                                    <th>プロジェクト種別</th>
+                                                    <th>開始日</th>
+                                                    <th>終了日</th>
+                                                </tr>
+                                            </jsp:attribute>
+                                            <jsp:attribute name="bodyRowFragment">
+                                                <tr class="info">
+                                                    <td>
+                                                        <!-- プロジェクトIDをパラメータとするリンクを表示する -->
+                                                        <a href="/action/project/show/__EL__">
+                                                            <n:write name="bulkForm.projectList[__EL__].projectId"/>
+                                                        </a>
+                                                        <input type="hidden" name="bulkForm.projectList[__EL__].projectId"/>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <input type="text" name="bulkForm.projectList[__EL__].projectName" maxlength="64" cssClass="form-control form-control-lg" errorCss="input-error"/>
+                                                            
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <n:set var="projectTypeList" value=""/>
+                                                            <select name="bulkForm.projectList[__EL__].projectType"
+                                                                      listName="projectTypeList"
+                                                                      elementValueProperty="value"
+                                                                      elementLabelProperty="label"
+                                                                      elementLabelPattern="$LABEL$"
+                                                                      cssClass="form-control form-control-lg"/>
+                                                            
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <n:set var="projectStartDate" name="bulkForm.projectList[__EL__].projectStartDate" scope="page" />
+                                                            <input type="text" name="bulkForm.projectList[__EL__].projectStartDate" 
+                                                                    nameAlias="bulkForm.projectList[__EL__].date"
+                                                                    value="__EL__"
+                                                                    maxlength="10"
+                                                                    cssClass="form-control form-control-lg datepicker"
+                                                                    errorCss="input-error"/>
+                                                            
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <n:set var="projectEndDate" name="bulkForm.projectList[__EL__].projectEndDate" scope="page" />
+                                                            <input type="text" name="bulkForm.projectList[__EL__].projectEndDate"
+                                                                    nameAlias="bulkForm.projectList[__EL__].date"
+                                                                    value="__EL__"
+                                                                    maxlength="10"
+                                                                    cssClass="form-control form-control-lg datepicker"
+                                                                    errorCss="input-error" />
+                                                            
+                                                            
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </jsp:attribute>
+                                        </app:listSearchResult>
+                                        <div class="title-nav page-footer">
+                                            <div class="button-nav">
+                                                <n:button id="bottomUpdateButton" uri="/action/projectBulk/confirmOfUpdate" disabled="__EL__" cssClass="btn btn-lg btn-success">更新</n:button>
+                                                <a id="bottomCreateButton" href="/action/project" cssClass="btn btn-lg btn-light">新規登録</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <n:script type="text/javascript">
+            $(function() {
+                saveListUrl();
+            });
+        </n:script>
+    </body>
+</html>

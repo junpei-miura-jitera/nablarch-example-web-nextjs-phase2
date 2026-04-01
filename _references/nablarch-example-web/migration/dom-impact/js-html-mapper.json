@@ -1,0 +1,439 @@
+{
+  "generatedAt": "2026-03-05T02:12:33.814Z",
+  "mapper": [
+    {
+      "selector": "#topUpdateButton",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/projectInput.js:5",
+      "scope": "multiple",
+      "recommendation": "stateful-hook",
+      "targets": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "button",
+              "line": 30,
+              "id": "topUpdateButton",
+              "classes": []
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/projectBulk/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectBulkUpdate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "button",
+              "line": 47,
+              "id": "topUpdateButton",
+              "name": "isUpdatable",
+              "classes": [
+                "btn",
+                "btn-lg",
+                "btn-success"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "selector": "#bottomUpdateButton",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/projectInput.js:6",
+      "scope": "single",
+      "recommendation": "single-component",
+      "targets": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "button",
+              "line": 294,
+              "id": "bottomUpdateButton",
+              "classes": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "selector": "#topDeleteButton",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/projectInput.js:9",
+      "scope": "single",
+      "recommendation": "single-component",
+      "targets": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "button",
+              "line": 29,
+              "id": "topDeleteButton",
+              "classes": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "selector": "#bottomDeleteButton",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/projectInput.js:10",
+      "scope": "single",
+      "recommendation": "single-component",
+      "targets": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "button",
+              "line": 293,
+              "id": "bottomDeleteButton",
+              "classes": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "selector": "#topBackButton",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/projectInput.js:13",
+      "scope": "single",
+      "recommendation": "single-component",
+      "targets": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "button",
+              "line": 33,
+              "id": "topBackButton",
+              "classes": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "selector": "#bottomBackButton",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/projectInput.js:14",
+      "scope": "single",
+      "recommendation": "single-component",
+      "targets": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "button",
+              "line": 297,
+              "id": "bottomBackButton",
+              "classes": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "selector": "#topSubmitButton",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/projectInput.js:17",
+      "scope": "single",
+      "recommendation": "single-component",
+      "targets": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "button",
+              "line": 34,
+              "id": "topSubmitButton",
+              "classes": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "selector": "#bottomSubmitButton",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/projectInput.js:18",
+      "scope": "single",
+      "recommendation": "single-component",
+      "targets": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "button",
+              "line": 298,
+              "id": "bottomSubmitButton",
+              "classes": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "selector": "#client-remove",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/projectInput.js:24",
+      "scope": "multiple",
+      "recommendation": "stateful-hook",
+      "targets": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/common/sidemenu.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewCommonSidemenu.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "a",
+              "line": 84,
+              "id": "client-remove",
+              "classes": [
+                "badge",
+                "rounded-pill",
+                "text-dark",
+                "bg-body-secondary"
+              ]
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/create.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectCreate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "a",
+              "line": 130,
+              "id": "client-remove",
+              "classes": [
+                "badge",
+                "rounded-pill",
+                "text-dark",
+                "bg-body-secondary"
+              ]
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "a",
+              "line": 127,
+              "id": "client-remove",
+              "classes": [
+                "badge",
+                "rounded-pill",
+                "text-dark",
+                "bg-body-secondary"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "selector": "#sortKey",
+      "event": "change",
+      "source": "src/main/webapp/javascripts/projectList.js:8",
+      "scope": "multiple",
+      "recommendation": "stateful-hook",
+      "targets": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/index.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectIndex.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "select",
+              "line": 111,
+              "id": "sortKey",
+              "name": "searchForm.sortKey",
+              "classes": []
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/projectBulk/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectBulkUpdate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "select",
+              "line": 85,
+              "id": "sortKey",
+              "name": "searchForm.sortKey",
+              "classes": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "selector": "#sortDir",
+      "event": "change",
+      "source": "src/main/webapp/javascripts/projectList.js:8",
+      "scope": "multiple",
+      "recommendation": "stateful-hook",
+      "targets": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/index.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectIndex.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "select",
+              "line": 122,
+              "id": "sortDir",
+              "name": "searchForm.sortDir",
+              "classes": []
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/projectBulk/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectBulkUpdate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "select",
+              "line": 96,
+              "id": "sortDir",
+              "name": "searchForm.sortDir",
+              "classes": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "selector": "#client-remove",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/projectList.js:16",
+      "scope": "multiple",
+      "recommendation": "stateful-hook",
+      "targets": [
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/common/sidemenu.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewCommonSidemenu.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "a",
+              "line": 84,
+              "id": "client-remove",
+              "classes": [
+                "badge",
+                "rounded-pill",
+                "text-dark",
+                "bg-body-secondary"
+              ]
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/create.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectCreate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "a",
+              "line": 130,
+              "id": "client-remove",
+              "classes": [
+                "badge",
+                "rounded-pill",
+                "text-dark",
+                "bg-body-secondary"
+              ]
+            }
+          ]
+        },
+        {
+          "jspFile": "src/main/webapp/WEB-INF/view/project/update.jsp",
+          "snapshotFile": "migration/dom-impact/snapshots/SrcMainWebappWEBINFViewProjectUpdate.html",
+          "matchedCount": 1,
+          "matched": [
+            {
+              "tag": "a",
+              "line": 127,
+              "id": "client-remove",
+              "classes": [
+                "badge",
+                "rounded-pill",
+                "text-dark",
+                "bg-body-secondary"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "selector": "#client_pop",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/sideMenu.js:50",
+      "scope": "none",
+      "recommendation": "manual-review",
+      "targets": []
+    },
+    {
+      "selector": "#clientId",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/sideMenu.js:55",
+      "scope": "none",
+      "recommendation": "manual-review",
+      "targets": []
+    },
+    {
+      "selector": "#clientName",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/sideMenu.js:55",
+      "scope": "none",
+      "recommendation": "manual-review",
+      "targets": []
+    },
+    {
+      "selector": "#client_pop",
+      "event": "click",
+      "source": "src/main/webapp/javascripts/sideMenu.js:56",
+      "scope": "none",
+      "recommendation": "manual-review",
+      "targets": []
+    },
+    {
+      "selector": ".checkbox",
+      "event": "change",
+      "source": "src/main/webapp/javascripts/sideMenu.js:62",
+      "scope": "none",
+      "recommendation": "manual-review",
+      "targets": []
+    }
+  ]
+}

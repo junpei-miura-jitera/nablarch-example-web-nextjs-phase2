@@ -1,0 +1,210 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <n:script type="text/javascript" src="/javascripts/lib/jquery-3.7.1.min.js"></n:script>
+        <n:script type="text/javascript" src="/javascripts/projectList.js"></n:script>
+        <n:script type="text/javascript" src="/javascripts/clientList.js"></n:script>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+        <title>プロジェクト検索一覧画面</title>
+    </head>
+    <body>
+        
+        <div class="mainContents">
+            
+            
+        </div>
+        <div class="container-fluid mainContents">
+            <div class="row">
+                
+                <div class="pages col-md-10">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="title-nav">
+                                        <span>プロジェクト検索一覧画面</span>
+                                        <div class="button-nav">
+                                            <a href="/action/project" cssClass="btn btn-lg btn-light">新規登録</a>
+                                        </div>
+                                    </div>
+                                    <!-- 検索フォームでバリデーションエラーが発生していない場合だけ、検索結果を表示する。 -->
+                                    
+                                        <div class="message-area margin-top">
+                                            
+                                        </div>
+                                        <form method="GET" action="/action/project/list">
+
+                                            
+                                            <c:url value="/action/project/list" var="uri" context="/">
+                                                <c:param name="searchForm.clientId" value="__EL__"/>
+                                                <c:param name="searchForm.clientName" value="__EL__"/>
+                                                <c:param name="searchForm.projectName" value="__EL__"/>
+                                                <c:param name="searchForm.projectType" value="__EL__"/>
+                                                
+                                                    <c:param name="searchForm.projectClass" value="__EL__" />
+                                                
+                                                <c:param name="searchForm.projectStartDateBegin"
+                                                         value="__EL__"/>
+                                                <c:param name="searchForm.projectStartDateEnd"
+                                                         value="__EL__"/>
+                                                <c:param name="searchForm.projectEndDateBegin"
+                                                         value="__EL__"/>
+                                                <c:param name="searchForm.projectEndDateEnd"
+                                                         value="__EL__"/>
+                                                <c:param name="searchForm.sortKey" value="__EL__"/>
+                                                <c:param name="searchForm.sortDir" value="__EL__"/>
+                                            </c:url>
+                                            <div class="sort-nav mb-3">
+                                                <div style="float:left;">
+                                                    <span class="font-group">
+                                                    検索結果
+                                                    </span>
+                                                    <span class="search-result-count">
+                                                        <n:write name="searchResult.pagination.resultCount" />
+                                                    </span>
+                                                    <c:url value="/action/project/download" var="download_uri" context="/">
+                                                        <c:param name="searchForm.clientId" value="__EL__"/>
+                                                        <c:param name="searchForm.clientName" value="__EL__"/>
+                                                        <c:param name="searchForm.projectName" value="__EL__"/>
+                                                        <c:param name="searchForm.projectType" value="__EL__"/>
+                                                        
+                                                            <c:param name="searchForm.projectClass" value="__EL__" />
+                                                        
+                                                        <c:param name="searchForm.projectStartDateBegin" value="__EL__"/>
+                                                        <c:param name="searchForm.projectStartDateEnd" value="__EL__"/>
+                                                        <c:param name="searchForm.projectEndDateBegin" value="__EL__"/>
+                                                        <c:param name="searchForm.projectEndDateEnd" value="__EL__"/>
+                                                        <c:param name="searchForm.sortKey" value="__EL__"/>
+                                                        <c:param name="searchForm.sortDir" value="__EL__"/>
+                                                        <c:param name="searchForm.pageNumber" value="__EL__"/>
+                                                    </c:url>
+                                                    <a href="__EL__">
+                                                        <n:write name="label" />
+                                                        <n:img src="/images/download.png" alt="ダウンロード" />
+                                                    </a>
+                                                </div>
+
+                                                <!-- ソート順を変更した際に現在の検索条件及びソート順を再送するためのパラメータ -->
+                                                <input type="hidden" name="searchForm.clientId"/>
+                                                <input type="hidden" name="searchForm.clientName"/>
+                                                <input type="hidden" name="searchForm.projectName"/>
+                                                <input type="hidden" name="searchForm.projectType"/>
+                                                <input type="hidden" name="searchForm.projectClass"/>
+                                                <input type="hidden" name="searchForm.projectStartDateBegin"/>
+                                                <input type="hidden" name="searchForm.projectStartDateEnd"/>
+                                                <input type="hidden" name="searchForm.projectEndDateBegin"/>
+                                                <input type="hidden" name="searchForm.projectEndDateEnd"/>
+                                                <n:set var="sortKeyList" value=""/>
+                                                <div class="row justify-content-end">
+                                                    <div class="col-md-2">
+                                                        <select
+                                                                id="sortKey"
+                                                                name="searchForm.sortKey"
+                                                                listName="sortKeyList"
+                                                                elementValueProperty="value"
+                                                                elementLabelProperty="label"
+                                                                elementLabelPattern="$LABEL$"
+                                                                cssClass="form-select form-select-lg"/>
+                                                        <n:set var="sortOrderList" value=""/>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <select
+                                                                id="sortDir"
+                                                                name="searchForm.sortDir"
+                                                                listName="sortOrderList"
+                                                                elementValueProperty="value"
+                                                                elementLabelProperty="label"
+                                                                elementLabelPattern="$LABEL$"
+                                                                cssClass="form-select form-select-lg"/>
+                                                        <input id="firstPageNumber" type="hidden" name="searchForm.pageNumber" value="1" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <!-- 検索結果 -->
+                                        <app:listSearchResult
+                                            useFirstSubmit="true"
+                                            currentPageNumberCss="fs-5 mb-3 border-0"
+                                            pagingCss="paging mb-3"
+                                            usePageNumberSubmit="true"
+                                            firstSubmitCss="page-link"
+                                            prevSubmitCss="page-link"
+                                            pageNumberSubmitCss="page-link"
+                                            nextSubmitCss="page-link"
+                                            useLastSubmit="true"
+                                            lastSubmitCss="page-link"
+                                            resultSetCss="table table-striped table-hover"
+                                            searchFormName="searchForm"
+                                            searchUri="__EL__"
+                                            resultSetName="searchResult"
+                                            useResultCount="false">
+                                            <jsp:attribute name="headerRowFragment">
+                                                <tr>
+                                                    <th>プロジェクトID</th>
+                                                    <th>プロジェクト名</th>
+                                                    <th>プロジェクト種別</th>
+                                                    <th>開始日</th>
+                                                    <th>終了日</th>
+                                                </tr>
+                                            </jsp:attribute>
+                                            <jsp:attribute name="bodyRowFragment">
+                                                <tr class="info">
+                                                    <td>
+                                                        <!-- プロジェクトIDをパラメータとするリンクを表示する -->
+                                                        <a href="/action/project/show/__EL__">
+                                                            <n:write name="row.projectId"/>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <n:write name="row.projectName" />
+                                                    </td>
+                                                    <td>
+                                                        
+                                                            
+                                                                <n:write name="projectType.label" />
+                                                            
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <n:write value="__EL__" />
+                                                    </td>
+                                                    <td>
+                                                        <n:write value="__EL__" />
+                                                    </td>
+                                                </tr>
+                                            </jsp:attribute>
+                                        </app:listSearchResult>
+                                    
+
+                                    <div class="title-nav page-footer">
+                                        <div class="button-nav">
+                                            <a href="/action/project" cssClass="btn btn-lg btn-light">新規登録</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <n:script type="text/javascript">
+            $(function() {
+                saveListUrl();
+            });
+        </n:script>
+    </body>
+</html>

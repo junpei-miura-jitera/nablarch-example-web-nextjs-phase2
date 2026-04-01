@@ -1,0 +1,211 @@
+{
+  "mode": "jsp-first",
+  "jspDir": "src/main/webapp/WEB-INF/view",
+  "jsDir": "src/main/webapp/javascripts",
+  "files": 29,
+  "summary": [
+    {
+      "file": "src/main/webapp/WEB-INF/view/client/index.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewClientIndexCandidatePage.tsx",
+      "elements": 1,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/errorPages/doubleSubmissionError.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonErrorPagesDoubleSubmissionErrorCandidatePage.tsx",
+      "elements": 0,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/errorPages/error.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonErrorPagesErrorCandidatePage.tsx",
+      "elements": 0,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/errorPages/optimisticLockError.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonErrorPagesOptimisticLockErrorCandidatePage.tsx",
+      "elements": 0,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/errorPages/pageNotFoundError.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonErrorPagesPageNotFoundErrorCandidatePage.tsx",
+      "elements": 0,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/errorPages/permissionError.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonErrorPagesPermissionErrorCandidatePage.tsx",
+      "elements": 0,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/errorPages/requestEntityTooLarge.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonErrorPagesRequestEntityTooLargeCandidatePage.tsx",
+      "elements": 0,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/errorPages/serviceUnavailableError.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonErrorPagesServiceUnavailableErrorCandidatePage.tsx",
+      "elements": 0,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/errorPages/tamperingDetected.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonErrorPagesTamperingDetectedCandidatePage.tsx",
+      "elements": 0,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/errorPages/userError.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonErrorPagesUserErrorCandidatePage.tsx",
+      "elements": 0,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/footer.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonFooterCandidatePage.tsx",
+      "elements": 0,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/header.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonHeaderCandidatePage.tsx",
+      "elements": 2,
+      "logic": 5,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/menu.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonMenuCandidatePage.tsx",
+      "elements": 3,
+      "logic": 1,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/noscript.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonNoscriptCandidatePage.tsx",
+      "elements": 0,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/common/sidemenu.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewCommonSidemenuCandidatePage.tsx",
+      "elements": 6,
+      "logic": 4,
+      "mappedById": 1
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/login/index.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewLoginIndexCandidatePage.tsx",
+      "elements": 0,
+      "logic": 1,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/project/completeOfCreate.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewProjectCompleteOfCreateCandidatePage.tsx",
+      "elements": 2,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/project/completeOfDelete.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewProjectCompleteOfDeleteCandidatePage.tsx",
+      "elements": 2,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/project/completeOfUpdate.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewProjectCompleteOfUpdateCandidatePage.tsx",
+      "elements": 2,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/project/confirmOfCreate.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewProjectConfirmOfCreateCandidatePage.tsx",
+      "elements": 0,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/project/confirmOfUpdate.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewProjectConfirmOfUpdateCandidatePage.tsx",
+      "elements": 0,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/project/create.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewProjectCreateCandidatePage.tsx",
+      "elements": 4,
+      "logic": 19,
+      "mappedById": 1
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/project/detail.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewProjectDetailCandidatePage.tsx",
+      "elements": 4,
+      "logic": 7,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/project/index.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewProjectIndexCandidatePage.tsx",
+      "elements": 4,
+      "logic": 10,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/project/update.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewProjectUpdateCandidatePage.tsx",
+      "elements": 12,
+      "logic": 18,
+      "mappedById": 9
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/projectBulk/completeOfUpdate.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewProjectBulkCompleteOfUpdateCandidatePage.tsx",
+      "elements": 2,
+      "logic": 0,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/projectBulk/confirmOfUpdate.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewProjectBulkConfirmOfUpdateCandidatePage.tsx",
+      "elements": 4,
+      "logic": 5,
+      "mappedById": 0
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/projectBulk/update.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewProjectBulkUpdateCandidatePage.tsx",
+      "elements": 4,
+      "logic": 9,
+      "mappedById": 1
+    },
+    {
+      "file": "src/main/webapp/WEB-INF/view/projectUpload/create.jsp",
+      "output": "migration/jsp-first-candidates/SrcMainWebappWEBINFViewProjectUploadCreateCandidatePage.tsx",
+      "elements": 0,
+      "logic": 1,
+      "mappedById": 0
+    }
+  ]
+}

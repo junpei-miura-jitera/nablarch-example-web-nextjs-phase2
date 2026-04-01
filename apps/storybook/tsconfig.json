@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "paths": {
+      ":": ["../web/src"],
+      ":/*": ["../web/src/*"]
+    }
+  },
+  "include": ["stories/**/*.ts", "stories/**/*.tsx", "../web/src/**/*.ts", "../web/src/**/*.tsx"],
+  "exclude": ["node_modules"]
+}

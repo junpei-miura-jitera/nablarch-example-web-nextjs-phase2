@@ -1,0 +1,68 @@
+[
+  {
+    "file": "src/main/webapp/javascripts/clientList.js",
+    "output": "migration/react-candidates/clientList.react-candidate.ts",
+    "findings": [
+      "Converted jQuery document-ready wrapper to useEffect.",
+      "Converted id selector from jQuery to querySelector.",
+      "Converted click handler to addEventListener."
+    ],
+    "unresolved": [
+      "Contains jQuery static API usage ($.*).",
+      "Contains Bootstrap/jQuery modal call.",
+      "Contains .val() call (requires state mapping).",
+      "Contains remaining jQuery selector/wrapper usage."
+    ]
+  },
+  {
+    "file": "src/main/webapp/javascripts/common.js",
+    "output": "migration/react-candidates/common.react-candidate.ts",
+    "findings": [],
+    "unresolved": []
+  },
+  {
+    "file": "src/main/webapp/javascripts/projectInput.js",
+    "output": "migration/react-candidates/projectInput.react-candidate.ts",
+    "findings": [
+      "Converted jQuery document-ready wrapper to useEffect.",
+      "Converted id selector from jQuery to querySelector.",
+      "Converted class selector from jQuery to querySelectorAll.",
+      "Converted click handler to addEventListener."
+    ],
+    "unresolved": [
+      "Contains datepicker plugin call.",
+      "Contains .val() call (requires state mapping)."
+    ]
+  },
+  {
+    "file": "src/main/webapp/javascripts/projectList.js",
+    "output": "migration/react-candidates/projectList.react-candidate.ts",
+    "findings": [
+      "Converted jQuery document-ready wrapper to useEffect.",
+      "Converted id selector from jQuery to querySelector.",
+      "Converted class selector from jQuery to querySelectorAll.",
+      "Converted click handler to addEventListener.",
+      "Converted change handler to addEventListener."
+    ],
+    "unresolved": [
+      "Contains .val() call (requires state mapping).",
+      "Contains remaining jQuery selector/wrapper usage."
+    ]
+  },
+  {
+    "file": "src/main/webapp/javascripts/sideMenu.js",
+    "output": "migration/react-candidates/sideMenu.react-candidate.ts",
+    "findings": [
+      "Converted jQuery document-ready wrapper to useEffect.",
+      "Converted id selector from jQuery to querySelector.",
+      "Converted class selector from jQuery to querySelectorAll.",
+      "Converted click handler to addEventListener.",
+      "Converted change handler to addEventListener."
+    ],
+    "unresolved": [
+      "Contains .val() call (requires state mapping).",
+      "Contains .attr() call (requires DOM API mapping).",
+      "Contains remaining jQuery selector/wrapper usage."
+    ]
+  }
+]

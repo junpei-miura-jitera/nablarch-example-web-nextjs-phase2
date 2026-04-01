@@ -1,0 +1,77 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <n:script type="text/javascript" src="/javascripts/lib/jquery-3.7.1.min.js"></n:script>
+        <n:script type="text/javascript" src="/javascripts/projectList.js"></n:script>
+        <title>プロジェクト検索一覧更新画面</title>
+    </head>
+    <body>
+        
+        <div class="mainContents">
+            
+            
+            <section>
+                <div class="title-nav">
+                    <span>プロジェクト検索一覧更新画面</span>
+                    <div class="button-nav">
+                        <form useToken="true">
+                            <button type="button" uri="backToList" cssClass="btn btn-lg btn-light" value="入力へ戻る"></button>
+                            <button type="button" uri="update" allowDoubleSubmission="false" cssClass="btn btn-lg btn-success" value="確定"></button>
+                        </form>
+                    </div>
+                </div>
+                <h2 class="font-group my-3">プロジェクト変更一覧</h2>
+                <div>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th>プロジェクトID</th>
+                            <th>プロジェクト名</th>
+                            <th>プロジェクト種別</th>
+                            <th>開始日</th>
+                            <th>終了日</th>
+                        </tr>
+                        
+                            <tr class="<n:write name='oddEvenCss' />">
+                                <td>
+                                    <n:write name="row.projectId" />
+                                </td>
+                                <td>
+                                    <n:write name="row.projectName" />
+                                </td>
+                                <td>
+                                    
+                                        
+                                            <n:write name="projectType.label" />
+                                        
+                                    
+                                </td>
+                                <td>
+                                    <n:write value="__EL__" />
+                                </td>
+                                <td>
+                                    <n:write value="__EL__" />
+                                </td>
+                            </tr>
+                        
+                    </table>
+                </div>
+            </section>
+            <div class="title-nav page-footer">
+                <div class="button-nav">
+                    <form useToken="true">
+                        <button type="button" uri="backToList" cssClass="btn btn-lg btn-light" value="入力へ戻る"></button>
+                        <button type="button" uri="update" allowDoubleSubmission="false" cssClass="btn btn-lg btn-success" value="確定"></button>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </body>
+</html>

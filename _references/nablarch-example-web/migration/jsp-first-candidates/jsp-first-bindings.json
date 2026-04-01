@@ -1,0 +1,146 @@
+[
+  {
+    "file": "src/main/webapp/javascripts/projectInput.js",
+    "line": 5,
+    "selectorType": "id",
+    "selectorValue": "topUpdateButton",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$(\"#topUpdateButton\").click("
+  },
+  {
+    "file": "src/main/webapp/javascripts/projectInput.js",
+    "line": 6,
+    "selectorType": "id",
+    "selectorValue": "bottomUpdateButton",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$(\"#bottomUpdateButton\").click("
+  },
+  {
+    "file": "src/main/webapp/javascripts/projectInput.js",
+    "line": 9,
+    "selectorType": "id",
+    "selectorValue": "topDeleteButton",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$(\"#topDeleteButton\").click("
+  },
+  {
+    "file": "src/main/webapp/javascripts/projectInput.js",
+    "line": 10,
+    "selectorType": "id",
+    "selectorValue": "bottomDeleteButton",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$(\"#bottomDeleteButton\").click("
+  },
+  {
+    "file": "src/main/webapp/javascripts/projectInput.js",
+    "line": 13,
+    "selectorType": "id",
+    "selectorValue": "topBackButton",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$(\"#topBackButton\").click("
+  },
+  {
+    "file": "src/main/webapp/javascripts/projectInput.js",
+    "line": 14,
+    "selectorType": "id",
+    "selectorValue": "bottomBackButton",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$(\"#bottomBackButton\").click("
+  },
+  {
+    "file": "src/main/webapp/javascripts/projectInput.js",
+    "line": 17,
+    "selectorType": "id",
+    "selectorValue": "topSubmitButton",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$(\"#topSubmitButton\").click("
+  },
+  {
+    "file": "src/main/webapp/javascripts/projectInput.js",
+    "line": 18,
+    "selectorType": "id",
+    "selectorValue": "bottomSubmitButton",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$(\"#bottomSubmitButton\").click("
+  },
+  {
+    "file": "src/main/webapp/javascripts/projectInput.js",
+    "line": 24,
+    "selectorType": "id",
+    "selectorValue": "client-remove",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$('#client-remove').click("
+  },
+  {
+    "file": "src/main/webapp/javascripts/projectList.js",
+    "line": 8,
+    "selectorType": "id",
+    "selectorValue": "sortKey",
+    "event": "change",
+    "kind": "jquery",
+    "raw": "$(\"#sortKey,#sortDir\").change("
+  },
+  {
+    "file": "src/main/webapp/javascripts/projectList.js",
+    "line": 8,
+    "selectorType": "id",
+    "selectorValue": "sortDir",
+    "event": "change",
+    "kind": "jquery",
+    "raw": "$(\"#sortKey,#sortDir\").change("
+  },
+  {
+    "file": "src/main/webapp/javascripts/projectList.js",
+    "line": 16,
+    "selectorType": "id",
+    "selectorValue": "client-remove",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$('#client-remove').click("
+  },
+  {
+    "file": "src/main/webapp/javascripts/sideMenu.js",
+    "line": 50,
+    "selectorType": "id",
+    "selectorValue": "client_pop",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$(\"#client_pop\").click("
+  },
+  {
+    "file": "src/main/webapp/javascripts/sideMenu.js",
+    "line": 55,
+    "selectorType": "id",
+    "selectorValue": "clientId",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$(\"#clientId, #clientName\").click("
+  },
+  {
+    "file": "src/main/webapp/javascripts/sideMenu.js",
+    "line": 55,
+    "selectorType": "id",
+    "selectorValue": "clientName",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$(\"#clientId, #clientName\").click("
+  },
+  {
+    "file": "src/main/webapp/javascripts/sideMenu.js",
+    "line": 56,
+    "selectorType": "id",
+    "selectorValue": "client_pop",
+    "event": "click",
+    "kind": "jquery",
+    "raw": "$(\"#client_pop\").click("
+  }
+]

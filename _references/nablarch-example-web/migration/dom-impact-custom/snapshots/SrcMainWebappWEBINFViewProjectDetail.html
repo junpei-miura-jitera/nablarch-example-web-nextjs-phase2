@@ -1,0 +1,219 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <n:script type="text/javascript" src="/javascripts/lib/jquery-3.7.1.min.js"></n:script>
+        <n:script type="text/javascript" src="/javascripts/projectInput.js"></n:script>
+        <title>プロジェクト詳細画面</title>
+    </head>
+
+    <body>
+        <div class="mainContents">
+            
+            
+        </div>
+        <section>
+            <div class="title-nav">
+                <span class="page-title">プロジェクト詳細画面</span>
+                <div class="button-nav">
+                    <div class="button-block real-button-block">
+                        <a href="/action/project/edit/__EL__" cssClass="btn btn-lg btn-success">変更</a>
+                    </div>
+                    <div class="button-block link-button-block">
+                        <a id="topReturnList" href="#" cssClass="btn btn-lg btn-light">戻る</a>
+                    </div>
+                </div>
+            </div>
+            <div class="message-area margin-top">
+                
+            </div>
+            <h2 class="font-group mb-3">
+                プロジェクト詳細
+            </h2>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th class="width-250">
+                            プロジェクト名
+                        </th>
+                        <td>
+                            <n:write name="form.projectName"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            プロジェクト種別
+                        </th>
+                        <td>
+                            
+                                
+                                    <n:write name="projectType.label" />
+                                
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            プロジェクト分類
+                        </th>
+                        <td>
+                            
+                                
+                                    <n:write name="projectClass.label" />
+                                
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            プロジェクトマネージャー
+                        </th>
+                        <td>
+                            <n:write name="form.projectManager"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            プロジェクトリーダー
+                        </th>
+                        <td>
+                            <n:write name="form.projectLeader"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            顧客名
+                        </th>
+                        <td>
+                            <n:write name="form.clientId"/>
+                            <n:write name="form.clientName"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            プロジェクト開始日
+                        </th>
+                        <td>
+                            <n:write value="__EL__" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            プロジェクト終了日
+                        </th>
+                        <td>
+                            <n:write value="__EL__"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            備考
+                        </th>
+                        <td>
+                            <n:write name="form.note"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            売上高
+                        </th>
+                        <td>
+                            <n:write value="__EL__" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            売上原価
+                        </th>
+                        <td>
+                            <n:write value="__EL__" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            販管費
+                        </th>
+                        <td>
+                            <n:write value="__EL__" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            本社配賦
+                        </th>
+                        <td>
+                            <n:write value="__EL__" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            売上総利益
+                        </td>
+                        <td>
+                            <n:write value="__EL__" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            配賦前利益
+                        </td>
+                        <td>
+                            <n:write value="__EL__" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            配賦前利益率
+                        </td>
+                        <td>
+                            <n:write value="__EL__" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            営業利益
+                        </td>
+                        <td>
+                            <n:write value="__EL__" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            営業利益率
+                        </td>
+                        <td>
+                             <n:write value="__EL__" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="title-nav page-footer">
+                <div class="button-nav">
+                    <div class="button-block real-button-block">
+                        <a href="/action/project/edit/__EL__" cssClass="btn btn-lg btn-success">変更</a>
+                    </div>
+                    <div class="button-block link-button-block">
+                        <a id="bottomReturnList" href="#" cssClass="btn btn-lg btn-light">戻る</a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        
+        <n:script type="text/javascript">
+            $(function(){
+                setListUrlTo("topReturnList");
+                setListUrlTo("bottomReturnList");
+            });
+        </n:script>
+    </body>
+</html>
