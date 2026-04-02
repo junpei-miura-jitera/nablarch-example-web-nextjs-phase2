@@ -1,75 +1,64 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { apiPostFormData, ApiError } from ":/app/(api)/_utils/client";
+import { useState } from 'react'
 
 /**
  * アップロード結果の型。
  */
-type UploadResult =
-  | { ok: true; count: number }
-  | { ok: false; errors: readonly string[] };
+type UploadResult = { ok: true; count: number } | { ok: false; errors: readonly string[] }
 
 /**
  * CSV ファイルアップロードフォーム。
  *
- * Java 版の構造:
- *   title-nav "プロジェクト一括登録画面" + button "登録"
- *   h2 "プロジェクト情報ファイル選択"
- *   table: "プロジェクト情報ファイル選択" ヘッダー + "プロジェクト情報ファイル必須" 行
- *   title-nav (footer) + button "登録"
+ * Java 版の構造: title-nav "プロジェクト一括登録画面" + button "登録" h2 "プロジェクト情報ファイル選択" table: "プロジェクト情報ファイル選択"
+ * ヘッダー + "プロジェクト情報ファイル必須" 行 title-nav (footer) + button "登録"
  *
- * 元 JSP では `<n:errors>` タグにより行番号付きの詳細バリデーションエラーを表示していた。
- * API が返す message フィールドを改行で分割し、同等の詳細エラー表示を行う。
+ * 元 JSP では `<n:errors>` タグにより行番号付きの詳細バリデーションエラーを表示していた。 API が返す message フィールドを改行で分割し、同等の詳細エラー表示を行う。
  *
  * 変換メモ:
- * - JSP の `allowDoubleSubmission=false` / `useToken` による二重送信防止は、
- *   UI レベルの `isUploading` フラグ（ボタン disabled 制御）に置き換えた。
+ *
+ * - JSP の `allowDoubleSubmission=false` / `useToken` による二重送信防止は、 UI レベルの `isUploading` フラグ（ボタン
+ *   disabled 制御）に置き換えた。
  *
  * @see _references/nablarch-example-web/src/main/webapp/WEB-INF/view/projectUpload/create.jsp
  */
 export function UploadForm() {
-  const [file, setFile] = useState<File | null>(null);
-  const [isUploading, setIsUploading] = useState(false);
-  const [result, setResult] = useState<UploadResult | null>(null);
+  const [file, setFile] = useState<File | null>(null)
+  const [isUploading, setIsUploading] = useState(false)
+  const [result, setResult] = useState<UploadResult | null>(null)
 
   async function handleUpload(e: React.FormEvent) {
-    e.preventDefault();
+    e.preventDefault()
     // @see ProjectUploadAction.java L67-69: ファイル未選択時のエラー表示
     if (!file) {
-      setResult({ ok: false, errors: ["ファイルを選択してください。"] });
-      return;
+      setResult({ ok: false, errors: ['ファイルを選択してください。'] })
+      return
     }
-    setIsUploading(true);
-    setResult(null);
+    setIsUploading(true)
+    setResult(null)
     try {
-      const fd = new FormData();
+      const fd = new FormData()
       // @see create.jsp L42: <n:file name="uploadFile"> — Java API のパラメータ名に合わせる
-      fd.append("uploadFile", file);
-      const data = await apiPostFormData<Record<string, unknown>>("/api/projectupload/upload", fd);
-      if (!data?.ok) {
+      fd.append('uploadFile', file)
+      const res = await fetch('/api/projectupload/upload', {
+        method: 'POST',
+        body: fd,
+      })
+      const data = (await res.json().catch(() => null)) as Record<string, unknown> | null
+      if (!res.ok || !data?.ok) {
         // API が返す message を改行区切りで分割し、詳細エラー（行番号付き等）を個別表示する
-        const message = data?.message as string | undefined;
+        const message = data?.message as string | undefined
         const errors = message
-          ? message.split("\n").filter(Boolean)
-          : ["アップロードに失敗しました。"];
-        setResult({ ok: false, errors });
-        return;
+          ? message.split('\n').filter(Boolean)
+          : ['アップロードに失敗しました。']
+        setResult({ ok: false, errors })
+        return
       }
-      setResult({ ok: true, count: (data as { count?: number })?.count ?? 0 });
-    } catch (err) {
-      if (err instanceof ApiError) {
-        const body = err.body as Record<string, unknown> | null;
-        const message = body?.message as string | undefined;
-        const errors = message
-          ? message.split("\n").filter(Boolean)
-          : ["アップロードに失敗しました。"];
-        setResult({ ok: false, errors });
-      } else {
-        setResult({ ok: false, errors: ["アップロードに失敗しました。"] });
-      }
+      setResult({ ok: true, count: (data as { count?: number })?.count ?? 0 })
+    } catch {
+      setResult({ ok: false, errors: ['アップロードに失敗しました。'] })
     } finally {
-      setIsUploading(false);
+      setIsUploading(false)
     }
   }
 
@@ -79,12 +68,8 @@ export function UploadForm() {
       <div className="title-nav">
         <span>プロジェクト一括登録画面</span>
         <div className="button-nav">
-          <button
-            type="submit"
-            className="btn btn-lg btn-light"
-            disabled={isUploading}
-          >
-            {isUploading ? "登録中..." : "登録"}
+          <button type="submit" className="btn btn-lg btn-light" disabled={isUploading}>
+            登録
           </button>
         </div>
       </div>
@@ -114,15 +99,13 @@ export function UploadForm() {
 
       <table className="table">
         <colgroup>
-          <col style={{ width: "20%" }} />
-          <col style={{ width: "30%" }} />
-          <col style={{ width: "50%" }} />
+          <col style={{ width: '20%' }} />
+          <col style={{ width: '30%' }} />
+          <col style={{ width: '50%' }} />
         </colgroup>
         <tbody>
           <tr>
-            <th colSpan={2}>
-              プロジェクト情報ファイル選択
-            </th>
+            <th colSpan={2}>プロジェクト情報ファイル選択</th>
           </tr>
           <tr>
             <th className="width-250 required">プロジェクト情報ファイル</th>
@@ -144,15 +127,11 @@ export function UploadForm() {
       {/* title-nav: 下部 */}
       <div className="title-nav">
         <div className="button-nav">
-          <button
-            type="submit"
-            className="btn btn-lg btn-light"
-            disabled={isUploading}
-          >
-            {isUploading ? "登録中..." : "登録"}
+          <button type="submit" className="btn btn-lg btn-light" disabled={isUploading}>
+            登録
           </button>
         </div>
       </div>
     </form>
-  );
+  )
 }

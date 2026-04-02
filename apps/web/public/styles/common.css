@@ -1,4 +1,3 @@
-
 /*
  * common.css
  *
@@ -6,23 +5,63 @@
  *       プロジェクトで自由に書き換えるか、不要な場合は削除してかまいません。
  */
 
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, code,
-del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td, input, select, textarea {
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+code,
+del,
+dfn,
+em,
+img,
+q,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+input,
+select,
+textarea {
   font-size: 12px;
-  font-family: Osaka, "ＭＳ P ゴシック", "MS P Gothic", sans-serif;
+  font-family: Osaka, 'ＭＳ P ゴシック', 'MS P Gothic', sans-serif;
   margin: 0;
   padding: 0;
 }
 body {
   color: #222;
-  background: #EEEEEE;
+  background: #eeeeee;
 }
 hr {
-  color: #DDDDDD;
+  color: #dddddd;
   height: 1px;
   margin: 3px 0px 3px 0px;
 }
@@ -30,14 +69,17 @@ hr {
   width: 100%;
 }
 
-tr, th, td {
+tr,
+th,
+td {
   line-height: 2.5;
   font-size: 1.25rem;
 }
 
-.table th, .table th a  {
-  background: #3F51B5;
-  color: #FFFFFF;
+.table th,
+.table th a {
+  background: #3f51b5;
+  color: #ffffff;
   font-weight: normal;
 }
 
@@ -46,8 +88,8 @@ a {
 }
 
 .btn {
-    padding: .5rem 2rem;
-    margin-top: 1rem;
+  padding: 0.5rem 2rem;
+  margin-top: 1rem;
 }
 
 .list-table {
@@ -58,23 +100,23 @@ a {
   font-weight: normal;
   text-align: left;
   height: 30px;
-  background: #3F51B5;
-  color: #FFFFFF;
+  background: #3f51b5;
+  color: #ffffff;
   width: 100%;
   white-space: nowrap;
 }
 .list-header td {
   font-family: 'MS UI Gothic';
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 13px;
 }
 
 h2 {
-    margin:0;
-    padding: 5px 3px;
-    font-size: 1em;
-    color:red;
-    font-weight: bold;
+  margin: 0;
+  padding: 5px 3px;
+  font-size: 1em;
+  color: red;
+  font-weight: bold;
 }
 tfoot td {
   background-color: transparent;
@@ -84,27 +126,27 @@ tfoot td {
 
 /* -------------------- 入力系項目 -------------------- */
 .input-button {
-    color: #000000;
-    height: 22px;
-    width: 100px;
-    padding: 2px;
-    font-size: 12px;
-    font-weight: bold;
+  color: #000000;
+  height: 22px;
+  width: 100px;
+  padding: 2px;
+  font-size: 12px;
+  font-weight: bold;
 }
 .buttonLink {
-    font-size:12px;
-    font-weight:bold;
-    color:#000000;
-    display:block;
-    background:#EEEEEE;
-    width:100px;
-    height:18px;
-    padding-top:3px;
-    padding-bottom:0px;
-    text-align:center;
-    border:1px solid;
-    border-color:#aaaaaa #444444 #444444 #aaaaaa;
-    text-decoration:none;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000000;
+  display: block;
+  background: #eeeeee;
+  width: 100px;
+  height: 18px;
+  padding-top: 3px;
+  padding-bottom: 0px;
+  text-align: center;
+  border: 1px solid;
+  border-color: #aaaaaa #444444 #444444 #aaaaaa;
+  text-decoration: none;
 }
 .input-text,
 .input-range,
@@ -119,68 +161,68 @@ tfoot td {
 .input-url,
 .input-email,
 .input-search {
-    color: #000000;
-    background-color: #FFFFDD;
-    border: 1px solid #AAAAAA;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    padding: 2px;
+  color: #000000;
+  background-color: #ffffdd;
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  padding: 2px;
 }
 .input-number {
-    color: #000000;
-    background-color: #FFFFDD;
-    border: 1px solid #AAAAAA;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    padding: 2px;
-    text-align: right;
+  color: #000000;
+  background-color: #ffffdd;
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  padding: 2px;
+  text-align: right;
 }
 
 .input-textarea {
-    color: #000000;
-    background-color: #FFFFDD;
-    border: 1px solid #AAAAAA;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    padding: 2px;
+  color: #000000;
+  background-color: #ffffdd;
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  padding: 2px;
 }
 .input-label {
-    color: #000000;
-    background-color: #E8EAF4;
-    border: none;
+  color: #000000;
+  background-color: #e8eaf4;
+  border: none;
 }
 .input-file {
-    color: #000000;
-    background-color: #FFFFDD;
-    border: 1px solid #AAAAAA;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    padding: 2px;
-    width: 600px;
+  color: #000000;
+  background-color: #ffffdd;
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  padding: 2px;
+  width: 600px;
 }
 .input-select {
-    color: #000000;
-    background-color: #FFFFDD;
-    border: 1px solid #AAAAAA;
-    border-radius: 3px;
-   -moz-border-radius: 3px;
-   -webkit-border-radius: 3px;
+  color: #000000;
+  background-color: #ffffdd;
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
 }
 .input-radio {
-    margin: 1px;
-    vertical-align: middle;
+  margin: 1px;
+  vertical-align: middle;
 }
 .input-checkbox {
-    margin: 1px;
-    vertical-align: middle;
+  margin: 1px;
+  vertical-align: middle;
 }
 /* ----- 入力エラー ----- */
 .input-error {
-    border-color: #FF0000;
+  border-color: #ff0000;
 }
 
 /* ----- 項目フォーカス（IE以外） ----- */
@@ -203,63 +245,62 @@ tfoot td {
 .input-url:focus,
 .input-email:focus,
 .input-search:focus {
-    color: #000000;
-    background-color: #FFEECC;
+  color: #000000;
+  background-color: #ffeecc;
 }
 /* ----- 項目フォーカス（IE専用） ----- */
 .forIE-focus {
-    color: #000000;
-    background-color: #FFEECC;
+  color: #000000;
+  background-color: #ffeecc;
 }
 
 /* -------------------- IME設定（IEのみ有効） -------------------- */
 .ime-active {
-    ime-mode: active;
+  ime-mode: active;
 }
 .ime-disabled {
-    ime-mode: disabled;
+  ime-mode: disabled;
 }
 
 /* -------------------- メッセージエリア -------------------- */
 .message-area {
-	margin: 20px 0px 20px 30px;
+  margin: 20px 0px 20px 30px;
 }
 .message-normal {
-    color: #0000FF;
+  color: #0000ff;
 }
 .message-error {
-    color: #FF0000;
+  color: #ff0000;
 }
 .message-info {
-    color: #000000;
+  color: #000000;
 }
-
 
 /* -------------------- フォント -------------------- */
 .font-group {
-    color: #0000FF;
-    font-size: 17px;
-    font-weight: 700;
-    text-shadow: 2px 2px 2px #CCCCFF;
+  color: #0000ff;
+  font-size: 17px;
+  font-weight: 700;
+  text-shadow: 2px 2px 2px #ccccff;
 }
 
 /* -------------------- 項目ラベル -------------------- */
 th.item-required {
-  color: #FFFF00;
+  color: #ffff00;
   vertical-align: middle;
 }
 th.item-norequired {
-  color: #FFFFFF;
+  color: #ffffff;
   vertical-align: middle;
 }
 
 /* -------------------- パンくずリスト -------------------- */
 div.flow-navigation {
   float: right;
-  color: #E8EAF4;
-  font-size:18px;
-  font-weight:bold;
-  margin-top:5px;
+  color: #e8eaf4;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 5px;
   text-align: right;
 }
 ol.flow-navigation {
@@ -267,7 +308,7 @@ ol.flow-navigation {
   list-style: none;
   display: inline-table;
   table-layout: fixed;
-  background: #0000FF none repeat scroll 0 0;
+  background: #0000ff none repeat scroll 0 0;
   height: 50px;
   color: white;
 }
@@ -289,13 +330,13 @@ ol.flow-navigation li div.step-name {
   display: table-cell;
   vertical-align: middle;
   /* IE 8以下用 */
-  position:absolute\9;
-  top:40%\9;
-  left:10%\9;
+  position: absolute\9;
+  top: 40%\9;
+  left: 10%\9;
   text-align: center\9;
   vertical-align: middle\9;
-  margin-left:0em\9;
-  margin-top:-1em\9;
+  margin-left: 0em\9;
+  margin-top: -1em\9;
 }
 ol.flow-navigation li div.active-step {
   font-weight: bold;
@@ -307,29 +348,29 @@ ol.flow-navigation li div.active-step {
   vertical-align: middle;
   color: white !important;
   /* IE 8以下用 */
-  position:absolute\9;
-  top:50%\9;
-  left:10%\9;
+  position: absolute\9;
+  top: 50%\9;
+  left: 10%\9;
   text-align: center\9;
   vertical-align: middle\9;
-  margin-left:0em\9;
-  margin-top:-1em\9;
+  margin-left: 0em\9;
+  margin-top: -1em\9;
 }
 .floatClear {
-    height: 0px;
-    clear: both;
+  height: 0px;
+  clear: both;
 }
 
 .title {
   color: blue;
 }
 .title-nav {
-    height: 59px;
-    width: 100%;
-    clear: both;
-    background: #3F51B5;
-    -moz-box-shadow: 3px 3px 10px #888888;
-    -webkit-box-shadow: 3px 3px 10px #888888;
+  height: 59px;
+  width: 100%;
+  clear: both;
+  background: #3f51b5;
+  -moz-box-shadow: 3px 3px 10px #888888;
+  -webkit-box-shadow: 3px 3px 10px #888888;
 }
 
 .title-nav span {
@@ -346,7 +387,7 @@ ol.flow-navigation li div.active-step {
   width: 100%;
   border: 0px;
   height: 30px;
-  background: #3F51B5;
+  background: #3f51b5;
   color: #ffffff;
 }
 .search-nav a {
@@ -374,7 +415,7 @@ ol.flow-navigation li div.active-step {
   text-align: right;
   margin: 1px;
   padding: 5px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 .white-padding {
   background: white !important;
@@ -386,68 +427,70 @@ ol.flow-navigation li div.active-step {
   white-space: nowrap;
 }
 .noscriptMessage {
-    font-size: 12pt;
-    line-height: 30px;
-    width: 500px;
-    margin: 20px;
-    padding: 50px;
-    display: block;
-    background-color: orange;
+  font-size: 12pt;
+  line-height: 30px;
+  width: 500px;
+  margin: 20px;
+  padding: 50px;
+  display: block;
+  background-color: orange;
 }
 
 /* -------------------- jQuery Datepicker -------------------- */
 .ui-datepicker {
-    font-size: 10px;
+  font-size: 10px;
 }
 .ui-datepicker-trigger {
-    cursor: hand;
+  cursor: hand;
 }
 
 /* -------------------- qTip2 -------------------- */
 .qtip-content {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 /* -------------------- xenlon-ui クラス定義の実装 -------------------- */
 .x_tooltip {
-    padding: 8px;
-    line-height: 170%;
+  padding: 8px;
+  line-height: 170%;
 
-    background: -moz-linear-gradient(top, #EEF, #BBF);
-    background: top left, -o-linear-gradient(#EEF, #BBF);
-    background: -webkit-gradient(linear, left top, left bottom, from(#EEF), to(#BBF));
-    background-color: #BBF;
+  background: -moz-linear-gradient(top, #eef, #bbf);
+  background:
+    top left,
+    -o-linear-gradient(#eef, #bbf);
+  background: -webkit-gradient(linear, left top, left bottom, from(#eef), to(#bbf));
+  background-color: #bbf;
 
-    border-color: #88F;
-    border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
+  border-color: #88f;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
 
-    box-shadow: 3px 5px 5px 3px rgba(0, 0, 0, 0.15);
-    -webkit-box-shadow: 3px 5px 5px 3px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 3px 5px 5px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 3px 5px 5px 3px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 3px 5px 5px 3px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 3px 5px 5px 3px rgba(0, 0, 0, 0.15);
 }
 
 .x_calendarImg {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .x_color_row_table_even {
-    background-color: #EEF;
+  background-color: #eef;
 }
 .x_color_row_table_odd {
-    background-color: #DDE;
+  background-color: #dde;
 }
 
 .x_pagingTable,
 .x_pagingTable tr,
 .x_pagingTable th,
 .x_pagingTable td {
-    border: #0000FF;
+  border: #0000ff;
 }
 .x_pagingTable_info {
   font-family: 'MS UI Gothic';
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 13px;
 }
 .x_displayErrorInfo_table {
@@ -459,8 +502,8 @@ ol.flow-navigation li div.active-step {
   float: right;
 }
 .x_displayErrorInfo_startSection {
-  background-color: #FF0000;
-  color:#FFFFFF;
+  background-color: #ff0000;
+  color: #ffffff;
   font-size: 18px;
   font-weight: bold;
   padding: 15px;
@@ -474,7 +517,7 @@ ol.flow-navigation li div.active-step {
   border: 1px solid #111;
 }
 .x_displayErrorInfo_table th {
-  background-color: #FF89B4;
+  background-color: #ff89b4;
   text-align: left;
   padding: 5px;
 }
@@ -486,146 +529,145 @@ ol.flow-navigation li div.active-step {
 }
 
 .page-title {
-	position: absolute;
-	font-size: 18px;
-	font-weight: bold;
-	padding-left: 15px;
-	margin-top: 5px;
-	color: white;
+  position: absolute;
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 15px;
+  margin-top: 5px;
+  color: white;
 }
-section{
-	margin: 20px 0px 20px 10px;
+section {
+  margin: 20px 0px 20px 10px;
 }
-input.width-300{
-	width: 300px;
-}
-
-input.width-200{
-	width: 200px;
-	float:left;
+input.width-300 {
+  width: 300px;
 }
 
-th.width-250{
-	width:250px;
+input.width-200 {
+  width: 200px;
+  float: left;
 }
 
-.required:after{
-	content:"必須";
-	color:#DB8B9A;
-	font-size:1rem;
+th.width-250 {
+  width: 250px;
+}
+
+.required:after {
+  content: '必須';
+  color: #db8b9a;
+  font-size: 1rem;
 }
 
 .project-search-list table,
-.client-search-list table{
-	width:100%;
+.client-search-list table {
+  width: 100%;
 }
 .project-search-list table th,
-.client-search-list table th{
-	padding: 1px 6px 1px 6px;
-	font-weight: normal;
-	text-align: left;
-	height: 22px;
-	background: #3F51B5;
-	color: #FFFFFF;
+.client-search-list table th {
+  padding: 1px 6px 1px 6px;
+  font-weight: normal;
+  text-align: left;
+  height: 22px;
+  background: #3f51b5;
+  color: #ffffff;
 }
 .project-search-list table td,
-.client-search-list table td{
-	padding: 1px 6px 1px 6px;
-	background-color: #E8EAF4;
-	align: left;
-	border-bottom: 1px solid #F0F0EE;
+.client-search-list table td {
+  padding: 1px 6px 1px 6px;
+  background-color: #e8eaf4;
+  align: left;
+  border-bottom: 1px solid #f0f0ee;
 }
 .next-page-link,
 .prev-page-link,
 .paging,
 .current-page-number,
 .nablarch_pageNumberSubmit,
-.nablarch_pageNumberSubmitWrapper
-.input.width-200{
-	display:inline-block;
+.nablarch_pageNumberSubmitWrapper .input.width-200 {
+  display: inline-block;
 }
 
 .pagination li:first-child .page-link {
-    border-top-left-radius: 0.375rem;
-    border-bottom-left-radius: 0.375rem;
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
 }
 
 .pagination li:last-child .page-link {
-    border-top-right-radius: 0.375rem;
-    border-bottom-right-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
 }
 
-.paging{
-	float:right;
+.paging {
+  float: right;
 }
 
 .paging ul {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 .page-footer {
-	margin-top: 10px;
+  margin-top: 10px;
 }
-.search-result-count{
-	font-size: 23px;
-	color: #EA8128;
+.search-result-count {
+  font-size: 23px;
+  color: #ea8128;
 }
-.search-result-count:after{
-	content:"件";
-	color:#0000FF;
-	font-size:17px;
-	font-weight: 700;
-	text-shadow: 2px 2px 2px #CCCCFF;
+.search-result-count:after {
+  content: '件';
+  color: #0000ff;
+  font-size: 17px;
+  font-weight: 700;
+  text-shadow: 2px 2px 2px #ccccff;
 }
 
-.sideMenu{
-	width:90%;
-	margin-left:5%;
+.sideMenu {
+  width: 90%;
+  margin-left: 5%;
 }
 
 .navbar {
-    background-color: #3F51B5;
+  background-color: #3f51b5;
 }
 
 .nav-link {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .nav-link:hover {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .form-group {
-    font-size: 1.25rem;
-    margin: auto;
+  font-size: 1.25rem;
+  margin: auto;
 }
 
 /* -------------------- ヘッダーエリア (header.jsp) -------------------- */
 .headerArea {
-    height: 50px;
-    margin: 5px;
+  height: 50px;
+  margin: 5px;
 }
 .headerLeftPane {
-    width: 55%;
-    text-align: left;
-    float: left;
+  width: 55%;
+  text-align: left;
+  float: left;
 }
 .headerCenterPane {
-    width: 10%;
-    margin-top: 30px;
-    text-align: center;
-    float: left;
+  width: 10%;
+  margin-top: 30px;
+  text-align: center;
+  float: left;
 }
 .headerRightPane {
-    width: 34%;
-    margin-top: 30px;
-    text-align: right;
-    float: left;
+  width: 34%;
+  margin-top: 30px;
+  text-align: right;
+  float: left;
 }
 .headerElement {
-    margin: 10px;
+  margin: 10px;
 }
 .applicationName {
-    color: #000;
-    font-size: 23px;
-    text-shadow: 3px 3px 5px #AAA;
+  color: #000;
+  font-size: 23px;
+  text-shadow: 3px 3px 5px #aaa;
 }

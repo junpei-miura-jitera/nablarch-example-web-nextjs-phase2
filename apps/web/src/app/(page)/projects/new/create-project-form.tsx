@@ -1,87 +1,104 @@
-"use client";
+'use client'
 
-import { useEffect, useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import { ClientSearchModal } from "../_fragments/client-search-modal";
-import { projectFormSchema, type ProjectForm as ProjectFormValues } from "../_schemas/project-form.schema";
-import { PROJECT_TYPE } from "../_constants/project-type";
-import { PROJECT_CLASS } from "../_constants/project-class";
+import { useEffect, useState, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { standardSchemaResolver } from '@hookform/resolvers/standard-schema'
+import { ClientSearchModal } from '../_fragments/client-search-modal'
 import {
-  saveProjectFormToCookie,
-  loadProjectFormFromCookie,
-} from "../_utils/cookie-helpers";
-import { transformProjectFormData } from "../_utils/project-form-helpers";
+  apiProjectFormSchema,
+  type ApiProjectFormValues,
+} from ':/shared/api/project'
+import { PROJECT_TYPE } from '../_constants/project-type'
+import { PROJECT_CLASS } from '../_constants/project-class'
+import { saveProjectFormToCookie, loadProjectFormFromCookie } from '../_utils/cookie-helpers'
+import { formatDate, normalizeDateForApi } from '../_utils/format-date'
+
+const VALID_FORM_KEYS: (keyof ApiProjectFormValues)[] = [
+  'projectName',
+  'projectType',
+  'projectClass',
+  'projectManager',
+  'projectLeader',
+  'clientId',
+  'clientName',
+  'projectStartDate',
+  'projectEndDate',
+  'note',
+  'sales',
+  'costOfGoodsSold',
+  'sga',
+  'allocationOfCorpExpenses',
+]
 
 /**
  * プロジェクト新規登録フォーム。
  *
- * Cookie からの復元（確認画面から「戻る」時）に対応。
- * 確認画面への遷移時に Cookie にフォームデータを保存する。
+ * Cookie からの復元（確認画面から「戻る」時）に対応。 確認画面への遷移時に Cookie にフォームデータを保存する。
  *
  * @see _references/nablarch-example-web/src/main/webapp/WEB-INF/view/project/create.jsp
  * @see _references/nablarch-example-web/src/main/webapp/javascripts/projectInput.js
  */
-export function CreateProjectForm() {
-  const router = useRouter();
-  const [isClientModalOpen, setIsClientModalOpen] = useState(false);
+export function CreateProjectForm({ clearCookie }: { clearCookie?: boolean }) {
+  const router = useRouter()
+  const [isClientModalOpen, setIsClientModalOpen] = useState(false)
   const {
     register,
     handleSubmit,
     setValue,
     getValues,
     formState: { errors },
-  } = useForm<ProjectFormValues>({
-    resolver: standardSchemaResolver(projectFormSchema),
-  });
-
-  const validKeys: (keyof ProjectFormValues)[] = [
-    "projectName", "projectType", "projectClass",
-    "projectManager", "projectLeader", "clientId", "clientName",
-    "projectStartDate", "projectEndDate", "note",
-    "sales", "costOfGoodsSold", "sga", "allocationOfCorpExpenses",
-  ];
+  } = useForm<ApiProjectFormValues>({
+    resolver: standardSchemaResolver(apiProjectFormSchema),
+  })
 
   const handleClientSelect = useCallback(
     (client: { clientId: number; clientName: string }) => {
-      setValue("clientId", String(client.clientId));
-      setValue("clientName", client.clientName);
+      setValue('clientId', String(client.clientId))
+      setValue('clientName', client.clientName)
     },
     [setValue],
-  );
+  )
 
   const handleClientClear = useCallback(() => {
-    setValue("clientId", "");
-    setValue("clientName", "");
-  }, [setValue]);
+    setValue('clientId', '')
+    setValue('clientName', '')
+  }, [setValue])
 
-  // Restore form data from cookie (when returning from confirm page)
+  // 直接アクセス時は Cookie クリア、確認画面からの戻りは Cookie からフォーム復元
   useEffect(() => {
-    (async () => {
-      const data = await loadProjectFormFromCookie();
+    if (clearCookie) {
+      document.cookie = 'project_form_data=; max-age=0; path=/'
+      return
+    }
+    ;(async () => {
+      const data = await loadProjectFormFromCookie()
       if (data) {
-        const d = data as Record<string, string>;
+        const d = data as Record<string, string>
         for (const key of Object.keys(d)) {
-          if (d[key] != null && validKeys.includes(key as keyof ProjectFormValues))
-            setValue(key as keyof ProjectFormValues, String(d[key]));
+          if (d[key] != null && VALID_FORM_KEYS.includes(key as keyof ApiProjectFormValues)) {
+            const value =
+              key === 'projectStartDate' || key === 'projectEndDate'
+                ? formatDate(String(d[key]))
+                : String(d[key])
+            setValue(key as keyof ApiProjectFormValues, value)
+          }
         }
       }
-    })();
-  }, [setValue]);
+    })()
+  }, [clearCookie, setValue])
 
-  async function onSubmit(data: ProjectFormValues) {
-    const formData = transformProjectFormData(data);
+  async function onSubmit(data: ApiProjectFormValues) {
     // Nablarch session scope の代替。バックエンド接続時はサーバーサイド session に移行
-    await saveProjectFormToCookie(formData);
-    router.push("/projects/new/confirm");
+    await saveProjectFormToCookie(data as Record<string, unknown>)
+    router.push('/projects/new/confirm')
   }
 
   function handleBack() {
-    const raw = sessionStorage.getItem("listUrl") ?? "/projects";
+    const raw = sessionStorage.getItem('listUrl') ?? '/projects'
     // open redirect 防止: 相対パスのみ許可
-    const listUrl = raw.startsWith("/") && !raw.startsWith("//") ? raw : "/projects";
-    router.push(listUrl);
+    const listUrl = raw.startsWith('/') && !raw.startsWith('//') ? raw : '/projects'
+    router.push(listUrl)
   }
 
   return (
@@ -90,18 +107,10 @@ export function CreateProjectForm() {
         <span className="page-title">プロジェクト登録画面</span>
         {/* — create.jsp L30-35: 登録ボタン → 戻るリンクの順 */}
         <div className="button-nav">
-          <button
-            type="button"
-            className="btn btn-lg btn-success"
-            onClick={handleSubmit(onSubmit)}
-          >
+          <button type="button" className="btn btn-lg btn-success" onClick={handleSubmit(onSubmit)}>
             登録
           </button>
-          <button
-            type="button"
-            className="btn btn-lg btn-light ms-2"
-            onClick={handleBack}
-          >
+          <button type="button" className="btn btn-lg btn-light ms-2" onClick={handleBack}>
             戻る
           </button>
         </div>
@@ -115,8 +124,8 @@ export function CreateProjectForm() {
       <section>
         <form
           onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit(onSubmit)();
+            e.preventDefault()
+            handleSubmit(onSubmit)()
           }}
         >
           <table className="table">
@@ -127,14 +136,12 @@ export function CreateProjectForm() {
                 <td>
                   <div className="form-group">
                     <input
-                      className={`form-control form-control-lg width-300${errors.projectName ? " input-error" : ""}`}
+                      className={`form-control form-control-lg width-300${errors.projectName ? ' input-error' : ''}`}
                       maxLength={64}
-                      {...register("projectName")}
+                      {...register('projectName')}
                     />
                     {errors.projectName && (
-                      <span className="message-error">
-                        {errors.projectName.message}
-                      </span>
+                      <span className="message-error">{errors.projectName.message}</span>
                     )}
                   </div>
                 </td>
@@ -145,8 +152,8 @@ export function CreateProjectForm() {
                 <td>
                   <div className="form-group">
                     <select
-                      className={`form-select form-select-lg${errors.projectType ? " input-error" : ""}`}
-                      {...register("projectType")}
+                      className={`form-select form-select-lg${errors.projectType ? ' input-error' : ''}`}
+                      {...register('projectType')}
                     >
                       {Object.entries(PROJECT_TYPE).map(([key, label]) => (
                         <option key={key} value={key}>
@@ -155,9 +162,7 @@ export function CreateProjectForm() {
                       ))}
                     </select>
                     {errors.projectType && (
-                      <span className="message-error">
-                        {errors.projectType.message}
-                      </span>
+                      <span className="message-error">{errors.projectType.message}</span>
                     )}
                   </div>
                 </td>
@@ -168,8 +173,8 @@ export function CreateProjectForm() {
                 <td>
                   <div className="form-group">
                     <select
-                      className={`form-select form-select-lg${errors.projectClass ? " input-error" : ""}`}
-                      {...register("projectClass")}
+                      className={`form-select form-select-lg${errors.projectClass ? ' input-error' : ''}`}
+                      {...register('projectClass')}
                     >
                       {Object.entries(PROJECT_CLASS).map(([key, label]) => (
                         <option key={key} value={key}>
@@ -178,49 +183,39 @@ export function CreateProjectForm() {
                       ))}
                     </select>
                     {errors.projectClass && (
-                      <span className="message-error">
-                        {errors.projectClass.message}
-                      </span>
+                      <span className="message-error">{errors.projectClass.message}</span>
                     )}
                   </div>
                 </td>
               </tr>
               {/* projectManager - optional */}
               <tr>
-                <th className="width-250">
-                  プロジェクトマネージャー
-                </th>
+                <th className="width-250">プロジェクトマネージャー</th>
                 <td>
                   <div className="form-group">
                     <input
-                      className={`form-control form-control-lg width-300${errors.projectManager ? " input-error" : ""}`}
+                      className={`form-control form-control-lg width-300${errors.projectManager ? ' input-error' : ''}`}
                       maxLength={64}
-                      {...register("projectManager")}
+                      {...register('projectManager')}
                     />
                     {errors.projectManager && (
-                      <span className="message-error">
-                        {errors.projectManager.message}
-                      </span>
+                      <span className="message-error">{errors.projectManager.message}</span>
                     )}
                   </div>
                 </td>
               </tr>
               {/* projectLeader - optional */}
               <tr>
-                <th className="width-250">
-                  プロジェクトリーダー
-                </th>
+                <th className="width-250">プロジェクトリーダー</th>
                 <td>
                   <div className="form-group">
                     <input
-                      className={`form-control form-control-lg width-300${errors.projectLeader ? " input-error" : ""}`}
+                      className={`form-control form-control-lg width-300${errors.projectLeader ? ' input-error' : ''}`}
                       maxLength={64}
-                      {...register("projectLeader")}
+                      {...register('projectLeader')}
                     />
                     {errors.projectLeader && (
-                      <span className="message-error">
-                        {errors.projectLeader.message}
-                      </span>
+                      <span className="message-error">{errors.projectLeader.message}</span>
                     )}
                   </div>
                 </td>
@@ -231,20 +226,20 @@ export function CreateProjectForm() {
                 <td>
                   <div className="form-group">
                     <input
-                      className={`form-control form-control-lg mb-1${errors.clientId ? " input-error" : ""}`}
+                      className={`form-control form-control-lg mb-1${errors.clientId ? ' input-error' : ''}`}
                       maxLength={10}
                       readOnly
                       tabIndex={-1}
                       id="client-id"
-                      {...register("clientId")}
+                      {...register('clientId')}
                     />
                     <input
-                      className={`form-control form-control-lg mb-1${errors.clientName ? " input-error" : ""}`}
+                      className={`form-control form-control-lg mb-1${errors.clientName ? ' input-error' : ''}`}
                       maxLength={64}
                       readOnly
                       tabIndex={-1}
                       id="client-name"
-                      {...register("clientName")}
+                      {...register('clientName')}
                     />
                   </div>
                   <div className="btn-group-sm">
@@ -265,63 +260,56 @@ export function CreateProjectForm() {
                     </button>
                   </div>
                   {errors.clientId && (
-                    <span className="message-error">
-                      {errors.clientId.message}
-                    </span>
+                    <span className="message-error">{errors.clientId.message}</span>
                   )}
                   {/* — create.jsp L134: <n:error name="form.clientName"> */}
                   {errors.clientName && (
-                    <span className="message-error">
-                      {errors.clientName.message}
-                    </span>
+                    <span className="message-error">{errors.clientName.message}</span>
                   )}
                 </td>
               </tr>
               {/* dates */}
               <tr>
-                <th className="width-250">
-                  プロジェクト開始日
-                </th>
+                <th className="width-250">プロジェクト開始日</th>
                 <td>
                   <div className="form-group">
                     <input
-                      type="date"
-                      className={`form-control form-control-lg${errors.projectStartDate ? " input-error" : ""}`}
-                      {...register("projectStartDate")}
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={10}
+                      className={`form-control form-control-lg datepicker${errors.projectStartDate ? ' input-error' : ''}`}
+                      {...register('projectStartDate')}
                     />
                     {/* — create.jsp L145: <n:error name="form.projectStartDate"> */}
                     {errors.projectStartDate && (
-                      <span className="message-error">
-                        {errors.projectStartDate.message}
-                      </span>
+                      <span className="message-error">{errors.projectStartDate.message}</span>
                     )}
                   </div>
                 </td>
               </tr>
               <tr>
-                <th className="width-250">
-                  プロジェクト終了日
-                </th>
+                <th className="width-250">プロジェクト終了日</th>
                 <td>
                   <div className="form-group">
                     <input
-                      type="date"
-                      className={`form-control form-control-lg${errors.projectEndDate ? " input-error" : ""}`}
-                      // — update.jsp の validProjectPeriod エラーに対応
-                      {...register("projectEndDate", {
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={10}
+                      className={`form-control form-control-lg datepicker${errors.projectEndDate ? ' input-error' : ''}`}
+                      {...register('projectEndDate', {
                         validate: (value) => {
-                          const start = getValues("projectStartDate");
-                          if (start && value && value < start) {
-                            return "プロジェクト終了日はプロジェクト開始日より後の日付を入力して下さい。";
+                          const start = getValues('projectStartDate')
+                          const normalizedStart = normalizeDateForApi(start)
+                          const normalizedEnd = normalizeDateForApi(value)
+                          if (normalizedStart && normalizedEnd && normalizedEnd < normalizedStart) {
+                            return 'プロジェクト終了日はプロジェクト開始日より後の日付を入力して下さい。'
                           }
-                          return true;
+                          return true
                         },
                       })}
                     />
                     {errors.projectEndDate && (
-                      <span className="message-error">
-                        {errors.projectEndDate.message}
-                      </span>
+                      <span className="message-error">{errors.projectEndDate.message}</span>
                     )}
                   </div>
                 </td>
@@ -332,16 +320,12 @@ export function CreateProjectForm() {
                 <td>
                   <div className="form-group">
                     <textarea
-                      className={`form-control form-control-lg${errors.note ? " input-error" : ""}`}
+                      className={`form-control form-control-lg${errors.note ? ' input-error' : ''}`}
                       rows={5}
                       cols={50}
-                      {...register("note")}
+                      {...register('note')}
                     />
-                    {errors.note && (
-                      <span className="message-error">
-                        {errors.note.message}
-                      </span>
-                    )}
+                    {errors.note && <span className="message-error">{errors.note.message}</span>}
                   </div>
                 </td>
               </tr>
@@ -355,13 +339,19 @@ export function CreateProjectForm() {
                       inputMode="numeric"
                       pattern="[0-9]*"
                       maxLength={9} // — ProjectForm.java の @Length(max=9) に対応
-                      className={`form-control form-control-lg width-200 me-3${errors.sales ? " input-error" : ""}`}
-                      style={{ float: "left" }}
-                      {...register("sales")}
+                      className={`form-control form-control-lg width-200 me-3${errors.sales ? ' input-error' : ''}`}
+                      style={{ float: 'left' }}
+                      {...register('sales')}
                     />
-                    <div style={{ display: "table-cell", height: "30px", verticalAlign: "bottom" }}>千円</div>
+                    <div style={{ display: 'table-cell', height: '30px', verticalAlign: 'bottom' }}>
+                      千円
+                    </div>
                     {/* — create.jsp L182: <n:error name="form.sales"> */}
-                    {errors.sales && <div style={{ clear: "left" }}><span className="message-error">{errors.sales.message}</span></div>}
+                    {errors.sales && (
+                      <div style={{ clear: 'left' }}>
+                        <span className="message-error">{errors.sales.message}</span>
+                      </div>
+                    )}
                   </div>
                 </td>
               </tr>
@@ -374,13 +364,19 @@ export function CreateProjectForm() {
                       inputMode="numeric"
                       pattern="[0-9]*"
                       maxLength={9} // — ProjectForm.java の @Length(max=9) に対応
-                      className={`form-control form-control-lg width-200 me-3${errors.costOfGoodsSold ? " input-error" : ""}`}
-                      style={{ float: "left" }}
-                      {...register("costOfGoodsSold")}
+                      className={`form-control form-control-lg width-200 me-3${errors.costOfGoodsSold ? ' input-error' : ''}`}
+                      style={{ float: 'left' }}
+                      {...register('costOfGoodsSold')}
                     />
-                    <div style={{ display: "table-cell", height: "30px", verticalAlign: "bottom" }}>千円</div>
+                    <div style={{ display: 'table-cell', height: '30px', verticalAlign: 'bottom' }}>
+                      千円
+                    </div>
                     {/* — create.jsp L199: <n:error name="form.costOfGoodsSold"> */}
-                    {errors.costOfGoodsSold && <div style={{ clear: "left" }}><span className="message-error">{errors.costOfGoodsSold.message}</span></div>}
+                    {errors.costOfGoodsSold && (
+                      <div style={{ clear: 'left' }}>
+                        <span className="message-error">{errors.costOfGoodsSold.message}</span>
+                      </div>
+                    )}
                   </div>
                 </td>
               </tr>
@@ -393,13 +389,19 @@ export function CreateProjectForm() {
                       inputMode="numeric"
                       pattern="[0-9]*"
                       maxLength={9} // — ProjectForm.java の @Length(max=9) に対応
-                      className={`form-control form-control-lg width-200 me-3${errors.sga ? " input-error" : ""}`}
-                      style={{ float: "left" }}
-                      {...register("sga")}
+                      className={`form-control form-control-lg width-200 me-3${errors.sga ? ' input-error' : ''}`}
+                      style={{ float: 'left' }}
+                      {...register('sga')}
                     />
-                    <div style={{ display: "table-cell", height: "30px", verticalAlign: "bottom" }}>千円</div>
+                    <div style={{ display: 'table-cell', height: '30px', verticalAlign: 'bottom' }}>
+                      千円
+                    </div>
                     {/* — create.jsp L216: <n:error name="form.sga"> */}
-                    {errors.sga && <div style={{ clear: "left" }}><span className="message-error">{errors.sga.message}</span></div>}
+                    {errors.sga && (
+                      <div style={{ clear: 'left' }}>
+                        <span className="message-error">{errors.sga.message}</span>
+                      </div>
+                    )}
                   </div>
                 </td>
               </tr>
@@ -412,13 +414,21 @@ export function CreateProjectForm() {
                       inputMode="numeric"
                       pattern="[0-9]*"
                       maxLength={9} // — ProjectForm.java の @Length(max=9) に対応
-                      className={`form-control form-control-lg width-200 me-3${errors.allocationOfCorpExpenses ? " input-error" : ""}`}
-                      style={{ float: "left" }}
-                      {...register("allocationOfCorpExpenses")}
+                      className={`form-control form-control-lg width-200 me-3${errors.allocationOfCorpExpenses ? ' input-error' : ''}`}
+                      style={{ float: 'left' }}
+                      {...register('allocationOfCorpExpenses')}
                     />
-                    <div style={{ display: "table-cell", height: "30px", verticalAlign: "bottom" }}>千円</div>
+                    <div style={{ display: 'table-cell', height: '30px', verticalAlign: 'bottom' }}>
+                      千円
+                    </div>
                     {/* — create.jsp L233: <n:error name="form.allocationOfCorpExpenses"> */}
-                    {errors.allocationOfCorpExpenses && <div style={{ clear: "left" }}><span className="message-error">{errors.allocationOfCorpExpenses.message}</span></div>}
+                    {errors.allocationOfCorpExpenses && (
+                      <div style={{ clear: 'left' }}>
+                        <span className="message-error">
+                          {errors.allocationOfCorpExpenses.message}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </td>
               </tr>
@@ -430,18 +440,10 @@ export function CreateProjectForm() {
       {/* — create.jsp L289-294: フッターも同じボタン順 */}
       <div className="title-nav page-footer">
         <div className="button-nav">
-          <button
-            type="button"
-            className="btn btn-lg btn-success"
-            onClick={handleSubmit(onSubmit)}
-          >
+          <button type="button" className="btn btn-lg btn-success" onClick={handleSubmit(onSubmit)}>
             登録
           </button>
-          <button
-            type="button"
-            className="btn btn-lg btn-light ms-2"
-            onClick={handleBack}
-          >
+          <button type="button" className="btn btn-lg btn-light ms-2" onClick={handleBack}>
             戻る
           </button>
         </div>
@@ -453,5 +455,5 @@ export function CreateProjectForm() {
         onSelect={handleClientSelect}
       />
     </>
-  );
+  )
 }

@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "concurrently \"npm:dev:mock\" \"npm:dev:next\"",
     "dev:next": "next dev",
-    "dev:mock": "tsx src/mocks/http-server.ts",
+    "dev:mock": "tsx src/mocks/mock-http-server.ts",
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "e2e": "playwright test",
+    "e2e:comparison": "playwright test src/tests/e2e/visual-comparison.test.ts",
     "e2e:update": "playwright test -u"
   },
   "dependencies": {

@@ -1,24 +1,7 @@
 // header.jsp + menu.jsp の HTML 構造をそのまま React 化
-import Link from "next/link";
-import { cookies } from "next/headers";
-import { AUTH_COOKIE_NAME, authUserSchema, type AuthUser } from ":/utils/auth";
-import { LogoutButton } from "./logout-button";
-
-/**
- * Cookie からログインユーザー情報を取得する。
- */
-async function getAuthUser(): Promise<AuthUser | null> {
-  const cookieStore = await cookies();
-  const session = cookieStore.get(AUTH_COOKIE_NAME);
-  if (!session?.value) return null;
-  try {
-    const parsed = authUserSchema.safeParse(JSON.parse(session.value));
-    if (!parsed.success) return null;
-    return parsed.data;
-  } catch {
-    return null;
-  }
-}
+import Link from 'next/link'
+import { LogoutButton } from './logout-button'
+import { getAuthUserServer } from '../_utils/auth-user.server'
 
 /**
  * ナビゲーションバー・ヘッダー・フッターを含むプロジェクトページの共通レイアウト。
@@ -26,12 +9,8 @@ async function getAuthUser(): Promise<AuthUser | null> {
  * @see _references/nablarch-example-web/src/main/webapp/WEB-INF/view/common/menu.jsp
  * @see _references/nablarch-example-web/src/main/webapp/WEB-INF/view/common/header.jsp
  */
-export async function ProjectHeaderLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const user = await getAuthUser();
+export async function ProjectHeaderLayout({ children }: { children: React.ReactNode }) {
+  const user = await getAuthUserServer()
 
   return (
     <>
@@ -82,17 +61,13 @@ export async function ProjectHeaderLayout({
         {/* header.jsp: headerArea */}
         <div className="headerArea my-4">
           <span className="headerLeftPane">
-            <span className="headerElement applicationName">
-              プロジェクト管理システム
-            </span>
+            <span className="headerElement applicationName">プロジェクト管理システム</span>
           </span>
           <span className="headerCenterPane" />
           <span className="headerRightPane">
             {user ? (
               <>
-                <span className="headerElement">
-                  ログイン中：&nbsp;{user.kanjiName}
-                </span>
+                <span className="headerElement">ログイン中：&nbsp;{user.kanjiName}</span>
                 <span className="headerElement">
                   <LogoutButton />
                 </span>
@@ -119,5 +94,5 @@ export async function ProjectHeaderLayout({
         </tbody>
       </table>
     </>
-  );
+  )
 }

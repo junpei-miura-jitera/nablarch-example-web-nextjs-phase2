@@ -1,34 +1,27 @@
-import type { Metadata } from "next";
-import { setupZodJaLocale } from ":/utils/zod";
-import Providers from "../_fragments/providers";
-
-setupZodJaLocale();
+import type { Metadata } from 'next'
+import Providers from '../_fragments/providers'
 
 /**
  * ページタイトルなどのメタデータ。
  */
 export const metadata: Metadata = {
-  title: "プロジェクト管理システム",
-};
+  title: 'プロジェクト管理システム',
+}
 
 /**
  * 移行元 JSP の CSS 読み込み順序を再現するレイアウト。
  *
- * header.jsp では以下の順序で読み込む。
+ * Header.jsp では以下の順序で読み込む。
+ *
  * 1. Bootstrap 5 CDN
  * 2. Google Fonts / Material Icons
- * 3. jquery-ui.css（ローカル）
- * 4. common.css（ローカル）
- * 5. project.css（ローカル）
+ * 3. Jquery-ui.css（ローカル）
+ * 4. Common.css（ローカル）
+ * 5. Project.css（ローカル）
  *
- * common.css が Bootstrap を上書きするため、この順序は必須。
- * Next.js の CSS import だと順序が保証されないため、全て link タグで制御する。
+ * Common.css が Bootstrap を上書きするため、この順序は必須。 Next.js の CSS import だと順序が保証されないため、全て link タグで制御する。
  */
-export default function PageLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function PageLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
       {/* eslint-disable @next/next/no-css-tags, @next/next/google-font-display, @next/next/no-page-custom-font -- 移行元 JSP の CSS 読み込み順序を維持 */}
@@ -36,7 +29,7 @@ export default function PageLayout({
         {/* 1. Bootstrap CSS (CDN) */}
         <link
           rel="stylesheet"
-          href="//cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossOrigin="anonymous"
         />
@@ -45,10 +38,7 @@ export default function PageLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
         />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         {/* 3-5. Local CSS (Bootstrap の後に読み込んで上書きする) */}
         <link rel="stylesheet" href="/styles/jquery-ui.css" />
         <link rel="stylesheet" href="/styles/common.css" />
@@ -59,5 +49,5 @@ export default function PageLayout({
         <Providers>{children}</Providers>
       </body>
     </html>
-  );
+  )
 }

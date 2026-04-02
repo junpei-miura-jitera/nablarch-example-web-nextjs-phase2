@@ -3,17 +3,31 @@
   "private": true,
   "packageManager": "pnpm@10.11.0",
   "scripts": {
-    "dev": "pnpm --filter @app/web dev",
+    "dev": "pnpm -r --parallel --stream --filter @app/web --filter @app/legacy --filter @app/storybook dev",
+    "dev:web": "pnpm --filter @app/web dev",
+    "dev:storybook": "pnpm --filter @app/storybook dev",
     "build": "pnpm --filter @app/web build",
-    "test": "pnpm -r test",
-    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r --if-present test",
+    "typecheck": "pnpm -r --if-present typecheck",
     "lint": "pnpm --filter @app/web lint",
     "storybook": "pnpm --filter @app/storybook storybook",
-    "dev:java": "cd _references/nablarch-example-web && mvn jetty:run"
+    "dev:java": "pnpm --filter @app/legacy dev",
+    "dev:legacy": "pnpm --filter @app/legacy dev",
+    "legacy:setup": "pnpm --filter @app/legacy setup",
+    "legacy:compile": "pnpm --filter @app/legacy compile",
+    "e2e": "pnpm --filter @app/web e2e",
+    "e2e:comparison": "pnpm --filter @app/web e2e:comparison",
+    "e2e:update": "pnpm --filter @app/web e2e:update",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^3.8.1",
+    "prettier-plugin-jsdoc": "^1.8.0"
   }
 }

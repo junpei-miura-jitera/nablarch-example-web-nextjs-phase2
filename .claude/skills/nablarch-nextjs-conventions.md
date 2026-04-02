@@ -31,10 +31,10 @@ Bootstrap CSS で元のUIを再現する。
 
 ```typescript
 // OK
-import { API_BASE_URL } from ":/bases/env.server";
+import { API_BASE_URL } from ':/bases/env.server'
 
 // NG
-import { API_BASE_URL } from "../../../../bases/env.server";
+import { API_BASE_URL } from '../../../../bases/env.server'
 ```
 
 ---
@@ -43,15 +43,15 @@ import { API_BASE_URL } from "../../../../bases/env.server";
 
 **全て kebab-case。**
 
-| 種類 | パターン | 例 |
-|------|----------|-----|
-| Client Fragment | `[noun].tsx` | `sort-select.tsx` |
-| ユーティリティ | `[noun].ts` | `project-profit.ts` |
-| サーバー専用ユーティリティ | `[noun].server.ts` | `cookie-helpers.server.ts` |
-| ユーティリティテスト | `[noun].test.ts` | `project-profit.test.ts` |
-| レイアウト | `[noun]-layout.tsx` | `project-sidemenu-layout.tsx` |
-| 定数 | `[feature]-constants.ts` | `project-constants.ts` |
-| Provider | `[name]-provider.tsx` | `msw-provider.tsx` |
+| 種類                       | パターン                 | 例                            |
+| -------------------------- | ------------------------ | ----------------------------- |
+| Client Fragment            | `[noun].tsx`             | `sort-select.tsx`             |
+| ユーティリティ             | `[noun].ts`              | `project-profit.ts`           |
+| サーバー専用ユーティリティ | `[noun].server.ts`       | `cookie-helpers.server.ts`    |
+| ユーティリティテスト       | `[noun].test.ts`         | `project-profit.test.ts`      |
+| レイアウト                 | `[noun]-layout.tsx`      | `project-sidemenu-layout.tsx` |
+| 定数                       | `[feature]-constants.ts` | `project-constants.ts`        |
+| Provider                   | `[name]-provider.tsx`    | `msw-provider.tsx`            |
 
 ---
 
@@ -59,22 +59,22 @@ import { API_BASE_URL } from "../../../../bases/env.server";
 
 ### `_` プレフィックス（ルート対象外）
 
-| ディレクトリ | 用途 |
-|-------------|------|
+| ディレクトリ  | 用途                                              |
+| ------------- | ------------------------------------------------- |
 | `_fragments/` | Client Components（interactive / presentational） |
-| `_layouts/` | 再利用可能なレイアウトコンポーネント |
-| `_utils/` | ユーティリティ・定数・ヘルパー |
-| `_styles/` | 共有 CSS |
-| `_providers/` | Provider コンポーネント（`app/` 直下） |
+| `_layouts/`   | 再利用可能なレイアウトコンポーネント              |
+| `_utils/`     | ユーティリティ・定数・ヘルパー                    |
+| `_styles/`    | 共有 CSS                                          |
+| `_providers/` | Provider コンポーネント（`app/` 直下）            |
 
 > `_services/` は使用しない。このプロジェクトでは Server Actions を使わず、fetch + MSW で API を呼ぶ。
 
 ### ルートグループ（URL に影響しない）
 
-| グループ | 用途 |
-|---------|------|
-| `(page)` | メイン UI ページ |
-| `(auth)` | 認証関連ページ |
+| グループ  | 用途               |
+| --------- | ------------------ |
+| `(page)`  | メイン UI ページ   |
+| `(auth)`  | 認証関連ページ     |
 | `(error)` | エラーハンドリング |
 
 ### 機能ディレクトリ構成例
@@ -120,30 +120,30 @@ projects/
 
 ```typescript
 // 1. 外部パッケージ
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
 
 // 2. : エイリアス
-import { API_BASE_URL } from ":/bases/env.server";
-import type { ProjectDto } from ":/types/api";
+import { API_BASE_URL } from ':/bases/env.server'
+import type { ProjectDto } from ':/types/api'
 
 // 3. 相対 import
-import { ProjectList } from "./_fragments/project-list";
+import { ProjectList } from './_fragments/project-list'
 
 // 4. CSS
-import ":/styles/common.css";
-import ":/styles/project.css";
+import ':/styles/common.css'
+import ':/styles/project.css'
 ```
 
 ### CSS 資産インベントリ
 
 `app/(page)/layout.tsx` で読み込む CSS ファイル一覧:
 
-| File | Source | Purpose |
-|------|--------|---------|
-| `common.css` | Nablarch `/stylesheets/common.css` | 共通スタイル（ヘッダー、フッター、レイアウト） |
-| `project.css` | Nablarch `/stylesheets/project.css` | プロジェクト機能のスタイル |
+| File          | Source                              | Purpose                                        |
+| ------------- | ----------------------------------- | ---------------------------------------------- |
+| `common.css`  | Nablarch `/stylesheets/common.css`  | 共通スタイル（ヘッダー、フッター、レイアウト） |
+| `project.css` | Nablarch `/stylesheets/project.css` | プロジェクト機能のスタイル                     |
 
 jQuery UI は完全に削除済み。
 
@@ -186,17 +186,17 @@ export default async function ProjectsPage({
 
 ```typescript
 // _fragments/sort-select.tsx
-"use client";
+'use client'
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export function SortSelect({ sortKey, sortDir }: { sortKey: string; sortDir: string }) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const router = useRouter()
+  const searchParams = useSearchParams()
   function handleChange(key: string, value: string) {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set(key, value);
-    router.push(`/projects?${params.toString()}`);
+    const params = new URLSearchParams(searchParams.toString())
+    params.set(key, value)
+    router.push(`/projects?${params.toString()}`)
   }
   // ...
 }
@@ -210,8 +210,8 @@ export function SortSelect({ sortKey, sortDir }: { sortKey: string; sortDir: str
 
 ```typescript
 const res = await fetch(`${API_BASE_URL}/api/project/list`, {
-  cache: "no-store",
-});
+  cache: 'no-store',
+})
 ```
 
 - `API_BASE_URL` はサーバー専用（`bases/env.server.ts`）
@@ -220,7 +220,7 @@ const res = await fetch(`${API_BASE_URL}/api/project/list`, {
 ### Client-side fetch（Client Component）
 
 ```typescript
-const res = await fetch("/api/project/download", { method: "POST" });
+const res = await fetch('/api/project/download', { method: 'POST' })
 ```
 
 - クライアントからの fetch はパスのみ（MSW がインターセプト）
@@ -248,18 +248,18 @@ Nablarch の session scope を Cookie で代替する。
 
 ```typescript
 export function saveProjectFormToCookie(data: Record<string, unknown>) {
-  document.cookie = `${COOKIE_NAME}=${encodeURIComponent(JSON.stringify(data))}; max-age=600; path=/`;
+  document.cookie = `${COOKIE_NAME}=${encodeURIComponent(JSON.stringify(data))}; max-age=600; path=/`
 }
 ```
 
 **Server 用** (`cookie-helpers.server.ts`) — `next/headers` の `cookies()` を使用:
 
 ```typescript
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers'
 
 export async function loadProjectFormFromCookieServer() {
-  const cookieStore = await cookies();
-  const cookie = cookieStore.get(COOKIE_NAME);
+  const cookieStore = await cookies()
+  const cookie = cookieStore.get(COOKIE_NAME)
   // ...
 }
 ```
@@ -388,20 +388,30 @@ _utils/
 ### テストスタイル
 
 ```typescript
-import { describe, it, expect } from "vitest";
-import { calculateProjectProfit, formatMoney } from "../project-profit";
+import { describe, it, expect } from 'vitest'
+import { calculateProjectProfit, formatMoney } from '../project-profit'
 
-describe("calculateProjectProfit", () => {
-  it("sales が null なら全て null を返す", () => {
-    const result = calculateProjectProfit({ sales: null, costOfGoodsSold: 100, sga: 50, allocationOfCorpExpenses: 30 });
-    expect(result.grossProfit).toBeNull();
-  });
+describe('calculateProjectProfit', () => {
+  it('sales が null なら全て null を返す', () => {
+    const result = calculateProjectProfit({
+      sales: null,
+      costOfGoodsSold: 100,
+      sga: 50,
+      allocationOfCorpExpenses: 30,
+    })
+    expect(result.grossProfit).toBeNull()
+  })
 
-  it("全値が揃えば利益を計算する", () => {
-    const result = calculateProjectProfit({ sales: 1000, costOfGoodsSold: 600, sga: 100, allocationOfCorpExpenses: 50 });
-    expect(result.grossProfit).toBe(400);
-  });
-});
+  it('全値が揃えば利益を計算する', () => {
+    const result = calculateProjectProfit({
+      sales: 1000,
+      costOfGoodsSold: 600,
+      sga: 100,
+      allocationOfCorpExpenses: 50,
+    })
+    expect(result.grossProfit).toBe(400)
+  })
+})
 ```
 
 ---
@@ -440,10 +450,10 @@ React は `null` / `undefined` を空として描画する。
 
 ### ブロックコメント（`/** */`）
 
-| ルール | 内容 |
-|--------|------|
-| 形式 | **常に複数行**（`/**` 単独行、`* ` 本文、`*/` 単独行）。**1 行にまとめた `/** ... */` は書かない**。 |
-| 文末 | 日本語の説明は**句読点で終える**（例: `。`）。 |
+| ルール | 内容                                                                                                    |
+| ------ | ------------------------------------------------------------------------------------------------------- |
+| 形式   | **常に複数行**（`/**` 単独行、`* ` 本文、`*/` 単独行）。**1 行にまとめた `/** ... \*/` は書かない\*\*。 |
+| 文末   | 日本語の説明は**句読点で終える**（例: `。`）。                                                          |
 
 ### 行コメント（`//`）
 
@@ -471,21 +481,21 @@ export type JavaField = {
 
 次のような**自動生成・ツール出力**には、複数行 JSDoc・句読点ルールを**課さない**。手でコメント整形や JSDoc を足さない（再生成で失われるため）。
 
-| 種類 | 例 | 備考 |
-|------|-----|------|
-| OpenAPI 型定義 | `apps/web/src/libs/java/server/api/index.d.ts` | `openapi-typescript`（単行 `/** @description */` 等はそのまま） |
-| MSW モック | `apps/web/src/mocks/handlers.ts` | `msw-auto-mock` |
-| Enum 定数 | `apps/web/src/libs/java/server/enums/*.ts`（`@generated` 付き） | `generate:enum`（体裁は `enums/generate.ts` のテンプレート側で管理） |
+| 種類           | 例                                                              | 備考                                                                 |
+| -------------- | --------------------------------------------------------------- | -------------------------------------------------------------------- |
+| OpenAPI 型定義 | `apps/web/src/libs/java/server/api/index.d.ts`                  | `openapi-typescript`（単行 `/** @description */` 等はそのまま）      |
+| MSW モック     | `apps/web/src/mocks/handlers.ts`                                | `msw-auto-mock`                                                      |
+| Enum 定数      | `apps/web/src/libs/java/server/enums/*.ts`（`@generated` 付き） | `generate:enum`（体裁は `enums/generate.ts` のテンプレート側で管理） |
 
 ---
 
 ## 14. 自動生成パイプライン（apps/web）
 
-| コマンド | 出力の例 |
-|----------|-----------|
+| コマンド              | 出力の例                          |
+| --------------------- | --------------------------------- |
 | `pnpm generate:types` | `libs/java/server/api/index.d.ts` |
-| `pnpm generate:mocks` | `mocks/handlers.ts` |
-| `pnpm generate:enum` | `libs/java/server/enums/*.ts` |
+| `pnpm generate:mocks` | `mocks/handlers.ts`               |
+| `pnpm generate:enum`  | `libs/java/server/enums/*.ts`     |
 
 ### 注意事項
 
@@ -512,18 +522,18 @@ nablarch-example-web-nextjs-phase1/
 
 ### 技術スタック
 
-| ライブラリ | バージョン | 用途 |
-|-----------|-----------|------|
-| Next.js | 16 | フレームワーク（App Router） |
-| React | 19 | UI |
-| TypeScript | 5.9 | 型安全 |
-| Bootstrap | 5.3 | スタイリング（JSP から移植） |
-| react-hook-form | 7 | フォーム管理 |
-| @tanstack/react-query | 5 | サーバー状態キャッシュ |
-| Zustand | 5 | クライアント状態（最小限） |
-| Valibot | 1.3 | スキーマバリデーション |
-| MSW | 2 | API モック |
-| Vitest | 4 | テスト |
+| ライブラリ            | バージョン | 用途                         |
+| --------------------- | ---------- | ---------------------------- |
+| Next.js               | 16         | フレームワーク（App Router） |
+| React                 | 19         | UI                           |
+| TypeScript            | 5.9        | 型安全                       |
+| Bootstrap             | 5.3        | スタイリング（JSP から移植） |
+| react-hook-form       | 7          | フォーム管理                 |
+| @tanstack/react-query | 5          | サーバー状態キャッシュ       |
+| Zustand               | 5          | クライアント状態（最小限）   |
+| Valibot               | 1.3        | スキーマバリデーション       |
+| MSW                   | 2          | API モック                   |
+| Vitest                | 4          | テスト                       |
 
 ### このプロジェクトで使わないもの
 
@@ -538,10 +548,10 @@ nablarch-example-web-nextjs-phase1/
 サーバー専用環境変数は `bases/env.server.ts` で Valibot バリデーション:
 
 ```typescript
-import { optional, parse, string } from "valibot";
+import { optional, parse, string } from 'valibot'
 
 export const API_BASE_URL = parse(
-  optional(string(), "http://localhost:3000"),
+  optional(string(), 'http://localhost:3000'),
   process.env.API_BASE_URL,
-);
+)
 ```

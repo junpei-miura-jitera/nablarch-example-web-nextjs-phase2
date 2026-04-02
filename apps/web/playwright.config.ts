@@ -1,29 +1,22 @@
-import { defineConfig } from "@playwright/test";
+import { defineConfig } from '@playwright/test'
 
 export default defineConfig({
-  testDir: "./src/tests/e2e",
-  snapshotPathTemplate: "{testDir}/__snapshots__/{arg}{ext}",
+  testDir: './src/tests/e2e',
+  snapshotPathTemplate: '{testDir}/__snapshots__/{arg}{ext}',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: 0,
   use: {
-    baseURL: process.env.BASE_URL ?? "http://localhost:3000",
-    screenshot: "only-on-failure",
+    baseURL: process.env.BASE_URL ?? 'http://localhost:3000',
+    screenshot: 'only-on-failure',
   },
   projects: [
     {
-      name: "chromium",
+      name: 'chromium',
       use: {
-        browserName: "chromium",
+        browserName: 'chromium',
         viewport: { width: 1280, height: 720 },
       },
     },
   ],
-  webServer: process.env.BASE_URL
-    ? undefined
-    : {
-        command: "pnpm dev",
-        port: 3000,
-        reuseExistingServer: true,
-      },
-});
+})

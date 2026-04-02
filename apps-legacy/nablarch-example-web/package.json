@@ -1,0 +1,9 @@
+{
+  "name": "@app/legacy",
+  "private": true,
+  "scripts": {
+    "dev": "mvn jetty:run",
+    "setup": "mvn generate-resources",
+    "compile": "mvn compile"
+  }
+}

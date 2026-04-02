@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
-import { redirect } from "next/navigation";
-import Link from "next/link";
+import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
+import Link from 'next/link'
 
-export const metadata: Metadata = { title: "プロジェクト検索一覧更新画面" };
-import type { BulkItem } from "../../_utils/project-types";
-import { PROJECT_TYPE } from "../../_constants/project-type";
-import { loadProjectFormFromCookieServer } from "../../_utils/cookie-helpers.server";
-import { ConfirmBulkButton } from "./confirm-bulk-button";
+export const metadata: Metadata = { title: 'プロジェクト検索一覧更新画面' }
+import type { ApiProjectBulkItemValues } from ':/shared/api/project-bulk'
+import { PROJECT_TYPE } from '../../_constants/project-type'
+import { loadProjectFormFromCookieServer } from '../../_utils/cookie-helpers.server'
+import { formatDate } from '../../_utils/format-date'
+import { ConfirmBulkButton } from './confirm-bulk-button'
 
 /**
  * プロジェクト一括更新確認画面。
@@ -14,10 +15,10 @@ import { ConfirmBulkButton } from "./confirm-bulk-button";
  * @see _references/nablarch-example-web/src/main/webapp/WEB-INF/view/projectBulk/confirmOfUpdate.jsp
  */
 export default async function BulkConfirmPage() {
-  const formData = await loadProjectFormFromCookieServer();
-  if (!formData || !formData.projectList) redirect("/projects/bulk");
-  const items = formData.projectList as BulkItem[];
-  if (items.length === 0) redirect("/projects/bulk");
+  const formData = await loadProjectFormFromCookieServer()
+  if (!formData || !formData.projectList) redirect('/projects/bulk')
+  const items = formData.projectList as ApiProjectBulkItemValues[]
+  if (items.length === 0) redirect('/projects/bulk')
 
   return (
     <section>
@@ -25,7 +26,9 @@ export default async function BulkConfirmPage() {
         <span>プロジェクト検索一覧更新画面</span>
         <div className="button-nav">
           {/* confirmOfUpdate.jsp L25: backToList → Cookie からデータを復元するために ?restore=1 を付与 */}
-          <Link href="/projects/bulk?restore=1" className="btn btn-lg btn-light">入力へ戻る</Link>
+          <Link href="/projects/bulk?restore=1" className="btn btn-lg btn-light">
+            入力へ戻る
+          </Link>
           <ConfirmBulkButton items={items} />
         </div>
       </div>
@@ -47,9 +50,11 @@ export default async function BulkConfirmPage() {
             <tr key={item.projectId}>
               <td>{item.projectId}</td>
               <td>{item.projectName}</td>
-              <td>{PROJECT_TYPE[item.projectType as keyof typeof PROJECT_TYPE] ?? item.projectType}</td>
-              <td>{item.projectStartDate ?? ""}</td>
-              <td>{item.projectEndDate ?? ""}</td>
+              <td>
+                {PROJECT_TYPE[item.projectType as keyof typeof PROJECT_TYPE] ?? item.projectType}
+              </td>
+              <td>{formatDate(item.projectStartDate)}</td>
+              <td>{formatDate(item.projectEndDate)}</td>
             </tr>
           ))}
         </tbody>
@@ -57,10 +62,12 @@ export default async function BulkConfirmPage() {
 
       <div className="title-nav page-footer">
         <div className="button-nav">
-          <Link href="/projects/bulk?restore=1" className="btn btn-lg btn-light">入力へ戻る</Link>
+          <Link href="/projects/bulk?restore=1" className="btn btn-lg btn-light">
+            入力へ戻る
+          </Link>
           <ConfirmBulkButton items={items} />
         </div>
       </div>
     </section>
-  );
+  )
 }

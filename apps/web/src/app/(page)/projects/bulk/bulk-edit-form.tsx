@@ -1,21 +1,25 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { useEffect, useRef } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useForm, useFieldArray } from "react-hook-form";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import { bulkFormSchema, type BulkFormValues } from "../_utils/project-types";
-import { PROJECT_TYPE } from "../_constants/project-type";
-import { PROJECT_SORT_KEY } from "../_constants/project-sort-key";
-import { SORT_ORDER } from "../_constants/sort-order";
-import { saveProjectFormToCookie, loadProjectFormFromCookie } from "../_utils/cookie-helpers";
-import type { ProjectDto } from "../_schemas/project.types";
+import Link from 'next/link'
+import { useEffect, useRef } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useForm, useFieldArray } from 'react-hook-form'
+import { standardSchemaResolver } from '@hookform/resolvers/standard-schema'
+import {
+  apiProjectBulkFormSchema,
+  type ApiProjectBulkFormValues,
+} from ':/shared/api/project-bulk'
+import { PROJECT_TYPE } from '../_constants/project-type'
+import { PROJECT_SORT_KEY } from '../_constants/project-sort-key'
+import { SORT_ORDER } from '../_constants/sort-order'
+import { saveProjectFormToCookie, loadProjectFormFromCookie } from '../_utils/cookie-helpers'
+import type { ApiProjectDto } from ':/shared/api/project'
+import { formatDate, normalizeDateForApi } from '../_utils/format-date'
 
 /**
  * プロジェクト一括更新フォーム。
  *
- * useFieldArray で複数行のプロジェクトを同時編集する。
+ * UseFieldArray で複数行のプロジェクトを同時編集する。
  *
  * @see _references/nablarch-example-web/src/main/webapp/WEB-INF/view/projectBulk/update.jsp
  */
@@ -25,22 +29,22 @@ export function BulkEditForm({
   sortKey,
   sortDir,
 }: {
-  projects: ProjectDto[];
-  totalCount: number;
-  sortKey: string;
-  sortDir: string;
+  projects: ApiProjectDto[]
+  totalCount: number
+  sortKey: string
+  sortDir: string
 }) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const isEmpty = projects.length === 0;
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const isEmpty = projects.length === 0
 
-  const initialItems: NonNullable<BulkFormValues["projectList"]> = projects.map((p) => ({
-    projectId: String(p.projectId ?? ""),
-    projectName: p.projectName ?? "",
-    projectType: p.projectType ?? "development",
-    projectStartDate: p.projectStartDate ?? "",
-    projectEndDate: p.projectEndDate ?? "",
-  }));
+  const initialItems: NonNullable<ApiProjectBulkFormValues['projectList']> = projects.map((p) => ({
+    projectId: String(p.projectId ?? ''),
+    projectName: p.projectName ?? '',
+    projectType: p.projectType ?? 'development',
+    projectStartDate: formatDate(p.projectStartDate),
+    projectEndDate: formatDate(p.projectEndDate),
+  }))
 
   const {
     register,
@@ -48,55 +52,64 @@ export function BulkEditForm({
     control,
     reset,
     formState: { errors },
-  } = useForm<BulkFormValues>({
-    resolver: standardSchemaResolver(bulkFormSchema),
+  } = useForm<ApiProjectBulkFormValues>({
+    resolver: standardSchemaResolver(apiProjectBulkFormSchema),
     defaultValues: { projectList: initialItems },
-  });
+  })
 
   // @see ProjectBulkAction.java L143-148: backToList — セッションから編集データを復元する処理に対応
   // 確認画面から「入力へ戻る」時は ?restore=1 が付くので Cookie から編集データを復元する
-  const prevProjectsRef = useRef(projects);
+  const prevProjectsRef = useRef(projects)
   useEffect(() => {
-    if (prevProjectsRef.current === projects) return;
-    prevProjectsRef.current = projects;
+    if (prevProjectsRef.current === projects) return
+    prevProjectsRef.current = projects
     reset({
       projectList: projects.map((p) => ({
-        projectId: String(p.projectId ?? ""),
-        projectName: p.projectName ?? "",
-        projectType: p.projectType ?? "development",
-        projectStartDate: p.projectStartDate ?? "",
-        projectEndDate: p.projectEndDate ?? "",
+        projectId: String(p.projectId ?? ''),
+        projectName: p.projectName ?? '',
+        projectType: p.projectType ?? 'development',
+        projectStartDate: formatDate(p.projectStartDate),
+        projectEndDate: formatDate(p.projectEndDate),
       })),
-    });
-  }, [projects, reset]);
+    })
+  }, [projects, reset])
 
   // 確認画面から戻った時に Cookie から編集内容を復元する
-  const restoredRef = useRef(false);
+  const restoredRef = useRef(false)
   useEffect(() => {
-    if (restoredRef.current) return;
-    if (!searchParams.get("restore")) return;
-    restoredRef.current = true;
-    (async () => {
-      const data = await loadProjectFormFromCookie();
+    if (restoredRef.current) return
+    if (!searchParams.get('restore')) return
+    restoredRef.current = true
+    ;(async () => {
+      const data = await loadProjectFormFromCookie()
       if (data?.projectList) {
-        reset({ projectList: data.projectList as NonNullable<BulkFormValues["projectList"]> });
+        const projectList = (data.projectList as NonNullable<ApiProjectBulkFormValues['projectList']>).map(
+          (item) => ({
+            ...item,
+            projectStartDate: formatDate(item.projectStartDate),
+            projectEndDate: formatDate(item.projectEndDate),
+          }),
+        )
+        reset({
+          projectList,
+        })
       }
-    })();
-  }, [searchParams, reset]);
+    })()
+  }, [searchParams, reset])
 
   // — update.jsp の <c:forEach items="${projectListDto.projectList}" ...> + <n:text name="bulkForm.projectList[${status.index}].fieldName"> に対応
-  const { fields } = useFieldArray({ control, name: "projectList" });
+  const { fields } = useFieldArray({ control, name: 'projectList' })
 
-  async function onSubmit(data: BulkFormValues) {
-    await saveProjectFormToCookie({ projectList: data.projectList });
-    router.push("/projects/bulk/confirm");
+  async function onSubmit(data: ApiProjectBulkFormValues) {
+    await saveProjectFormToCookie({ projectList: data.projectList })
+    router.push('/projects/bulk/confirm')
   }
 
   function handleSortChange(key: string, value: string) {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set(key, value);
-    params.set("pageNumber", "1");
-    router.push(`/projects/bulk?${params.toString()}`);
+    const params = new URLSearchParams(searchParams.toString())
+    params.set(key, value)
+    params.set('pageNumber', '1')
+    router.push(`/projects/bulk?${params.toString()}`)
   }
 
   return (
@@ -121,14 +134,12 @@ export function BulkEditForm({
       {/* n:errors filter="global" に対応するグローバルエラーメッセージ表示領域 */}
       {/* @see _references/nablarch-example-web/src/main/webapp/WEB-INF/view/projectBulk/update.jsp */}
       <div className="message-area margin-top">
-        {errors.root && (
-          <span className="message-error">{errors.root.message}</span>
-        )}
+        {errors.root && <span className="message-error">{errors.root.message}</span>}
       </div>
 
       {/* sort-nav */}
       <div className="sort-nav mb-3">
-        <div style={{ float: "left" }}>
+        <div style={{ float: 'left' }}>
           <span className="font-group">検索結果</span>
           <span className="search-result-count">{totalCount}</span>
         </div>
@@ -137,7 +148,7 @@ export function BulkEditForm({
             <select
               className="form-select form-select-lg"
               value={sortKey}
-              onChange={(e) => handleSortChange("sortKey", e.target.value)}
+              onChange={(e) => handleSortChange('sortKey', e.target.value)}
             >
               {Object.entries(PROJECT_SORT_KEY).map(([key, label]) => (
                 <option key={key} value={key}>
@@ -150,7 +161,7 @@ export function BulkEditForm({
             <select
               className="form-select form-select-lg"
               value={sortDir}
-              onChange={(e) => handleSortChange("sortDir", e.target.value)}
+              onChange={(e) => handleSortChange('sortDir', e.target.value)}
             >
               {Object.entries(SORT_ORDER).map(([key, label]) => (
                 <option key={key} value={key}>
@@ -163,7 +174,12 @@ export function BulkEditForm({
       </div>
 
       <section>
-        <form onSubmit={(e) => { e.preventDefault(); handleSubmit(onSubmit)(); }}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleSubmit(onSubmit)()
+          }}
+        >
           <table className="table table-striped table-hover">
             <thead>
               <tr>
@@ -179,67 +195,85 @@ export function BulkEditForm({
                 <tr key={field.id} className="info">
                   <td>
                     <input type="hidden" {...register(`projectList.${index}.projectId`)} />
-                    <Link href={`/projects/${field.projectId}`}>
-                      {field.projectId}
-                    </Link>
+                    <Link href={`/projects/${field.projectId}`}>{field.projectId}</Link>
                   </td>
                   <td>
                     <div className="form-group">
                       <input
-                        className={`form-control form-control-lg${errors.projectList?.[index]?.projectName ? " input-error" : ""}`}
+                        className={`form-control form-control-lg${errors.projectList?.[index]?.projectName ? ' input-error' : ''}`}
                         maxLength={64}
                         {...register(`projectList.${index}.projectName`)}
                       />
                       {/* — <n:error name="bulkForm.projectList[${status.index}].projectName"> に対応 */}
                       {errors.projectList?.[index]?.projectName && (
-                        <span className="message-error">{errors.projectList[index].projectName.message}</span>
+                        <span className="message-error">
+                          {errors.projectList[index].projectName.message}
+                        </span>
                       )}
                     </div>
                   </td>
                   <td>
                     <div className="form-group">
-                      <select className="form-select form-select-lg" {...register(`projectList.${index}.projectType`)}>
+                      <select
+                        className="form-select form-select-lg"
+                        {...register(`projectList.${index}.projectType`)}
+                      >
                         {Object.entries(PROJECT_TYPE).map(([key, label]) => (
-                          <option key={key} value={key}>{label}</option>
+                          <option key={key} value={key}>
+                            {label}
+                          </option>
                         ))}
                       </select>
                       {errors.projectList?.[index]?.projectType && (
-                        <span className="message-error">{errors.projectList[index].projectType.message}</span>
+                        <span className="message-error">
+                          {errors.projectList[index].projectType.message}
+                        </span>
                       )}
                     </div>
                   </td>
                   <td>
                     <div className="form-group">
                       <input
-                        type="date"
-                        className={`form-control form-control-lg${errors.projectList?.[index]?.projectStartDate ? " input-error" : ""}`}
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={10}
+                        className={`form-control form-control-lg datepicker${errors.projectList?.[index]?.projectStartDate ? ' input-error' : ''}`}
                         {...register(`projectList.${index}.projectStartDate`, {
-                          required: "開始日を入力してください",
+                          required: '開始日を入力してください',
                         })}
                       />
                       {errors.projectList?.[index]?.projectStartDate && (
-                        <span className="message-error">{errors.projectList[index].projectStartDate.message}</span>
+                        <span className="message-error">
+                          {errors.projectList[index].projectStartDate.message}
+                        </span>
                       )}
                     </div>
                   </td>
                   <td>
                     <div className="form-group">
                       <input
-                        type="date"
-                        className={`form-control form-control-lg${errors.projectList?.[index]?.projectEndDate ? " input-error" : ""}`}
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={10}
+                        className={`form-control form-control-lg datepicker${errors.projectList?.[index]?.projectEndDate ? ' input-error' : ''}`}
                         {...register(`projectList.${index}.projectEndDate`, {
-                          required: "終了日を入力してください",
+                          required: '終了日を入力してください',
                           validate: (value, formValues) => {
-                            const startDate = formValues.projectList![index].projectStartDate;
-                            if (startDate && value && startDate > value) {
-                              return "開始日は終了日より前の日付にしてください";
+                            const startDate = normalizeDateForApi(
+                              formValues.projectList![index].projectStartDate,
+                            )
+                            const endDate = normalizeDateForApi(value)
+                            if (startDate && endDate && startDate > endDate) {
+                              return 'プロジェクト終了日はプロジェクト開始日より後の日付を入力して下さい。'
                             }
-                            return true;
+                            return true
                           },
                         })}
                       />
                       {errors.projectList?.[index]?.projectEndDate && (
-                        <span className="message-error">{errors.projectList[index].projectEndDate.message}</span>
+                        <span className="message-error">
+                          {errors.projectList[index].projectEndDate.message}
+                        </span>
                       )}
                     </div>
                   </td>
@@ -266,5 +300,5 @@ export function BulkEditForm({
         </div>
       </div>
     </>
-  );
+  )
 }

@@ -1,9 +1,7 @@
-import type { Metadata } from "next";
-import { cookies } from "next/headers";
-import { CreateProjectForm } from "./create-project-form";
-import { ProjectSidemenuLayout } from "../_layouts/project-sidemenu-layout";
+import type { Metadata } from 'next'
+import { CreateProjectForm } from './create-project-form'
 
-export const metadata: Metadata = { title: "プロジェクト登録画面" };
+export const metadata: Metadata = { title: 'プロジェクト登録画面' }
 
 /**
  * プロジェクト新規登録画面。
@@ -14,15 +12,15 @@ export const metadata: Metadata = { title: "プロジェクト登録画面" };
 export default async function CreateProjectPage({
   searchParams,
 }: {
-  searchParams: Promise<Record<string, string | string[]>>;
+  searchParams: Promise<Record<string, string | string[]>>
 }) {
-  const params = await searchParams;
-  // @see ProjectAction.java#newEntity: セッションから "project" を削除してから入力画面を表示
-  // 確認画面から「戻る」でない場合（直接アクセス）は Cookie をクリアして前回データを残さない
-  const isReturningFromConfirm = params.from === "confirm";
-  if (!isReturningFromConfirm) {
-    const cookieStore = await cookies();
-    cookieStore.delete("project_form_data");
-  }
-  return <ProjectSidemenuLayout><CreateProjectForm /></ProjectSidemenuLayout>;
+  const params = await searchParams
+  // 確認画面から「戻る」で遷移した場合は Cookie のフォームデータを復元する
+  // 直接アクセスの場合はフォーム側で Cookie をクリアする
+  const isReturningFromConfirm = params.from === 'confirm'
+  return (
+    <section>
+      <CreateProjectForm clearCookie={!isReturningFromConfirm} />
+    </section>
+  )
 }

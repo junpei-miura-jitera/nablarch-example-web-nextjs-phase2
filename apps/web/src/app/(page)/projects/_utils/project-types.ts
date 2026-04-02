@@ -1,2 +1,5 @@
-export { projectBulkFormSchema as bulkFormSchema } from "../_schemas/project-bulk-form.schema";
-export type { ProjectBulkForm as BulkFormValues, InnerProjectForm as BulkItem } from "../_schemas/project-bulk-form.schema";
+export { apiProjectBulkFormSchema as bulkFormSchema } from ':/shared/api/project-bulk'
+export type {
+  ApiProjectBulkFormValues as BulkFormValues,
+  ApiProjectBulkItemValues as BulkItem,
+} from ':/shared/api/project-bulk'

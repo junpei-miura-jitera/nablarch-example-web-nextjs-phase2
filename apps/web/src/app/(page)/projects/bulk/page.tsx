@@ -1,68 +1,79 @@
-import type { Metadata } from "next";
-import { apiGet } from ":/app/(api)/_utils/server";
-import type { ProjectDto } from "../_schemas/project.types";
+import type { Metadata } from 'next'
+import type { ApiProjectDto } from ':/shared/api/project'
 
-export const metadata: Metadata = { title: "プロジェクト検索一覧更新画面" };
-import { BulkEditForm } from "./bulk-edit-form";
-import { ProjectSidemenuLayout } from "../_layouts/project-sidemenu-layout";
-import { Pagination } from "../_fragments/pagination";
-import { SaveListUrl } from "../_fragments/save-list-url";
-import { toArray, buildPageUrl } from "../_utils/search-params-helpers";
-import type { ProjectClassValue } from "../_constants/project-class";
+const API_BASE = process.env.API_BASE_URL ?? 'http://localhost:9090'
 
-const PAGE_SIZE = 20;
+export const metadata: Metadata = { title: 'プロジェクト検索一覧更新画面' }
+import { BulkEditForm } from './bulk-edit-form'
+import { ProjectSidemenuLayout } from '../_layouts/project-sidemenu-layout'
+import { Pagination } from '../_fragments/pagination'
+import { SaveListUrl } from '../_fragments/save-list-url'
+import { toArray, buildPageUrl } from '../_utils/search-params-helpers'
+import type { ProjectClassValue } from '../_constants/project-class'
+
+const PAGE_SIZE = 20
 
 /**
  * プロジェクト一括更新画面。
  *
- * 元 JSP と同様に searchParams から検索条件・ソート・ページを受け取り、
- * サーバーサイドで API に渡す。
+ * 元 JSP と同様に searchParams から検索条件・ソート・ページを受け取り、 サーバーサイドで API に渡す。
  *
- * 現時点では MSW モックがページネーション非対応のため、
- * API が返す全件をサーバーサイドでスライスして擬似ページングを行う。
+ * 現時点では MSW モックがページネーション非対応のため、 API が返す全件をサーバーサイドでスライスして擬似ページングを行う。
  *
  * @see _references/nablarch-example-web/src/main/webapp/WEB-INF/view/projectBulk/update.jsp
  */
 export default async function BulkUpdatePage({
   searchParams,
 }: {
-  searchParams: Promise<Record<string, string | string[]>>;
+  searchParams: Promise<Record<string, string | string[]>>
 }) {
-  const params = await searchParams;
-  const sortKey = (params.sortKey as string | undefined) ?? "id";
-  const sortDir = (params.sortDir as string | undefined) ?? "asc";
-  const pageNumber = Number((params.pageNumber as string | undefined) ?? "1");
+  const params = await searchParams
+  const hasSearchParams = Object.keys(params).length > 0
+  const sortKey = (params.sortKey as string | undefined) ?? 'id'
+  const sortDir = (params.sortDir as string | undefined) ?? 'asc'
+  const pageNumber = Number((params.pageNumber as string | undefined) ?? '1')
 
-  let allProjects: ProjectDto[] = [];
-  try {
-    allProjects = await apiGet<ProjectDto[]>("/api/projectbulk/list", {
-      pageNumber: String(pageNumber),
-      sortKey,
-      sortDir,
-      clientId: params.clientId as string | undefined,
-      clientName: params.clientName as string | undefined,
-      projectName: params.projectName as string | undefined,
-      projectType: params.projectType as "development" | "maintenance" | undefined,
-      projectClass: toArray(params.projectClass) as ProjectClassValue[] | undefined,
-      projectStartDateBegin: params.projectStartDateBegin as string | undefined,
-      projectStartDateEnd: params.projectStartDateEnd as string | undefined,
-      projectEndDateBegin: params.projectEndDateBegin as string | undefined,
-      projectEndDateEnd: params.projectEndDateEnd as string | undefined,
-    });
-  } catch {
-    allProjects = [];
+  const qs = new URLSearchParams()
+  qs.set('pageNumber', String(pageNumber))
+  qs.set('sortKey', sortKey)
+  qs.set('sortDir', sortDir)
+  if (params.clientId) qs.set('clientId', params.clientId as string)
+  if (params.clientName) qs.set('clientName', params.clientName as string)
+  if (params.projectName) qs.set('projectName', params.projectName as string)
+  if (params.projectType) qs.set('projectType', params.projectType as string)
+  for (const v of (toArray(params.projectClass) ?? []) as ProjectClassValue[]) {
+    qs.append('projectClass', v)
   }
+  if (params.projectStartDateBegin)
+    qs.set('projectStartDateBegin', params.projectStartDateBegin as string)
+  if (params.projectStartDateEnd)
+    qs.set('projectStartDateEnd', params.projectStartDateEnd as string)
+  if (params.projectEndDateBegin)
+    qs.set('projectEndDateBegin', params.projectEndDateBegin as string)
+  if (params.projectEndDateEnd) qs.set('projectEndDateEnd', params.projectEndDateEnd as string)
+
+  const endpoint = hasSearchParams ? 'list' : 'index'
+  const requestUrl = hasSearchParams
+    ? `${API_BASE}/api/projectbulk/${endpoint}?${qs}`
+    : `${API_BASE}/api/projectbulk/${endpoint}`
+
+  const res = await fetch(requestUrl, {
+    cache: 'no-store',
+    headers: { Accept: 'application/json' },
+  })
+  if (!res.ok) throw new Error(`API error ${res.status}`)
+  const allProjects: ApiProjectDto[] = (await res.json()) ?? []
 
   // 擬似ページング（projects/page.tsx と同じ方式）
   // MSW が全件返すのでサーバーサイドでスライス。
   // バックエンド接続時はこのスライス処理を削除し、API レスポンスの
   // pagination オブジェクトから totalCount (resultCount) / pageCount を取得する。
   // @see _references/nablarch-example-web/src/main/java/com/nablarch/example/app/web/action/ProjectBulkAction.java#list
-  const totalCount = allProjects.length;
-  const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
-  const currentPage = Math.min(Math.max(1, pageNumber), totalPages);
-  const startIdx = (currentPage - 1) * PAGE_SIZE;
-  const projects = allProjects.slice(startIdx, startIdx + PAGE_SIZE);
+  const totalCount = allProjects.length
+  const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE))
+  const currentPage = Math.min(Math.max(1, pageNumber), totalPages)
+  const startIdx = (currentPage - 1) * PAGE_SIZE
+  const projects = allProjects.slice(startIdx, startIdx + PAGE_SIZE)
 
   return (
     <ProjectSidemenuLayout>
@@ -74,7 +85,7 @@ export default async function BulkUpdatePage({
               <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
-                buildUrl={(page) => buildPageUrl("/projects/bulk", params, page)}
+                buildUrl={(page) => buildPageUrl('/projects/bulk', params, page)}
               />
               <BulkEditForm
                 projects={projects}
@@ -87,5 +98,5 @@ export default async function BulkUpdatePage({
         </div>
       </div>
     </ProjectSidemenuLayout>
-  );
+  )
 }

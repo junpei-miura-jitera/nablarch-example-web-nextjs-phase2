@@ -1,6 +1,6 @@
-import { test } from "@playwright/test";
-import { writeFileSync, mkdirSync } from "node:fs";
-import { join } from "node:path";
+import { test } from '@playwright/test'
+import { writeFileSync, mkdirSync } from 'node:fs'
+import { join } from 'node:path'
 
 /**
  * Java (Nablarch) vs Next.js 移行前後の視覚比較テスト。
@@ -8,151 +8,197 @@ import { join } from "node:path";
  * 両アプリのスクリーンショットを撮影し、HTMLレポートで並べて比較する。
  *
  * 前提:
- *   - Java版:   http://localhost:8080 で起動済み
- *   - Next.js版: http://localhost:3000 で起動済み（pnpm dev）
  *
- * 実行:
- *   pnpm exec playwright test visual-comparison
+ * - Java版: http://localhost:8080 で起動済み
+ * - Next.js版: http://localhost:3000 で起動済み（pnpm dev）
  *
- * Java版のポートを変更する場合:
- *   JAVA_BASE_URL=http://localhost:7080 pnpm exec playwright test visual-comparison
+ * 実行: pnpm exec playwright test visual-comparison
+ *
+ * Java版のポートを変更する場合: JAVA_BASE_URL=http://localhost:7080 pnpm exec playwright test visual-comparison
  */
 
-const JAVA_BASE = process.env.JAVA_BASE_URL ?? "http://localhost:8080";
-const NEXT_BASE = process.env.NEXT_BASE_URL ?? "http://localhost:3000";
-const OUTPUT_DIR = join(import.meta.dirname, "__comparison__");
+const JAVA_BASE = process.env.JAVA_BASE_URL ?? 'http://localhost:8080'
+const NEXT_BASE = process.env.NEXT_BASE_URL ?? 'http://localhost:3000'
+const OUTPUT_DIR = join(import.meta.dirname, '__comparison__')
 
-const JAVA_LOGIN = { id: "10000001", password: "pass123-" };
+const JAVA_LOGIN = { id: '10000001', password: 'pass123-' }
 
 /**
  * 移行前後のページマッピング。
  */
 const PAGE_MAP = [
   {
-    name: "login",
-    java: "/action/login",
-    next: "/login",
+    name: 'login',
+    java: '/action/login',
+    next: '/login',
     skipAuth: true,
   },
   {
-    name: "project-list",
-    java: "/action/project/index",
-    next: "/projects",
+    name: 'project-list',
+    java: '/action/project/index',
+    next: '/projects',
   },
   {
-    name: "project-new",
-    java: "/action/project",
-    next: "/projects/new",
+    name: 'project-list-page-7',
+    java: '/action/project/index',
+    next: '/projects',
+    pageNumber: '7',
   },
   {
-    name: "project-detail",
-    java: "/action/project/show/1",
-    next: "/projects/1",
+    name: 'project-new',
+    java: '/action/project',
+    next: '/projects/new',
   },
   {
-    name: "project-edit",
-    java: "/action/project/edit/1",
-    next: "/projects/1/edit",
+    name: 'project-detail',
+    java: '/action/project/show/1',
+    next: '/projects/1',
   },
   {
-    name: "project-upload",
-    java: "/action/projectUpload/index",
-    next: "/projects/upload",
+    name: 'project-edit',
+    java: '/action/project/edit/1',
+    next: '/projects/1/edit',
   },
-] as const;
+  {
+    name: 'project-bulk',
+    java: '/action/projectBulk/index',
+    next: '/projects/bulk',
+  },
+  {
+    name: 'project-upload',
+    java: '/action/projectUpload/index',
+    next: '/projects/upload',
+  },
+] as const
 
 type Screenshot = {
-  name: string;
-  javaPath: string;
-  nextPath: string;
-};
+  name: string
+  javaPath: string
+  nextPath: string
+}
 
-const screenshots: Screenshot[] = [];
+const screenshots: Screenshot[] = []
 
 /**
  * Java ページの読み込み待ち（CDN が CORS ブロックされるため networkidle は使えない）。
  */
-async function waitForJavaPage(page: import("@playwright/test").Page) {
-  await page.waitForLoadState("domcontentloaded");
-  await page.waitForTimeout(1000);
+async function waitForJavaPage(page: import('@playwright/test').Page) {
+  await page.waitForLoadState('domcontentloaded')
+  await page.waitForTimeout(1000)
 }
 
 /**
  * Java アプリにログインし、セッション付きの Page を返す。
  */
-async function loginToJava(page: import("@playwright/test").Page) {
-  await page.goto(`${JAVA_BASE}/action/login`);
-  await waitForJavaPage(page);
-  await page.fill('input[name="loginId"]', JAVA_LOGIN.id);
-  await page.fill('input[name="userPassword"]', JAVA_LOGIN.password);
-  await page.getByRole("button", { name: "ログイン" }).click();
-  await page.waitForURL("**/action/project/**", { timeout: 10000 });
-  await waitForJavaPage(page);
+async function loginToJava(page: import('@playwright/test').Page) {
+  await page.goto(`${JAVA_BASE}/action/login`)
+  await waitForJavaPage(page)
+  await page.fill('input[name="loginId"]', JAVA_LOGIN.id)
+  await page.fill('input[name="userPassword"]', JAVA_LOGIN.password)
+  await page.getByRole('button', { name: 'ログイン' }).click()
+  await page.waitForURL('**/action/project/**', { timeout: 10000 })
+  await waitForJavaPage(page)
 }
 
-test.describe.configure({ mode: "serial" });
+async function loginToNext(page: import('@playwright/test').Page) {
+  await page.goto(`${NEXT_BASE}/login`)
+  await page.waitForLoadState('networkidle')
+  await page.fill('input[name="loginId"]', JAVA_LOGIN.id)
+  await page.fill('input[name="userPassword"]', JAVA_LOGIN.password)
+  await page.getByRole('button', { name: 'ログイン' }).click()
+  await page.waitForURL('**/projects', { timeout: 10000 })
+  await page.waitForLoadState('networkidle')
+}
 
-test.describe("Java vs Next.js 視覚比較", () => {
-  test.setTimeout(60_000);
+async function moveToPageNumber(
+  page: import('@playwright/test').Page,
+  pageNumber: string,
+  wait: 'java' | 'next',
+) {
+  await page
+    .locator('a.page-link', { hasText: new RegExp(`^${pageNumber}$`) })
+    .first()
+    .click()
+  if (wait === 'java') {
+    await waitForJavaPage(page)
+    return
+  }
+  await page.waitForLoadState('networkidle')
+  await page.waitForTimeout(300)
+}
+
+test.describe.configure({ mode: 'serial' })
+
+test.describe('Java vs Next.js 視覚比較', () => {
+  test.setTimeout(60_000)
 
   test.beforeAll(() => {
-    mkdirSync(join(OUTPUT_DIR, "java"), { recursive: true });
-    mkdirSync(join(OUTPUT_DIR, "next"), { recursive: true });
-  });
+    mkdirSync(join(OUTPUT_DIR, 'java'), { recursive: true })
+    mkdirSync(join(OUTPUT_DIR, 'next'), { recursive: true })
+  })
 
   for (const entry of PAGE_MAP) {
     test(`${entry.name}`, async ({ browser }) => {
       const javaCtx = await browser.newContext({
         viewport: { width: 1280, height: 900 },
-      });
+      })
       const nextCtx = await browser.newContext({
         viewport: { width: 1280, height: 900 },
-      });
+      })
 
-      const javaPage = await javaCtx.newPage();
-      const nextPage = await nextCtx.newPage();
+      const javaPage = await javaCtx.newPage()
+      const nextPage = await nextCtx.newPage()
 
       try {
         // --- Java 側 ---
-        if (!("skipAuth" in entry && entry.skipAuth)) {
-          await loginToJava(javaPage);
+        if (!('skipAuth' in entry && entry.skipAuth)) {
+          await loginToJava(javaPage)
         }
-        await javaPage.goto(`${JAVA_BASE}${entry.java}`);
-        await waitForJavaPage(javaPage);
+        await javaPage.goto(`${JAVA_BASE}${entry.java}`)
+        await waitForJavaPage(javaPage)
+        if ('pageNumber' in entry) {
+          await moveToPageNumber(javaPage, entry.pageNumber, 'java')
+        }
 
-        const javaFile = `java/${entry.name}.png`;
+        const javaFile = `java/${entry.name}.png`
         await javaPage.screenshot({
           path: join(OUTPUT_DIR, javaFile),
           fullPage: true,
-        });
+        })
 
         // --- Next.js 側 ---
-        await nextPage.goto(`${NEXT_BASE}${entry.next}`);
-        await nextPage.waitForLoadState("networkidle");
-        await nextPage.waitForTimeout(500);
+        if (!('skipAuth' in entry && entry.skipAuth)) {
+          await loginToNext(nextPage)
+        }
+        await nextPage.goto(`${NEXT_BASE}${entry.next}`)
+        await nextPage.waitForLoadState('networkidle')
+        await nextPage.waitForTimeout(500)
+        if ('pageNumber' in entry) {
+          await moveToPageNumber(nextPage, entry.pageNumber, 'next')
+        }
 
-        const nextFile = `next/${entry.name}.png`;
+        const nextFile = `next/${entry.name}.png`
         await nextPage.screenshot({
           path: join(OUTPUT_DIR, nextFile),
           fullPage: true,
-        });
+        })
 
         screenshots.push({
           name: entry.name,
           javaPath: javaFile,
           nextPath: nextFile,
-        });
+        })
       } finally {
-        await javaCtx.close();
-        await nextCtx.close();
+        await javaCtx.close()
+        await nextCtx.close()
       }
-    });
+    })
   }
 
   test.afterAll(() => {
-    generateReport(screenshots);
-  });
-});
+    generateReport(screenshots)
+  })
+})
 
 /**
  * 比較結果のスクリーンショット一覧から HTML レポートを書き出す。
@@ -173,9 +219,9 @@ function generateReport(items: Screenshot[]) {
           <img src="${s.nextPath}" alt="${s.name} - Next.js" />
         </div>
       </div>
-    </div>`
+    </div>`,
     )
-    .join("\n");
+    .join('\n')
 
   const html = `<!DOCTYPE html>
 <html lang="ja">
@@ -197,10 +243,10 @@ function generateReport(items: Screenshot[]) {
 <body>
   <h1>Nablarch → Next.js 移行 視覚比較レポート</h1>
   ${rows}
-  <p class="meta">生成日時: ${new Date().toLocaleString("ja-JP")}</p>
+  <p class="meta">生成日時: ${new Date().toLocaleString('ja-JP')}</p>
 </body>
-</html>`;
+</html>`
 
-  writeFileSync(join(OUTPUT_DIR, "report.html"), html, "utf-8");
-  console.log(`\n📊 比較レポート: ${join(OUTPUT_DIR, "report.html")}\n`);
+  writeFileSync(join(OUTPUT_DIR, 'report.html'), html, 'utf-8')
+  console.log(`\n📊 比較レポート: ${join(OUTPUT_DIR, 'report.html')}\n`)
 }

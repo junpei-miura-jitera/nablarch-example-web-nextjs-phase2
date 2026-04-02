@@ -4,34 +4,34 @@
  * RFC 4180 準拠のダブルクォート・エスケープに対応する。
  */
 export function parseCsvLine(line: string): string[] {
-  const fields: string[] = [];
-  let current = "";
-  let inQuotes = false;
+  const fields: string[] = []
+  let current = ''
+  let inQuotes = false
 
   for (let i = 0; i < line.length; i++) {
-    const char = line[i];
+    const char = line[i]
     if (inQuotes) {
       if (char === '"') {
         if (i + 1 < line.length && line[i + 1] === '"') {
-          current += '"';
-          i++;
+          current += '"'
+          i++
         } else {
-          inQuotes = false;
+          inQuotes = false
         }
       } else {
-        current += char;
+        current += char
       }
     } else {
       if (char === '"') {
-        inQuotes = true;
-      } else if (char === ",") {
-        fields.push(current.trim());
-        current = "";
+        inQuotes = true
+      } else if (char === ',') {
+        fields.push(current.trim())
+        current = ''
       } else {
-        current += char;
+        current += char
       }
     }
   }
-  fields.push(current.trim());
-  return fields;
+  fields.push(current.trim())
+  return fields
 }

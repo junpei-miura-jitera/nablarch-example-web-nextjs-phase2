@@ -1,0 +1,1796 @@
+/components/schemas/ActionResultopenapi: '3.0.0'
+info:
+  title: Nablarch Example Web API
+  description: >-
+    Nablarch Example Web アプリケーションの API 定義。
+  version: 1.0.0
+
+paths:
+  # ── AuthenticationAction ──
+  /api/authentication/index:
+    get:
+      operationId: AuthenticationAction_index
+      summary: AuthenticationAction#index
+      description: >-
+        AuthenticationAction.index() (source: AuthenticationAction.java)
+      responses:
+        '200':
+          description: OK
+  /api/authentication/login:
+    post:
+      operationId: AuthenticationAction_login
+      summary: AuthenticationAction#login
+      description: >-
+        AuthenticationAction.login() (source: AuthenticationAction.java)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiLoginForm'
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/authentication/logout:
+    get:
+      operationId: AuthenticationAction_logout
+      summary: AuthenticationAction#logout
+      description: >-
+        AuthenticationAction.logout() (source: AuthenticationAction.java)
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+
+  # ── ClientAction ──
+  /api/client/find:
+    get:
+      operationId: ClientAction_find
+      summary: ClientAction#find
+      description: >-
+        ClientAction.find() (source: ClientAction.java)
+      parameters:
+        - name: clientName
+          in: query
+          schema:
+            type: string
+        - name: industryCode
+          in: query
+          schema:
+            type: string
+        - name: sortKey
+          in: query
+          schema:
+            type: string
+        - name: sortDir
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ApiClientDto の配列を返す
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiClientDto'
+
+  # ── IndustryAction ──
+  /api/industry/find:
+    get:
+      operationId: IndustryAction_find
+      summary: IndustryAction#find
+      description: >-
+        IndustryAction.find() (source: IndustryAction.java)
+      parameters:
+        - name: industryCode
+          in: query
+          schema:
+            type: string
+        - name: industryName
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ApiIndustryDto の配列を返す
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiIndustryDto'
+
+  # ── ProjectAction ──
+  /api/project/newEntity:
+    get:
+      operationId: ProjectAction_newEntity
+      summary: ProjectAction#newEntity
+      description: >-
+        ProjectAction.newEntity() (source: ProjectAction.java)
+      responses:
+        '200':
+          description: OK
+  /api/project/confirmOfCreate:
+    post:
+      operationId: ProjectAction_confirmOfCreate
+      summary: ProjectAction#confirmOfCreate
+      description: >-
+        ProjectAction.confirmOfCreate() (source: ProjectAction.java)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiProjectForm'
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/project/create:
+    post:
+      operationId: ProjectAction_create
+      summary: ProjectAction#create
+      description: >-
+        ProjectAction.create() (source: ProjectAction.java)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiProjectForm'
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/project/completeOfCreate:
+    get:
+      operationId: ProjectAction_completeOfCreate
+      summary: ProjectAction#completeOfCreate
+      description: >-
+        ProjectAction.completeOfCreate() (source: ProjectAction.java)
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/project/backToNew:
+    get:
+      operationId: ProjectAction_backToNew
+      summary: ProjectAction#backToNew
+      description: >-
+        ProjectAction.backToNew() (source: ProjectAction.java)
+      parameters:
+        - name: projectId
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: projectName
+          in: query
+          schema:
+            type: string
+        - name: projectType
+          in: query
+          description: 'プロジェクト種別を定義したEnum。 (development: 新規開発PJ, maintenance: 保守PJ)'
+          schema:
+            type: string
+            enum:
+              - 'development'
+              - 'maintenance'
+            x-labels:
+              development: '新規開発PJ'
+              maintenance: '保守PJ'
+        - name: projectClass
+          in: query
+          description: 'プロジェクト規模を定義したEnum。 (ss: SS, s: S, a: A, b: B, c: C, d: D)'
+          schema:
+            type: string
+            enum:
+              - 'ss'
+              - 's'
+              - 'a'
+              - 'b'
+              - 'c'
+              - 'd'
+            x-labels:
+              ss: 'SS'
+              s: 'S'
+              a: 'A'
+              b: 'B'
+              c: 'C'
+              d: 'D'
+        - name: projectStartDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: projectEndDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: clientId
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: clientName
+          in: query
+          schema:
+            type: string
+        - name: projectManager
+          in: query
+          schema:
+            type: string
+        - name: projectLeader
+          in: query
+          schema:
+            type: string
+        - name: userId
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: note
+          in: query
+          schema:
+            type: string
+        - name: sales
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: costOfGoodsSold
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: sga
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: allocationOfCorpExpenses
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: version
+          in: query
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+            maximum: 999999999
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/project/index:
+    get:
+      operationId: ProjectAction_index
+      summary: ProjectAction#index
+      description: >-
+        ProjectAction.index() (source: ProjectAction.java)
+      parameters:
+        - name: projectName
+          in: query
+          schema:
+            type: string
+        - name: projectType
+          in: query
+          description: 'プロジェクト種別を定義したEnum。 (development: 新規開発PJ, maintenance: 保守PJ)'
+          schema:
+            type: string
+            enum:
+              - 'development'
+              - 'maintenance'
+            x-labels:
+              development: '新規開発PJ'
+              maintenance: '保守PJ'
+        - name: projectClass
+          in: query
+          description: 'プロジェクト規模を定義したEnum。 (ss: SS, s: S, a: A, b: B, c: C, d: D)'
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - 'ss'
+                - 's'
+                - 'a'
+                - 'b'
+                - 'c'
+                - 'd'
+              x-labels:
+                ss: 'SS'
+                s: 'S'
+                a: 'A'
+                b: 'B'
+                c: 'C'
+                d: 'D'
+        - name: projectStartDateBegin
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: projectStartDateEnd
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: projectEndDateBegin
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: projectEndDateEnd
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: clientId
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: clientName
+          in: query
+          schema:
+            type: string
+        - name: userId
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: sortId
+          in: query
+          schema:
+            type: string
+        - name: sortKey
+          in: query
+          schema:
+            type: string
+        - name: sortDir
+          in: query
+          schema:
+            type: string
+        - name: pageNumber
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+      responses:
+        '200':
+          description: OK
+  /api/project/list:
+    get:
+      operationId: ProjectAction_list
+      summary: ProjectAction#list
+      description: >-
+        ProjectAction.list() (source: ProjectAction.java)
+      parameters:
+        - name: pageNumber
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: clientId
+          in: query
+          schema:
+            type: string
+        - name: clientName
+          in: query
+          schema:
+            type: string
+        - name: projectName
+          in: query
+          schema:
+            type: string
+        - name: projectType
+          in: query
+          description: 'プロジェクト種別を定義したEnum。 (development: 新規開発PJ, maintenance: 保守PJ)'
+          schema:
+            type: string
+            enum:
+              - 'development'
+              - 'maintenance'
+            x-labels:
+              development: '新規開発PJ'
+              maintenance: '保守PJ'
+        - name: projectClass
+          in: query
+          description: 'プロジェクト規模を定義したEnum。 (ss: SS, s: S, a: A, b: B, c: C, d: D)'
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - 'ss'
+                - 's'
+                - 'a'
+                - 'b'
+                - 'c'
+                - 'd'
+              x-labels:
+                ss: 'SS'
+                s: 'S'
+                a: 'A'
+                b: 'B'
+                c: 'C'
+                d: 'D'
+        - name: projectStartDateBegin
+          in: query
+          schema:
+            type: string
+        - name: projectStartDateEnd
+          in: query
+          schema:
+            type: string
+        - name: projectEndDateBegin
+          in: query
+          schema:
+            type: string
+        - name: projectEndDateEnd
+          in: query
+          schema:
+            type: string
+        - name: sortKey
+          in: query
+          schema:
+            type: string
+        - name: sortDir
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ApiProjectDto の配列を返す
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiProjectDto'
+  /api/project/download:
+    get:
+      operationId: ProjectAction_download
+      summary: ProjectAction#download
+      description: >-
+        ProjectAction.download() (source: ProjectAction.java)
+      parameters:
+        - name: pageNumber
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: clientId
+          in: query
+          schema:
+            type: string
+        - name: clientName
+          in: query
+          schema:
+            type: string
+        - name: projectName
+          in: query
+          schema:
+            type: string
+        - name: projectType
+          in: query
+          description: 'プロジェクト種別を定義したEnum。 (development: 新規開発PJ, maintenance: 保守PJ)'
+          schema:
+            type: string
+            enum:
+              - 'development'
+              - 'maintenance'
+            x-labels:
+              development: '新規開発PJ'
+              maintenance: '保守PJ'
+        - name: projectClass
+          in: query
+          description: 'プロジェクト規模を定義したEnum。 (ss: SS, s: S, a: A, b: B, c: C, d: D)'
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - 'ss'
+                - 's'
+                - 'a'
+                - 'b'
+                - 'c'
+                - 'd'
+              x-labels:
+                ss: 'SS'
+                s: 'S'
+                a: 'A'
+                b: 'B'
+                c: 'C'
+                d: 'D'
+        - name: projectStartDateBegin
+          in: query
+          schema:
+            type: string
+        - name: projectStartDateEnd
+          in: query
+          schema:
+            type: string
+        - name: projectEndDateBegin
+          in: query
+          schema:
+            type: string
+        - name: projectEndDateEnd
+          in: query
+          schema:
+            type: string
+        - name: sortKey
+          in: query
+          schema:
+            type: string
+        - name: sortDir
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ファイルダウンロード
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /api/project/show:
+    get:
+      operationId: ProjectAction_show
+      summary: ProjectAction#show
+      description: >-
+        ProjectAction.show() (source: ProjectAction.java)
+      parameters:
+        - name: projectId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ApiProjectDto を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiProjectDto'
+  /api/project/edit:
+    get:
+      operationId: ProjectAction_edit
+      summary: ProjectAction#edit
+      description: >-
+        ProjectAction.edit() (source: ProjectAction.java)
+      parameters:
+        - name: projectId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ApiProjectDto を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiProjectDto'
+  /api/project/confirmOfUpdate:
+    post:
+      operationId: ProjectAction_confirmOfUpdate
+      summary: ProjectAction#confirmOfUpdate
+      description: >-
+        ProjectAction.confirmOfUpdate() (source: ProjectAction.java)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiProjectUpdateForm'
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/project/backToEdit:
+    get:
+      operationId: ProjectAction_backToEdit
+      summary: ProjectAction#backToEdit
+      description: >-
+        ProjectAction.backToEdit() (source: ProjectAction.java)
+      parameters:
+        - name: projectId
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: projectName
+          in: query
+          schema:
+            type: string
+        - name: projectType
+          in: query
+          description: 'プロジェクト種別を定義したEnum。 (development: 新規開発PJ, maintenance: 保守PJ)'
+          schema:
+            type: string
+            enum:
+              - 'development'
+              - 'maintenance'
+            x-labels:
+              development: '新規開発PJ'
+              maintenance: '保守PJ'
+        - name: projectClass
+          in: query
+          description: 'プロジェクト規模を定義したEnum。 (ss: SS, s: S, a: A, b: B, c: C, d: D)'
+          schema:
+            type: string
+            enum:
+              - 'ss'
+              - 's'
+              - 'a'
+              - 'b'
+              - 'c'
+              - 'd'
+            x-labels:
+              ss: 'SS'
+              s: 'S'
+              a: 'A'
+              b: 'B'
+              c: 'C'
+              d: 'D'
+        - name: projectStartDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: projectEndDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: clientId
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: clientName
+          in: query
+          schema:
+            type: string
+        - name: projectManager
+          in: query
+          schema:
+            type: string
+        - name: projectLeader
+          in: query
+          schema:
+            type: string
+        - name: userId
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: note
+          in: query
+          schema:
+            type: string
+        - name: sales
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: costOfGoodsSold
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: sga
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: allocationOfCorpExpenses
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: version
+          in: query
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+            maximum: 999999999
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/project/update:
+    post:
+      operationId: ProjectAction_update
+      summary: ProjectAction#update
+      description: >-
+        ProjectAction.update() (source: ProjectAction.java)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiProjectUpdateForm'
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/project/completeOfUpdate:
+    get:
+      operationId: ProjectAction_completeOfUpdate
+      summary: ProjectAction#completeOfUpdate
+      description: >-
+        ProjectAction.completeOfUpdate() (source: ProjectAction.java)
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/project/delete:
+    post:
+      operationId: ProjectAction_delete
+      summary: ProjectAction#delete
+      description: >-
+        ProjectAction.delete() (source: ProjectAction.java)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiProjectTargetForm'
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/project/completeOfDelete:
+    get:
+      operationId: ProjectAction_completeOfDelete
+      summary: ProjectAction#completeOfDelete
+      description: >-
+        ProjectAction.completeOfDelete() (source: ProjectAction.java)
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+
+  # ── ProjectBulkAction ──
+  /api/projectbulk/index:
+    get:
+      operationId: ProjectBulkAction_index
+      summary: ProjectBulkAction#index
+      description: >-
+        ProjectBulkAction.index() (source: ProjectBulkAction.java)
+      parameters:
+        - name: projectName
+          in: query
+          schema:
+            type: string
+        - name: projectType
+          in: query
+          description: 'プロジェクト種別を定義したEnum。 (development: 新規開発PJ, maintenance: 保守PJ)'
+          schema:
+            type: string
+            enum:
+              - 'development'
+              - 'maintenance'
+            x-labels:
+              development: '新規開発PJ'
+              maintenance: '保守PJ'
+        - name: projectClass
+          in: query
+          description: 'プロジェクト規模を定義したEnum。 (ss: SS, s: S, a: A, b: B, c: C, d: D)'
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - 'ss'
+                - 's'
+                - 'a'
+                - 'b'
+                - 'c'
+                - 'd'
+              x-labels:
+                ss: 'SS'
+                s: 'S'
+                a: 'A'
+                b: 'B'
+                c: 'C'
+                d: 'D'
+        - name: projectStartDateBegin
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: projectStartDateEnd
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: projectEndDateBegin
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: projectEndDateEnd
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: clientId
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: clientName
+          in: query
+          schema:
+            type: string
+        - name: userId
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+        - name: sortId
+          in: query
+          schema:
+            type: string
+        - name: sortKey
+          in: query
+          schema:
+            type: string
+        - name: sortDir
+          in: query
+          schema:
+            type: string
+        - name: pageNumber
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999999999
+      responses:
+        '200':
+          description: OK
+  /api/projectbulk/list:
+    get:
+      operationId: ProjectBulkAction_list
+      summary: ProjectBulkAction#list
+      description: >-
+        ProjectBulkAction.list() (source: ProjectBulkAction.java)
+      parameters:
+        - name: pageNumber
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: clientId
+          in: query
+          schema:
+            type: string
+        - name: clientName
+          in: query
+          schema:
+            type: string
+        - name: projectName
+          in: query
+          schema:
+            type: string
+        - name: projectType
+          in: query
+          description: 'プロジェクト種別を定義したEnum。 (development: 新規開発PJ, maintenance: 保守PJ)'
+          schema:
+            type: string
+            enum:
+              - 'development'
+              - 'maintenance'
+            x-labels:
+              development: '新規開発PJ'
+              maintenance: '保守PJ'
+        - name: projectClass
+          in: query
+          description: 'プロジェクト規模を定義したEnum。 (ss: SS, s: S, a: A, b: B, c: C, d: D)'
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - 'ss'
+                - 's'
+                - 'a'
+                - 'b'
+                - 'c'
+                - 'd'
+              x-labels:
+                ss: 'SS'
+                s: 'S'
+                a: 'A'
+                b: 'B'
+                c: 'C'
+                d: 'D'
+        - name: projectStartDateBegin
+          in: query
+          schema:
+            type: string
+        - name: projectStartDateEnd
+          in: query
+          schema:
+            type: string
+        - name: projectEndDateBegin
+          in: query
+          schema:
+            type: string
+        - name: projectEndDateEnd
+          in: query
+          schema:
+            type: string
+        - name: sortKey
+          in: query
+          schema:
+            type: string
+        - name: sortDir
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ApiProjectDto の配列を返す
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiProjectDto'
+  /api/projectbulk/confirmOfUpdate:
+    post:
+      operationId: ProjectBulkAction_confirmOfUpdate
+      summary: ProjectBulkAction#confirmOfUpdate
+      description: >-
+        ProjectBulkAction.confirmOfUpdate() (source: ProjectBulkAction.java)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiProjectBulkForm'
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/projectbulk/backToList:
+    get:
+      operationId: ProjectBulkAction_backToList
+      summary: ProjectBulkAction#backToList
+      description: >-
+        ProjectBulkAction.backToList() (source: ProjectBulkAction.java)
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/projectbulk/update:
+    post:
+      operationId: ProjectBulkAction_update
+      summary: ProjectBulkAction#update
+      description: >-
+        ProjectBulkAction.update() (source: ProjectBulkAction.java)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiProjectBulkForm'
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/projectbulk/completeOfUpdate:
+    get:
+      operationId: ProjectBulkAction_completeOfUpdate
+      summary: ProjectBulkAction#completeOfUpdate
+      description: >-
+        ProjectBulkAction.completeOfUpdate() (source: ProjectBulkAction.java)
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+  /api/projectbulk/initialize:
+    get:
+      operationId: ProjectBulkAction_initialize
+      summary: ProjectBulkAction#initialize
+      description: >-
+        ProjectBulkAction.initialize() (source: ProjectBulkAction.java)
+      responses:
+        '200':
+          description: OK
+
+  # ── ProjectUploadAction ──
+  /api/projectupload/index:
+    get:
+      operationId: ProjectUploadAction_index
+      summary: ProjectUploadAction#index
+      description: >-
+        ProjectUploadAction.index() (source: ProjectUploadAction.java)
+      responses:
+        '200':
+          description: OK
+  /api/projectupload/upload:
+    post:
+      operationId: ProjectUploadAction_upload
+      summary: ProjectUploadAction#upload
+      description: >-
+        ProjectUploadAction.upload() (source: ProjectUploadAction.java)
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: 処理結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiActionResult'
+
+components:
+  schemas:
+    # ── 共通スキーマ ──
+    ApiActionResult:
+      description: API の処理結果を表す汎用レスポンス
+      type: object
+      required:
+        - ok
+      properties:
+        ok:
+          type: boolean
+          description: 処理が成功したかどうか
+        message:
+          type: string
+          description: 処理結果のメッセージ
+
+    # ── DTO（データ転送オブジェクト） ──
+    ApiClientDto:
+      description: 'ApiClientDto — source: dto/ClientDto.java'
+      type: object
+      properties:
+        clientId:
+          type: integer
+          minimum: 0
+          maximum: 999999999
+        clientName:
+          type: string
+        industryCode:
+          type: string
+        industryName:
+          type: string
+
+    ClientSearchDto:
+      description: 'ClientSearchDto — source: dto/ClientSearchDto.java'
+      type: object
+      properties:
+        clientName:
+          type: string
+        industryCode:
+          type: string
+        sortId:
+          type: string
+
+    ApiIndustryDto:
+      description: 'ApiIndustryDto — source: dto/IndustryDto.java'
+      type: object
+      properties:
+        industryCode:
+          type: string
+        industryName:
+          type: string
+
+    ProjectDownloadDto:
+      description: 'ProjectDownloadDto — source: dto/ProjectDownloadDto.java'
+      type: object
+      properties:
+        projectName:
+          type: string
+        projectType:
+          type: string
+          description: >-
+            プロジェクト種別を定義したEnum。 (source: ProjectType.java) — development: 新規開発PJ, maintenance: 保守PJ
+          enum:
+            - 'development'
+            - 'maintenance'
+          x-labels:
+            development: '新規開発PJ'
+            maintenance: '保守PJ'
+        projectClass:
+          type: string
+          description: >-
+            プロジェクト規模を定義したEnum。 (source: ProjectClass.java) — ss: SS, s: S, a: A, b: B, c: C, d: D
+          enum:
+            - 'ss'
+            - 's'
+            - 'a'
+            - 'b'
+            - 'c'
+            - 'd'
+          x-labels:
+            ss: 'SS'
+            s: 'S'
+            a: 'A'
+            b: 'B'
+            c: 'C'
+            d: 'D'
+        projectManager:
+          type: string
+        projectLeader:
+          type: string
+        clientId:
+          type: string
+        clientName:
+          type: string
+        projectStartDate:
+          type: string
+          format: date
+        projectEndDate:
+          type: string
+          format: date
+        note:
+          type: string
+        sales:
+          type: string
+        costOfGoodsSold:
+          type: string
+        sga:
+          type: string
+        allocationOfCorpExpenses:
+          type: string
+
+    ApiProjectDto:
+      description: 'ApiProjectDto — source: dto/ProjectDto.java'
+      type: object
+      properties:
+        projectId:
+          type: integer
+          minimum: 0
+          maximum: 999999999
+        projectName:
+          type: string
+        projectType:
+          type: string
+          description: >-
+            プロジェクト種別を定義したEnum。 (source: ProjectType.java) — development: 新規開発PJ, maintenance: 保守PJ
+          enum:
+            - 'development'
+            - 'maintenance'
+          x-labels:
+            development: '新規開発PJ'
+            maintenance: '保守PJ'
+        projectClass:
+          type: string
+          description: >-
+            プロジェクト規模を定義したEnum。 (source: ProjectClass.java) — ss: SS, s: S, a: A, b: B, c: C, d: D
+          enum:
+            - 'ss'
+            - 's'
+            - 'a'
+            - 'b'
+            - 'c'
+            - 'd'
+          x-labels:
+            ss: 'SS'
+            s: 'S'
+            a: 'A'
+            b: 'B'
+            c: 'C'
+            d: 'D'
+        projectStartDate:
+          type: string
+          format: date
+        projectEndDate:
+          type: string
+          format: date
+        clientId:
+          type: integer
+          minimum: 0
+          maximum: 999999999
+        clientName:
+          type: string
+        projectManager:
+          type: string
+        projectLeader:
+          type: string
+        userId:
+          type: integer
+          minimum: 0
+          maximum: 999999999
+        note:
+          type: string
+        sales:
+          type: integer
+          minimum: 0
+          maximum: 999999999
+        costOfGoodsSold:
+          type: integer
+          minimum: 0
+          maximum: 999999999
+        sga:
+          type: integer
+          minimum: 0
+          maximum: 999999999
+        allocationOfCorpExpenses:
+          type: integer
+          minimum: 0
+          maximum: 999999999
+        version:
+          type: integer
+          format: int64
+          minimum: 0
+          maximum: 999999999
+
+    ProjectListDto:
+      description: 'ProjectListDto — source: dto/ProjectListDto.java'
+      type: object
+      properties:
+        projectList:
+          type: array
+          items:
+            type: string
+
+    ProjectSearchDto:
+      description: 'ProjectSearchDto — source: dto/ProjectSearchDto.java'
+      type: object
+      properties:
+        projectName:
+          type: string
+        projectType:
+          type: string
+          description: >-
+            プロジェクト種別を定義したEnum。 (source: ProjectType.java) — development: 新規開発PJ, maintenance: 保守PJ
+          enum:
+            - 'development'
+            - 'maintenance'
+          x-labels:
+            development: '新規開発PJ'
+            maintenance: '保守PJ'
+        projectClass:
+          type: array
+          items:
+            type: string
+          description: >-
+            プロジェクト規模を定義したEnum。 (source: ProjectClass.java) — ss: SS, s: S, a: A, b: B, c: C, d: D
+            enum:
+              - "ss"
+              - "s"
+              - "a"
+              - "b"
+              - "c"
+              - "d"
+            x-labels:
+              ss: "SS"
+              s: "S"
+              a: "A"
+              b: "B"
+              c: "C"
+              d: "D"
+        projectStartDateBegin:
+          type: string
+          format: date
+        projectStartDateEnd:
+          type: string
+          format: date
+        projectEndDateBegin:
+          type: string
+          format: date
+        projectEndDateEnd:
+          type: string
+          format: date
+        clientId:
+          type: integer
+          minimum: 0
+          maximum: 999999999
+        clientName:
+          type: string
+        userId:
+          type: integer
+          minimum: 0
+          maximum: 999999999
+        sortId:
+          type: string
+        sortKey:
+          type: string
+        sortDir:
+          type: string
+        pageNumber:
+          type: integer
+          minimum: 0
+          maximum: 999999999
+
+    ProjectUploadDto:
+      description: 'ProjectUploadDto — source: dto/ProjectUploadDto.java'
+      type: object
+      required:
+        - projectName
+        - projectType
+        - projectClass
+        - clientId
+      properties:
+        projectName:
+          type: string
+          minLength: 1
+        projectType:
+          type: string
+          minLength: 1
+          description: >-
+            プロジェクト種別を定義したEnum。 (source: ProjectType.java) — development: 新規開発PJ, maintenance: 保守PJ
+          enum:
+            - 'development'
+            - 'maintenance'
+          x-labels:
+            development: '新規開発PJ'
+            maintenance: '保守PJ'
+        projectClass:
+          type: string
+          minLength: 1
+          description: >-
+            プロジェクト規模を定義したEnum。 (source: ProjectClass.java) — ss: SS, s: S, a: A, b: B, c: C, d: D
+          enum:
+            - 'ss'
+            - 's'
+            - 'a'
+            - 'b'
+            - 'c'
+            - 'd'
+          x-labels:
+            ss: 'SS'
+            s: 'S'
+            a: 'A'
+            b: 'B'
+            c: 'C'
+            d: 'D'
+        projectManager:
+          type: string
+        projectLeader:
+          type: string
+        clientId:
+          type: string
+          minLength: 1
+        clientName:
+          type: string
+        projectStartDate:
+          type: string
+        projectEndDate:
+          type: string
+        note:
+          type: string
+        sales:
+          type: string
+        costOfGoodsSold:
+          type: string
+        sga:
+          type: string
+        allocationOfCorpExpenses:
+          type: string
+        lineNumber:
+          type: integer
+          format: int64
+          minimum: 0
+          maximum: 999999999
+
+    # ── Form（リクエストフォーム） ──
+    ClientSearchForm:
+      description: 'ClientSearchForm — source: form/ClientSearchForm.java'
+      type: object
+      properties:
+        clientName:
+          type: string
+        industryCode:
+          type: string
+        sortKey:
+          type: string
+        sortDir:
+          type: string
+
+    ApiProjectBulkItem:
+      description: 'InnerProjectForm — source: form/InnerProjectForm.java'
+      type: object
+      required:
+        - projectId
+        - projectName
+        - projectType
+      properties:
+        projectId:
+          type: string
+          minLength: 1
+        projectName:
+          type: string
+          minLength: 1
+        projectType:
+          type: string
+          minLength: 1
+          description: >-
+            プロジェクト種別を定義したEnum。 (source: ProjectType.java) — development: 新規開発PJ, maintenance: 保守PJ
+          enum:
+            - 'development'
+            - 'maintenance'
+          x-labels:
+            development: '新規開発PJ'
+            maintenance: '保守PJ'
+        projectStartDate:
+          type: string
+        projectEndDate:
+          type: string
+
+    ApiLoginForm:
+      description: 'LoginForm — source: form/LoginForm.java'
+      type: object
+      required:
+        - loginId
+        - userPassword
+      properties:
+        loginId:
+          type: string
+          minLength: 1
+        userPassword:
+          type: string
+          minLength: 1
+
+    ApiProjectBulkForm:
+      description: 'ProjectBulkForm — source: form/ProjectBulkForm.java'
+      type: object
+      properties:
+        projectList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiProjectBulkItem'
+
+    ApiProjectForm:
+      description: 'ProjectForm — source: form/ProjectForm.java'
+      type: object
+      required:
+        - projectName
+        - projectType
+        - projectClass
+        - clientId
+      properties:
+        projectName:
+          type: string
+          minLength: 1
+        projectType:
+          type: string
+          minLength: 1
+          description: >-
+            プロジェクト種別を定義したEnum。 (source: ProjectType.java) — development: 新規開発PJ, maintenance: 保守PJ
+          enum:
+            - 'development'
+            - 'maintenance'
+          x-labels:
+            development: '新規開発PJ'
+            maintenance: '保守PJ'
+        projectClass:
+          type: string
+          minLength: 1
+          description: >-
+            プロジェクト規模を定義したEnum。 (source: ProjectClass.java) — ss: SS, s: S, a: A, b: B, c: C, d: D
+          enum:
+            - 'ss'
+            - 's'
+            - 'a'
+            - 'b'
+            - 'c'
+            - 'd'
+          x-labels:
+            ss: 'SS'
+            s: 'S'
+            a: 'A'
+            b: 'B'
+            c: 'C'
+            d: 'D'
+        projectManager:
+          type: string
+        projectLeader:
+          type: string
+        clientId:
+          type: string
+          minLength: 1
+        clientName:
+          type: string
+        projectStartDate:
+          type: string
+        projectEndDate:
+          type: string
+        note:
+          type: string
+        sales:
+          type: string
+        costOfGoodsSold:
+          type: string
+        sga:
+          type: string
+        allocationOfCorpExpenses:
+          type: string
+
+    ApiProjectSearchForm:
+      description: 'ProjectSearchForm — source: form/ProjectSearchForm.java'
+      type: object
+      required:
+        - pageNumber
+      properties:
+        pageNumber:
+          type: string
+          minLength: 1
+        clientId:
+          type: string
+        clientName:
+          type: string
+        projectName:
+          type: string
+        projectType:
+          type: string
+          description: >-
+            プロジェクト種別を定義したEnum。 (source: ProjectType.java) — development: 新規開発PJ, maintenance: 保守PJ
+          enum:
+            - 'development'
+            - 'maintenance'
+          x-labels:
+            development: '新規開発PJ'
+            maintenance: '保守PJ'
+        projectClass:
+          type: array
+          items:
+            type: string
+          description: >-
+            プロジェクト規模を定義したEnum。 (source: ProjectClass.java) — ss: SS, s: S, a: A, b: B, c: C, d: D
+            enum:
+              - "ss"
+              - "s"
+              - "a"
+              - "b"
+              - "c"
+              - "d"
+            x-labels:
+              ss: "SS"
+              s: "S"
+              a: "A"
+              b: "B"
+              c: "C"
+              d: "D"
+        projectStartDateBegin:
+          type: string
+        projectStartDateEnd:
+          type: string
+        projectEndDateBegin:
+          type: string
+        projectEndDateEnd:
+          type: string
+        sortKey:
+          type: string
+        sortDir:
+          type: string
+
+    ApiProjectTargetForm:
+      description: 'ProjectTargetForm — source: form/ProjectTargetForm.java'
+      type: object
+      required:
+        - projectId
+      properties:
+        projectId:
+          type: string
+          minLength: 1
+
+    ApiProjectUpdateForm:
+      description: 'ProjectUpdateForm — source: form/ProjectUpdateForm.java'
+      type: object
+      required:
+        - projectName
+        - projectType
+        - projectClass
+        - clientId
+      properties:
+        projectName:
+          type: string
+          minLength: 1
+        projectType:
+          type: string
+          minLength: 1
+          description: >-
+            プロジェクト種別を定義したEnum。 (source: ProjectType.java) — development: 新規開発PJ, maintenance: 保守PJ
+          enum:
+            - 'development'
+            - 'maintenance'
+          x-labels:
+            development: '新規開発PJ'
+            maintenance: '保守PJ'
+        projectClass:
+          type: string
+          minLength: 1
+          description: >-
+            プロジェクト規模を定義したEnum。 (source: ProjectClass.java) — ss: SS, s: S, a: A, b: B, c: C, d: D
+          enum:
+            - 'ss'
+            - 's'
+            - 'a'
+            - 'b'
+            - 'c'
+            - 'd'
+          x-labels:
+            ss: 'SS'
+            s: 'S'
+            a: 'A'
+            b: 'B'
+            c: 'C'
+            d: 'D'
+        projectManager:
+          type: string
+        projectLeader:
+          type: string
+        clientId:
+          type: string
+          minLength: 1
+        clientName:
+          type: string
+        projectStartDate:
+          type: string
+        projectEndDate:
+          type: string
+        note:
+          type: string
+        sales:
+          type: string
+        costOfGoodsSold:
+          type: string
+        sga:
+          type: string
+        allocationOfCorpExpenses:
+          type: string
+
+    SearchFormBase:
+      description: 'SearchFormBase — source: form/SearchFormBase.java'
+      type: object
+      required:
+        - pageNumber
+      properties:
+        pageNumber:
+          type: string
+          minLength: 1
+
+    # ── その他 ──
+    ApiLoginUser:
+      description: 'LoginUserPrincipal — source: LoginUserPrincipal.java'
+      type: object
+      required:
+        - userId
+        - kanjiName
+        - admin
+        - lastLoginDateTime
+      properties:
+        userId:
+          type: integer
+          minimum: 0
+          maximum: 999999999
+        kanjiName:
+          type: string
+          minLength: 1
+        admin:
+          type: boolean
+        lastLoginDateTime:
+          type: string
+          format: date
+          minLength: 1
+
+  # ── CodeEnum ラベル定義（enum TS ファイル生成元）──
+  x-enums:
+    clientSortKey:
+      description: 顧客を定義したEnum。
+      x-source: ClientSortKey.java
+      values:
+        id: '顧客ＩＤ'
+        name: '顧客名'
+    projectClass:
+      description: プロジェクト規模を定義したEnum。
+      x-source: ProjectClass.java
+      values:
+        ss: 'SS'
+        s: 'S'
+        a: 'A'
+        b: 'B'
+        c: 'C'
+        d: 'D'
+    projectSortKey:
+      description: プロジェクトのソートキーを定義したEnum。
+      x-source: ProjectSortKey.java
+      values:
+        id: 'プロジェクトＩＤ'
+        name: 'プロジェクト名'
+        startDate: 'プロジェクト開始日'
+        endDate: 'プロジェクト終了日'
+    projectType:
+      description: プロジェクト種別を定義したEnum。
+      x-source: ProjectType.java
+      values:
+        development: '新規開発PJ'
+        maintenance: '保守PJ'
+    sortOrder:
+      description: 並び順を定義したEnum。
+      x-source: SortOrder.java
+      values:
+        asc: '昇順'
+        desc: '降順'

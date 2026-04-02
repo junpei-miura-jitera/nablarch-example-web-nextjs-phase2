@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
-import { CompletePage } from "../../_fragments/complete-page";
+import type { Metadata } from 'next'
+import { CompletePage } from '../../_fragments/complete-page'
 
-export const metadata: Metadata = { title: "プロジェクト一覧更新完了画面" };
+export const metadata: Metadata = { title: 'プロジェクト一覧更新完了画面' }
 
 /**
  * プロジェクト一括更新完了画面。
@@ -9,5 +9,10 @@ export const metadata: Metadata = { title: "プロジェクト一覧更新完了
  * @see _references/nablarch-example-web/src/main/webapp/WEB-INF/view/projectBulk/completeOfUpdate.jsp
  */
 export default function BulkCompletePage() {
-  return <CompletePage title="プロジェクト一覧更新完了画面" message="プロジェクトの更新が完了しました。" />;
+  return (
+    <CompletePage
+      title="プロジェクト一覧更新完了画面"
+      message="プロジェクトの更新が完了しました。"
+    />
+  )
 }

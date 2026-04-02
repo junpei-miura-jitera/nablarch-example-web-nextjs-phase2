@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { CompletePage } from "../../../_fragments/complete-page";
-import { ProjectSidemenuLayout } from "../../../_layouts/project-sidemenu-layout";
+import type { Metadata } from 'next'
+import { CompletePage } from '../../../_fragments/complete-page'
+import { ProjectSidemenuLayout } from '../../../_layouts/project-sidemenu-layout'
 
-export const metadata: Metadata = { title: "プロジェクト変更完了画面" };
+export const metadata: Metadata = { title: 'プロジェクト変更完了画面' }
 
 /**
  * プロジェクト変更完了画面。
@@ -13,10 +13,7 @@ export const metadata: Metadata = { title: "プロジェクト変更完了画面
 export default function UpdateCompletePage() {
   return (
     <ProjectSidemenuLayout>
-      <CompletePage
-        title="プロジェクト変更完了画面"
-        message="プロジェクトの更新が完了しました。"
-      />
+      <CompletePage title="プロジェクト変更完了画面" message="プロジェクトの更新が完了しました。" />
     </ProjectSidemenuLayout>
-  );
+  )
 }
