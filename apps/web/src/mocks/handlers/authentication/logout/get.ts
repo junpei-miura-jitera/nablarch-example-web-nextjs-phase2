@@ -1,8 +1,7 @@
 /**
  * ログアウト endpoint。
  *
- * 旧 `mocks/handlers/auth/handlers.ts` の `/api/authentication/logout` 処理を
- * endpoint 単位へ分離して移行した。
+ * 旧 `mocks/handlers/auth/handlers.ts` の `/api/authentication/logout` 処理を endpoint 単位へ分離して移行した。
  *
  * @see _references/nablarch-example-web/src/main/java/com/nablarch/example/app/web/action/AuthenticationAction.java#logout
  */

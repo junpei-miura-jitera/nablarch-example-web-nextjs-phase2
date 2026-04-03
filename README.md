@@ -20,31 +20,31 @@ _references/
 
 ### アプリ
 
-| ライブラリ | 用途 |
-| --- | --- |
-| Next.js 16 | App Router, SSR, routing |
-| React 19 | UI |
-| TypeScript 5.9 | 型安全 |
-| Bootstrap 5 | 既存 JSP の見た目を踏襲 |
+| ライブラリ     | 用途                     |
+| -------------- | ------------------------ |
+| Next.js 16     | App Router, SSR, routing |
+| React 19       | UI                       |
+| TypeScript 5.9 | 型安全                   |
+| Bootstrap 5    | 既存 JSP の見た目を踏襲  |
 
 ### フォーム / 状態管理
 
-| ライブラリ | 用途 |
-| --- | --- |
-| react-hook-form | フォーム管理 |
-| zod | バリデーション |
-| @tanstack/react-query | サーバ状態管理 |
-| Zustand | 軽量クライアント状態管理 |
+| ライブラリ            | 用途                     |
+| --------------------- | ------------------------ |
+| react-hook-form       | フォーム管理             |
+| zod                   | バリデーション           |
+| @tanstack/react-query | サーバ状態管理           |
+| Zustand               | 軽量クライアント状態管理 |
 
 ### テスト / 開発
 
-| ライブラリ | 用途 |
-| --- | --- |
-| msw 2 + @mswjs/http-middleware | mock server |
-| Vitest 4 | 単体テスト |
-| Playwright | E2E / visual comparison |
-| ESLint 9 | lint |
-| Storybook | UI 確認 |
+| ライブラリ                     | 用途                    |
+| ------------------------------ | ----------------------- |
+| msw 2 + @mswjs/http-middleware | mock server             |
+| Vitest 4                       | 単体テスト              |
+| Playwright                     | E2E / visual comparison |
+| ESLint 9                       | lint                    |
+| Storybook                      | UI 確認                 |
 
 ## セットアップ
 
@@ -54,18 +54,18 @@ pnpm install
 
 ## コマンド
 
-| コマンド | 説明 |
-| --- | --- |
-| `pnpm dev` | `apps/web` と `apps/_legacy` を同時起動 |
-| `pnpm dev:web` | `apps/web` を起動 |
-| `pnpm dev:_legacy` | Nablarch 移行元アプリを起動 |
-| `pnpm _legacy:setup` | Nablarch 移行元アプリの DB 初期化とコード生成 |
-| `pnpm _legacy:compile` | Nablarch 移行元アプリをコンパイル |
-| `pnpm build` | Next.js ビルド |
-| `pnpm test` | ワークスペース全体のテスト |
-| `pnpm typecheck` | ワークスペース全体の型チェック |
-| `pnpm lint` | `apps/web` の lint |
-| `pnpm storybook` | Storybook 起動 |
+| コマンド               | 説明                                          |
+| ---------------------- | --------------------------------------------- |
+| `pnpm dev`             | `apps/web` と `apps/_legacy` を同時起動       |
+| `pnpm dev:web`         | `apps/web` を起動                             |
+| `pnpm dev:_legacy`     | Nablarch 移行元アプリを起動                   |
+| `pnpm _legacy:setup`   | Nablarch 移行元アプリの DB 初期化とコード生成 |
+| `pnpm _legacy:compile` | Nablarch 移行元アプリをコンパイル             |
+| `pnpm build`           | Next.js ビルド                                |
+| `pnpm test`            | ワークスペース全体のテスト                    |
+| `pnpm typecheck`       | ワークスペース全体の型チェック                |
+| `pnpm lint`            | `apps/web` の lint                            |
+| `pnpm storybook`       | Storybook 起動                                |
 
 ### `apps/web` の補足
 

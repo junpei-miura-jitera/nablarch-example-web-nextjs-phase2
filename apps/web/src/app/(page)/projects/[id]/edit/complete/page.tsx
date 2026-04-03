@@ -2,7 +2,12 @@ import type { Metadata } from 'next'
 import { CompletePage } from '../../../_fragments/complete-page'
 import { ProjectSidemenuLayout } from '../../../_layouts/project-sidemenu-layout'
 
-export const metadata: Metadata = { title: 'プロジェクト変更完了画面' }
+/**
+ * プロジェクト変更完了画面のメタデータ。
+ */
+export const metadata: Metadata = {
+  title: 'プロジェクト変更完了画面',
+}
 
 /**
  * プロジェクト変更完了画面。

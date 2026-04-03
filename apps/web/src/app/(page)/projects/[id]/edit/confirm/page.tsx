@@ -1,17 +1,22 @@
 import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 import Link from 'next/link'
-
-export const metadata: Metadata = { title: 'プロジェクト変更画面' }
-import { PROJECT_TYPE } from '../../../_constants/project-type'
-import { PROJECT_CLASS } from '../../../_constants/project-class'
 import { apiProjectUpdateFormSchema } from ':/shared/api/project'
+import { ProjectSidemenuLayout } from '../../../_layouts/project-sidemenu-layout'
+import { PROJECT_CLASS } from '../../../_constants/project-class'
+import { PROJECT_TYPE } from '../../../_constants/project-type'
 import { calculateProjectProfit, formatMoney, formatRate } from '../../../_utils/project-profit'
 import { formatDate } from '../../../_utils/format-date'
 import { loadProjectFormFromCookieServer } from '../../../_utils/cookie-helpers.server'
 import { parseProjectIdFromRouteSegment } from '../../../_utils/route-params'
 import { ConfirmUpdateButton } from './confirm-update-button'
-import { ProjectSidemenuLayout } from '../../../_layouts/project-sidemenu-layout'
+
+/**
+ * プロジェクト変更画面のメタデータ。
+ */
+export const metadata: Metadata = {
+  title: 'プロジェクト変更画面',
+}
 
 /**
  * プロジェクト変更確認画面。
@@ -28,10 +33,18 @@ export default async function ConfirmUpdatePage({ params }: { params: Promise<{ 
   if (!rawFormData) redirect(`/projects/${projectId}/edit`)
   const parsed = apiProjectUpdateFormSchema.safeParse(rawFormData)
   if (!parsed.success) redirect(`/projects/${projectId}/edit`)
+  const cookieProjectId = Number(rawFormData.projectId as string | number | undefined)
+  const cookieVersion = Number(rawFormData.version as string | number | undefined)
+  if (!Number.isInteger(cookieProjectId) || cookieProjectId !== projectId) {
+    redirect(`/projects/${projectId}/edit`)
+  }
+  if (!Number.isInteger(cookieVersion) || cookieVersion < 1) {
+    redirect(`/projects/${projectId}/edit`)
+  }
   const formData = {
     ...parsed.data,
-    projectId: Number((rawFormData.projectId as string | number | undefined) ?? projectId),
-    version: Number((rawFormData.version as string | number | undefined) ?? 0),
+    projectId: cookieProjectId,
+    version: cookieVersion,
   }
 
   const profit = calculateProjectProfit({

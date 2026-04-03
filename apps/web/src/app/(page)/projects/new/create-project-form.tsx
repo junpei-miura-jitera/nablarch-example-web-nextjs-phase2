@@ -5,10 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema'
 import { ClientSearchModal } from '../_fragments/client-search-modal'
-import {
-  apiProjectFormSchema,
-  type ApiProjectFormValues,
-} from ':/shared/api/project'
+import { apiProjectFormSchema, type ApiProjectFormValues } from ':/shared/api/project'
 import { PROJECT_TYPE } from '../_constants/project-type'
 import { PROJECT_CLASS } from '../_constants/project-class'
 import { saveProjectFormToCookie, loadProjectFormFromCookie } from '../_utils/cookie-helpers'

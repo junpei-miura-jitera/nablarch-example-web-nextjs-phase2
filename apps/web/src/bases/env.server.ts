@@ -6,9 +6,6 @@
 import { z } from 'zod'
 
 /**
- * Java API (MSW) のベース URL。 サーバーサイド fetch で使用する。デフォルト: http://localhost:9090
+ * Java API (MSW) のベース URL。 サーバーサイド fetch で使用する。必須。
  */
-export const API_BASE_URL = /*#__PURE__*/ z
-  .string()
-  .default('http://localhost:9090')
-  .parse(process.env.API_BASE_URL)
+export const API_BASE_URL = /*#__PURE__*/ z.string().parse(process.env.API_BASE_URL)

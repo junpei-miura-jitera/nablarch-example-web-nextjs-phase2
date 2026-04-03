@@ -18,7 +18,8 @@ export function ConfirmBulkButton({ items }: { items: ApiProjectBulkItemValues[]
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ projectList: items }),
         })
-        if (!res.ok) throw new Error(`API error ${res.status}`)
+        const data = (await res.json().catch(() => null)) as { ok?: boolean } | null
+        if (!res.ok || !data?.ok) throw new Error(`API error ${res.status}`)
       }}
       redirectTo="/projects/bulk/complete"
       errorMessage="更新に失敗しました。"

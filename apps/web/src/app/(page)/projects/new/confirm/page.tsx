@@ -1,16 +1,21 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-
-export const metadata: Metadata = { title: 'プロジェクト登録画面' }
-import { PROJECT_TYPE } from '../../_constants/project-type'
-import { PROJECT_CLASS } from '../../_constants/project-class'
 import { apiProjectFormSchema } from ':/shared/api/project'
+import { ProjectSidemenuLayout } from '../../_layouts/project-sidemenu-layout'
+import { PROJECT_CLASS } from '../../_constants/project-class'
+import { PROJECT_TYPE } from '../../_constants/project-type'
 import { calculateProjectProfit, formatMoney, formatRate } from '../../_utils/project-profit'
 import { formatDate } from '../../_utils/format-date'
 import { loadProjectFormFromCookieServer } from '../../_utils/cookie-helpers.server'
 import { ConfirmCreateButton } from './confirm-create-button'
-import { ProjectSidemenuLayout } from '../../_layouts/project-sidemenu-layout'
+
+/**
+ * プロジェクト登録画面のメタデータ。
+ */
+export const metadata: Metadata = {
+  title: 'プロジェクト登録画面',
+}
 
 /**
  * プロジェクト登録確認画面。

@@ -5,10 +5,7 @@ import { useEffect, useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema'
-import {
-  apiProjectBulkFormSchema,
-  type ApiProjectBulkFormValues,
-} from ':/shared/api/project-bulk'
+import { apiProjectBulkFormSchema, type ApiProjectBulkFormValues } from ':/shared/api/project-bulk'
 import { PROJECT_TYPE } from '../_constants/project-type'
 import { PROJECT_SORT_KEY } from '../_constants/project-sort-key'
 import { SORT_ORDER } from '../_constants/sort-order'
@@ -83,13 +80,13 @@ export function BulkEditForm({
     ;(async () => {
       const data = await loadProjectFormFromCookie()
       if (data?.projectList) {
-        const projectList = (data.projectList as NonNullable<ApiProjectBulkFormValues['projectList']>).map(
-          (item) => ({
-            ...item,
-            projectStartDate: formatDate(item.projectStartDate),
-            projectEndDate: formatDate(item.projectEndDate),
-          }),
-        )
+        const projectList = (
+          data.projectList as NonNullable<ApiProjectBulkFormValues['projectList']>
+        ).map((item) => ({
+          ...item,
+          projectStartDate: formatDate(item.projectStartDate),
+          projectEndDate: formatDate(item.projectEndDate),
+        }))
         reset({
           projectList,
         })

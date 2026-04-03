@@ -1,7 +1,12 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
-export const metadata: Metadata = { title: 'エラー画面' }
+/**
+ * エラー画面のメタデータ。
+ */
+export const metadata: Metadata = {
+  title: 'エラー画面',
+}
 
 /**
  * エラー種別ごとのメタタイトルとメッセージ定義。

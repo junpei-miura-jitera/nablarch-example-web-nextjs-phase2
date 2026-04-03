@@ -1,9 +1,14 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
-
-export const metadata: Metadata = { title: 'プロジェクト一括登録画面' }
-import { UploadForm } from './upload-form'
 import { getAuthUserServer } from '../_utils/auth-user.server'
+import { UploadForm } from './upload-form'
+
+/**
+ * プロジェクト一括登録画面のメタデータ。
+ */
+export const metadata: Metadata = {
+  title: 'プロジェクト一括登録画面',
+}
 
 /**
  * プロジェクト一括登録（CSV アップロード）ページ。

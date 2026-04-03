@@ -42,7 +42,8 @@ export function ConfirmUpdateButton({
             version: version ?? 0,
           }),
         })
-        if (!res.ok) throw new Error(`API error ${res.status}`)
+        const data = (await res.json().catch(() => null)) as { ok?: boolean } | null
+        if (!res.ok || !data?.ok) throw new Error(`API error ${res.status}`)
       }}
       redirectTo={`/projects/${projectId}/edit/complete`}
       errorMessage="更新に失敗しました。"

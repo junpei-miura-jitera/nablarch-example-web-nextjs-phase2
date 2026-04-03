@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Providers from '../_fragments/providers'
 
 /**
- * ページタイトルなどのメタデータ。
+ * プロジェクト管理システムのメタデータ。
  */
 export const metadata: Metadata = {
   title: 'プロジェクト管理システム',

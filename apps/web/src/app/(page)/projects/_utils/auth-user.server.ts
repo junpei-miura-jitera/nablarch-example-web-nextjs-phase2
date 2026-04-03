@@ -1,9 +1,8 @@
 import { apiLoginUserSchema, type ApiLoginUser } from ':/shared/api/authentication'
-
-const API_BASE_URL = process.env.API_BASE_URL ?? 'http://localhost:9090'
+import { API_BASE_URL } from ':/bases/env.server'
 
 /**
- * mock server の認証状態から現在ユーザーを取得する。
+ * Mock server の認証状態から現在ユーザーを取得する。
  */
 export async function getAuthUserServer(): Promise<ApiLoginUser | null> {
   const res = await fetch(`${API_BASE_URL}/api/authentication/index`, {

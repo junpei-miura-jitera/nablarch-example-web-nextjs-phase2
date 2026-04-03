@@ -1,7 +1,12 @@
 import type { Metadata } from 'next'
 import { LoginForm } from './login-form'
 
-export const metadata: Metadata = { title: 'ログイン' }
+/**
+ * ログイン画面のメタデータ。
+ */
+export const metadata: Metadata = {
+  title: 'ログイン',
+}
 
 /**
  * ログインページ。

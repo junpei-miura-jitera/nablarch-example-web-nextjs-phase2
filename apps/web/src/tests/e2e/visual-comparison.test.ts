@@ -65,6 +65,26 @@ const PAGE_MAP = [
     next: '/projects/bulk',
   },
   {
+    name: 'project-new-complete',
+    java: '/action/project/completeOfCreate',
+    next: '/projects/new/complete',
+  },
+  {
+    name: 'project-edit-complete',
+    java: '/action/project/completeOfUpdate',
+    next: '/projects/1/edit/complete',
+  },
+  {
+    name: 'project-delete-complete',
+    java: '/action/project/completeOfDelete',
+    next: '/projects/delete-complete',
+  },
+  {
+    name: 'project-bulk-complete',
+    java: '/action/projectBulk/completeOfUpdate',
+    next: '/projects/bulk/complete',
+  },
+  {
     name: 'project-upload',
     java: '/action/projectUpload/index',
     next: '/projects/upload',

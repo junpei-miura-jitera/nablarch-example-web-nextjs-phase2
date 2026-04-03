@@ -1,7 +1,12 @@
 import type { Metadata } from 'next'
 import { CompletePage } from '../../_fragments/complete-page'
 
-export const metadata: Metadata = { title: 'プロジェクト一覧更新完了画面' }
+/**
+ * プロジェクト一覧更新完了画面のメタデータ。
+ */
+export const metadata: Metadata = {
+  title: 'プロジェクト一覧更新完了画面',
+}
 
 /**
  * プロジェクト一括更新完了画面。

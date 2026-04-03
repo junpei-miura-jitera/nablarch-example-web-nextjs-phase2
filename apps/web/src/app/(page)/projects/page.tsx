@@ -1,18 +1,22 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import type { ApiProjectDto } from ':/shared/api/project'
-
-export const metadata: Metadata = { title: 'プロジェクト検索一覧画面' }
-
-const API_BASE = process.env.API_BASE_URL ?? 'http://localhost:9090'
-import { PROJECT_TYPE } from './_constants/project-type'
-import { ProjectSidemenuLayout } from './_layouts/project-sidemenu-layout'
+import { API_BASE_URL } from ':/bases/env.server'
 import { SortSelect } from './_fragments/sort-select'
 import { DownloadButton } from './_fragments/download-button'
 import { Pagination } from './_fragments/pagination'
 import { SaveListUrl } from './_fragments/save-list-url'
+import { ProjectSidemenuLayout } from './_layouts/project-sidemenu-layout'
+import { PROJECT_TYPE } from './_constants/project-type'
 import { formatDate } from './_utils/format-date'
 import { toArray, buildPageUrl } from './_utils/search-params-helpers'
+
+/**
+ * プロジェクト検索一覧画面のメタデータ。
+ */
+export const metadata: Metadata = {
+  title: 'プロジェクト検索一覧画面',
+}
 
 /**
  * プロジェクト検索一覧ページ。
@@ -25,6 +29,9 @@ import { toArray, buildPageUrl } from './_utils/search-params-helpers'
  * @see _references/nablarch-example-web/src/main/webapp/WEB-INF/view/project/index.jsp
  */
 
+/**
+ * ページサイズ。
+ */
 const PAGE_SIZE = 20
 
 export default async function ProjectsPage({
@@ -57,8 +64,8 @@ export default async function ProjectsPage({
 
   const endpoint = hasSearchParams ? 'list' : 'index'
   const requestUrl = hasSearchParams
-    ? `${API_BASE}/api/project/${endpoint}?${qs}`
-    : `${API_BASE}/api/project/${endpoint}`
+    ? `${API_BASE_URL}/api/project/${endpoint}?${qs}`
+    : `${API_BASE_URL}/api/project/${endpoint}`
 
   const res = await fetch(requestUrl, {
     cache: 'no-store',

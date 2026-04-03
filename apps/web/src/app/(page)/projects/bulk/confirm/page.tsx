@@ -1,13 +1,18 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-
-export const metadata: Metadata = { title: 'プロジェクト検索一覧更新画面' }
 import type { ApiProjectBulkItemValues } from ':/shared/api/project-bulk'
 import { PROJECT_TYPE } from '../../_constants/project-type'
 import { loadProjectFormFromCookieServer } from '../../_utils/cookie-helpers.server'
 import { formatDate } from '../../_utils/format-date'
 import { ConfirmBulkButton } from './confirm-bulk-button'
+
+/**
+ * プロジェクト検索一覧更新画面のメタデータ。
+ */
+export const metadata: Metadata = {
+  title: 'プロジェクト検索一覧更新画面',
+}
 
 /**
  * プロジェクト一括更新確認画面。

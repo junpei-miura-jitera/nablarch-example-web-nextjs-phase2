@@ -36,13 +36,14 @@ const mockLoginUsersByLoginId = new Map(
   ]),
 )
 
-export const validMockCredentials: readonly MockLoginCredential[] = systemAccountRows.map((row) => ({
-  loginId: row.LOGIN_ID,
-  userPassword: DEFAULT_PASSWORD,
-}))
+export const validMockCredentials: readonly MockLoginCredential[] = systemAccountRows.map(
+  (row) => ({
+    loginId: row.LOGIN_ID,
+    userPassword: DEFAULT_PASSWORD,
+  }),
+)
 
-export const defaultMockLoginUser =
-  mockLoginUsers.find((user) => user.admin) ?? mockLoginUsers[0]
+export const defaultMockLoginUser = mockLoginUsers.find((user) => user.admin) ?? mockLoginUsers[0]
 
 if (!defaultMockLoginUser) {
   throw new Error('Mock login users could not be loaded.')

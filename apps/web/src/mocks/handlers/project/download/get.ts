@@ -8,9 +8,7 @@ import { store } from '../../_services/mock-state'
  */
 export const projectDownloadGetHandler = http.get('/api/project/download', ({ request }) => {
   const params = extractSearchParams(new URL(request.url))
-  const csv = buildProjectCsv(
-    searchProjects(store.getProjects(), store.getCurrentUserId(), params),
-  )
+  const csv = buildProjectCsv(searchProjects(store.getProjects(), store.getCurrentUserId(), params))
 
   return new HttpResponse(csv, {
     status: 200,

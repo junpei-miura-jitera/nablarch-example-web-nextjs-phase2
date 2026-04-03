@@ -1,7 +1,12 @@
 import type { Metadata } from 'next'
 import { CreateProjectForm } from './create-project-form'
 
-export const metadata: Metadata = { title: 'プロジェクト登録画面' }
+/**
+ * プロジェクト登録画面のメタデータ。
+ */
+export const metadata: Metadata = {
+  title: 'プロジェクト登録画面',
+}
 
 /**
  * プロジェクト新規登録画面。

@@ -1,10 +1,11 @@
 /**
- * mock server 全体の endpoint handler 集約ファイル。
+ * Mock server 全体の endpoint handler 集約ファイル。
  */
 
 import { authenticationIndexGetHandler } from './handlers/authentication/index/get'
 import { authenticationLoginPostHandler } from './handlers/authentication/login/post'
 import { authenticationLogoutGetHandler } from './handlers/authentication/logout/get'
+import { mockResetPostHandler } from './handlers/_internal/reset/post'
 import { clientFindGetHandler } from './handlers/client/find/get'
 import { industryFindGetHandler } from './handlers/industry/find/get'
 import { projectBackToEditGetHandler } from './handlers/project/backToEdit/get'
@@ -34,6 +35,7 @@ import { projectUploadIndexGetHandler } from './handlers/projectupload/index/get
 import { projectUploadPostHandler } from './handlers/projectupload/upload/post'
 
 export const mockHandlers = [
+  mockResetPostHandler,
   authenticationIndexGetHandler,
   authenticationLoginPostHandler,
   authenticationLogoutGetHandler,

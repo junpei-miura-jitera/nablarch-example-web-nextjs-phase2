@@ -1,17 +1,21 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-
-export const metadata: Metadata = { title: 'プロジェクト詳細画面' }
 import type { ApiProjectDto } from ':/shared/api/project'
-
-const API_BASE = process.env.API_BASE_URL ?? 'http://localhost:9090'
+import { API_BASE_URL } from ':/bases/env.server'
+import { BackButton } from '../_fragments/back-button'
 import { PROJECT_TYPE } from '../_constants/project-type'
 import { PROJECT_CLASS } from '../_constants/project-class'
 import { calculateProjectProfit, formatMoney, formatRate } from '../_utils/project-profit'
 import { formatDate } from '../_utils/format-date'
 import { parseProjectIdFromRouteSegment } from '../_utils/route-params'
-import { BackButton } from '../_fragments/back-button'
+
+/**
+ * プロジェクト詳細画面のメタデータ。
+ */
+export const metadata: Metadata = {
+  title: 'プロジェクト詳細画面',
+}
 
 /**
  * プロジェクト詳細画面。
@@ -27,7 +31,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   if (projectId === null) notFound()
 
   // プロジェクトを取得する
-  const res = await fetch(`${API_BASE}/api/project/show?projectId=${projectId}`, {
+  const res = await fetch(`${API_BASE_URL}/api/project/show?projectId=${projectId}`, {
     cache: 'no-store',
     headers: { Accept: 'application/json' },
   })

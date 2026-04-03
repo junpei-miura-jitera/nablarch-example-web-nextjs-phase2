@@ -1,8 +1,7 @@
 /**
  * 顧客検索 endpoint のクエリ schema。
  *
- * 旧 `mocks/handlers/client/handlers.ts` に埋め込まれていた検索パラメータ定義を
- * endpoint 専用ファイルへ切り出している。
+ * 旧 `mocks/handlers/client/handlers.ts` に埋め込まれていた検索パラメータ定義を endpoint 専用ファイルへ切り出している。
  */
 import { z } from 'zod'
 

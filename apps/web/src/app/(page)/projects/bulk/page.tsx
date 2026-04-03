@@ -1,16 +1,23 @@
 import type { Metadata } from 'next'
 import type { ApiProjectDto } from ':/shared/api/project'
-
-const API_BASE = process.env.API_BASE_URL ?? 'http://localhost:9090'
-
-export const metadata: Metadata = { title: 'プロジェクト検索一覧更新画面' }
+import { API_BASE_URL } from ':/bases/env.server'
 import { BulkEditForm } from './bulk-edit-form'
-import { ProjectSidemenuLayout } from '../_layouts/project-sidemenu-layout'
 import { Pagination } from '../_fragments/pagination'
 import { SaveListUrl } from '../_fragments/save-list-url'
-import { toArray, buildPageUrl } from '../_utils/search-params-helpers'
+import { ProjectSidemenuLayout } from '../_layouts/project-sidemenu-layout'
 import type { ProjectClassValue } from '../_constants/project-class'
+import { toArray, buildPageUrl } from '../_utils/search-params-helpers'
 
+/**
+ * プロジェクト検索一覧更新画面のメタデータ。
+ */
+export const metadata: Metadata = {
+  title: 'プロジェクト検索一覧更新画面',
+}
+
+/**
+ * ページサイズ。
+ */
 const PAGE_SIZE = 20
 
 /**
@@ -54,8 +61,8 @@ export default async function BulkUpdatePage({
 
   const endpoint = hasSearchParams ? 'list' : 'index'
   const requestUrl = hasSearchParams
-    ? `${API_BASE}/api/projectbulk/${endpoint}?${qs}`
-    : `${API_BASE}/api/projectbulk/${endpoint}`
+    ? `${API_BASE_URL}/api/projectbulk/${endpoint}?${qs}`
+    : `${API_BASE_URL}/api/projectbulk/${endpoint}`
 
   const res = await fetch(requestUrl, {
     cache: 'no-store',

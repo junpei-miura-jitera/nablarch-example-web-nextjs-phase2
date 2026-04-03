@@ -1,8 +1,7 @@
 /**
  * 顧客検索 endpoint。
  *
- * 旧 `mocks/handlers/client/handlers.ts` の `/api/client/find` 処理を
- * endpoint 単位へ分離して移行した。
+ * 旧 `mocks/handlers/client/handlers.ts` の `/api/client/find` 処理を endpoint 単位へ分離して移行した。
  *
  * @see _references/nablarch-example-web/src/main/java/com/nablarch/example/app/web/action/ClientAction.java#find
  */
